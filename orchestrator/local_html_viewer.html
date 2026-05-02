@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Memory Glass • XML/HTML</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#000000">
+    <link rel="manifest" href="manifest.json">
+    <style>
+        :root {
+            --glass-bg: rgba(25, 25, 30, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            --accent: #0A84FF;
+            --accent-glow: rgba(10, 132, 255, 0.3);
+            --text-main: #FFFFFF;
+            --text-muted: rgba(255, 255, 255, 0.5);
+            --danger: #FF453A;
+            --xml-tag: #FF7AB2;
+            --xml-attr: #87C540;
+            --xml-val: #D09CFF;
+            --xml-text: #FFD60A;
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+            background: #000;
+            color: var(--text-main);
+            height: 100vh; width: 100vw;
+            overflow: hidden;
+            display: flex;
+            position: relative;
+        }
+
+        /* ───────── VisionOS Ambient Background ───────── */
+        .ambient-blobs {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 0;
+            overflow: hidden;
+            /* Optimize composite layers for mobile */
+            will-change: transform;
+            transform: translateZ(0);
+        }
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.6;
+            will-change: transform;
+            animation: drift 20s infinite alternate ease-in-out;
+            transform: translateZ(0); /* Hardware acceleration */
+        }
+        .blob1 { width: 500px; height: 500px; background: #2A0066; top: -10%; left: -10%; }
+        .blob2 { width: 400px; height: 400px; background: #004D40; bottom: -5%; right: -5%; animation-delay: -5s; }
+        .blob3 { width: 300px; height: 300px; background: #4D002A; top: 40%; left: 50%; animation-delay: -10s; }
+
+        @keyframes drift {
+            from { transform: translate3d(0, 0, 0) scale(1); }
+            to   { transform: translate3d(80px, 40px, 0) scale(1.15); }
+        }
+
+        /* ───────── App Shell ───────── */
+        .app-container {
+            position: relative; z-index: 1;
+            display: flex; width: 100%; height: 100%;
+            padding: 16px; gap: 16px;
+        }
+
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px) saturate(150%);
+            -webkit-backdrop-filter: blur(30px) saturate(150%);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: var(--glass-shadow),
+                        inset 0 1px 0 rgba(255,255,255,0.08);
+            display: flex; flex-direction: column;
+            overflow: hidden;
+            transform: translateZ(0); /* Hardware acceleration for blur rendering */
+        }
+
+        /* ───────── Sidebar ───────── */
+        .sidebar {
+            width: 320px; padding: 24px;
+            flex-shrink: 0;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                        opacity 0.3s ease;
+        }
+
+        .header { margin-bottom: 20px; }
+        .header h1 {
+            font-size: 1.5rem; font-weight: 700;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.7) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .header p { color: var(--text-muted); font-size: 0.85rem; margin-top: 4px; }
+
+        /* Liquid Button */
+        .upload-wrapper { position: relative; margin-bottom: 20px; }
+        .btn-liquid {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #fff; padding: 14px; border-radius: 14px;
+            font-size: 0.95rem; font-weight: 500; cursor: pointer;
+            width: 100%; transition: all 0.2s;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .btn-liquid:hover { background: rgba(255, 255, 255, 0.14); }
+        .btn-liquid:active { transform: scale(0.97); }
+        .upload-wrapper input[type=file] {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0; cursor: pointer;
+        }
+
+        /* Section Title */
+        .section-title {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 12px; padding: 0 4px;
+        }
+        .section-title span {
+            font-size: 0.7rem; font-weight: 700;
+            letter-spacing: 1.5px; color: var(--text-muted);
+            text-transform: uppercase;
+        }
+        .clear-all-btn {
+            background: none; border: none;
+            font-size: 0.7rem; font-weight: 700;
+            color: var(--danger); cursor: pointer;
+            letter-spacing: 0.5px;
+        }
+        .clear-all-btn:hover { opacity: 0.8; }
+
+        /* File List */
+        .file-list {
+            list-style: none; flex-grow: 1;
+            overflow-y: auto;
+            scrollbar-width: none;
+        }
+        .file-list::-webkit-scrollbar { display: none; }
+
+        .file-item {
+            padding: 12px 14px; margin-bottom: 6px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid transparent;
+            border-radius: 12px; cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .file-item:hover { background: rgba(255, 255, 255, 0.08); }
+        .file-item.active {
+            background: rgba(10, 132, 255, 0.12);
+            border-color: rgba(10, 132, 255, 0.3);
+        }
+        .file-info { overflow: hidden; flex: 1; min-width: 0; }
+        .file-name {
+            font-size: 0.88rem; font-weight: 500;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .file-meta {
+            font-size: 0.68rem; color: var(--text-muted);
+            text-transform: uppercase; margin-top: 2px;
+        }
+        .delete-btn {
+            background: none; border: none; color: var(--text-muted);
+            cursor: pointer; padding: 4px 6px; border-radius: 8px;
+            transition: all 0.15s; flex-shrink: 0; margin-left: 8px;
+            line-height: 1;
+        }
+        .delete-btn:hover { color: var(--danger); background: rgba(255, 69, 58, 0.1); }
+
+        .empty-list-msg {
+            text-align: center; color: var(--text-muted);
+            font-size: 0.8rem; padding: 24px 0;
+            opacity: 0.6;
+        }
+
+        /* ───────── Main Viewer ───────── */
+        .main-content { flex-grow: 1; position: relative; }
+
+        .empty-state {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            color: var(--text-muted); text-align: center;
+        }
+        .empty-state svg { opacity: 0.4; margin-bottom: 16px; }
+        .empty-state p { font-size: 0.9rem; }
+
+        #viewer-frame {
+            width: 100%; height: 100%; border: none;
+            display: none; background: #fff; border-radius: 20px;
+        }
+
+        #xml-viewer {
+            width: 100%; height: 100%; border: none;
+            display: none; padding: 20px; overflow: auto;
+            font-family: 'SF Mono', 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+            font-size: 0.82rem; line-height: 1.6;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255,255,255,0.15) transparent;
+        }
+
+        /* ───────── XML Tree ───────── */
+        .xml-node {
+            margin-left: 18px; padding: 1px 0 1px 8px;
+            border-left: 1px solid rgba(255,255,255,0.08);
+        }
+        .xml-node:hover { border-left-color: rgba(255,255,255,0.2); }
+        .xml-line { display: flex; align-items: baseline; flex-wrap: wrap; }
+        .xml-toggle {
+            color: var(--accent); cursor: pointer;
+            font-size: 0.65rem; margin-right: 6px;
+            transition: transform 0.2s;
+            display: inline-block; user-select: none;
+            width: 12px; text-align: center;
+        }
+        .xml-toggle.collapsed { transform: rotate(-90deg); }
+        .xml-bracket { color: rgba(255,255,255,0.35); }
+        .xml-tag { color: var(--xml-tag); font-weight: 500; }
+        .xml-attr { color: var(--xml-attr); }
+        .xml-val { color: var(--xml-val); }
+        .xml-text { color: var(--xml-text); font-style: italic; opacity: 0.85; }
+        .xml-content { /* container for children */ }
+        .xml-content.hidden { display: none; }
+        .xml-error {
+            color: var(--danger); padding: 20px;
+            font-family: inherit; white-space: pre-wrap;
+        }
+
+        /* ───────── Mobile ───────── */
+        .mobile-fab {
+            display: none; position: fixed;
+            bottom: 24px; right: 24px;
+            width: 56px; height: 56px; border-radius: 28px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            color: #fff; z-index: 100;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            align-items: center; justify-content: center;
+            cursor: pointer;
+        }
+
+        .backdrop-overlay {
+            display: none; position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 40;
+        }
+
+        @media (max-width: 768px) {
+            .app-container { padding: 8px; gap: 8px; }
+            .sidebar {
+                position: fixed;
+                left: 8px; top: 8px; bottom: 8px;
+                width: calc(100% - 16px);
+                z-index: 50;
+                transform: translateY(120%);
+                opacity: 0;
+            }
+            .sidebar.open { transform: translateY(0); opacity: 1; }
+            .backdrop-overlay.open { display: block; }
+            .mobile-fab { display: flex; }
+            .glass-panel { border-radius: 20px; }
+            #viewer-frame { border-radius: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="ambient-blobs">
+        <div class="blob blob1"></div>
+        <div class="blob blob2"></div>
+        <div class="blob blob3"></div>
+    </div>
+
+    <div class="backdrop-overlay" id="backdrop"></div>
+
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div class="glass-panel sidebar" id="sidebar">
+            <div class="header">
+                <h1>Memory Glass</h1>
+                <p>Liquid XML/HTML State</p>
+            </div>
+
+            <div class="upload-wrapper">
+                <button class="btn-liquid">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg>
+                    Add Projection
+                </button>
+                <input type="file" id="fileInput" accept=".xml,.html,.htm" />
+            </div>
+
+            <div class="section-title">
+                <span>Stored Memory</span>
+                <button class="clear-all-btn" id="clearBtn">ERASE ALL</button>
+            </div>
+
+            <ul class="file-list" id="fileList"></ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="glass-panel main-content">
+            <div class="empty-state" id="emptyState">
+                <svg width="52" height="52" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke-linecap="round" stroke-linejoin="round"/>
+                    <polyline points="14 2 14 8 20 8" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="16" y1="13" x2="8" y2="13" stroke-linecap="round"/>
+                    <line x1="16" y1="17" x2="8" y2="17" stroke-linecap="round"/>
+                    <polyline points="10 9 9 9 8 9" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <p>No projection active in memory.</p>
+            </div>
+            <iframe id="viewer-frame" sandbox="allow-scripts allow-same-origin"></iframe>
+            <div id="xml-viewer"></div>
+        </div>
+    </div>
+
+    <!-- Mobile FAB -->
+    <div class="mobile-fab" id="mobileToggle">
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+    </div>
+
+    <script>
+        /* ═══════════════════════════════════════════
+           Memory Glass — Persistent XML/HTML Viewer
+           Storage: IndexedDB (unlimited, persistent)
+           ═══════════════════════════════════════════ */
+
+        const DB_NAME    = 'MemoryGlassDB';
+        const STORE_NAME = 'projections';
+        const LAST_KEY   = 'mg_lastActiveId';
+        let db = null;
+        let currentId = null;
+
+        // DOM refs
+        const fileInput   = document.getElementById('fileInput');
+        const fileList    = document.getElementById('fileList');
+        const viewerFrame = document.getElementById('viewer-frame');
+        const xmlViewer   = document.getElementById('xml-viewer');
+        const emptyState  = document.getElementById('emptyState');
+        const sidebar     = document.getElementById('sidebar');
+        const backdrop    = document.getElementById('backdrop');
+        const mobileToggle = document.getElementById('mobileToggle');
+
+        // ───────── Mobile Sidebar ─────────
+        function toggleSidebar() {
+            sidebar.classList.toggle('open');
+            backdrop.classList.toggle('open');
+        }
+        mobileToggle.onclick = toggleSidebar;
+        backdrop.onclick = toggleSidebar;
+
+        // ───────── IndexedDB Init ─────────
+        const dbReq = indexedDB.open(DB_NAME, 1);
+        dbReq.onupgradeneeded = (e) => {
+            const idb = e.target.result;
+            if (!idb.objectStoreNames.contains(STORE_NAME)) {
+                idb.createObjectStore(STORE_NAME, { keyPath: 'id' });
+            }
+        };
+        dbReq.onsuccess = (e) => {
+            db = e.target.result;
+            loadHistory();
+        };
+        dbReq.onerror = (e) => {
+            console.error('IndexedDB init failed:', e.target.error);
+        };
+
+        // ───────── File Input ─────────
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (ev) => {
+                const data = {
+                    id: Date.now().toString(),
+                    name: file.name,
+                    content: ev.target.result,
+                    type: file.name.toLowerCase().endsWith('.xml') ? 'xml' : 'html',
+                    time: new Date().toLocaleString([], {
+                        month: 'short', day: 'numeric',
+                        hour: '2-digit', minute: '2-digit'
+                    })
+                };
+                const tx = db.transaction(STORE_NAME, 'readwrite');
+                tx.objectStore(STORE_NAME).put(data);
+                tx.oncomplete = () => {
+                    viewFile(data);
+                    loadHistory();
+                    closeSidebar();
+                };
+            };
+            reader.readAsText(file);
+            fileInput.value = ''; // Reset so re-selecting same file works
+        });
+
+        function closeSidebar() {
+            sidebar.classList.remove('open');
+            backdrop.classList.remove('open');
+        }
+
+        // ───────── History List ─────────
+        function loadHistory() {
+            const tx = db.transaction(STORE_NAME, 'readonly');
+            const req = tx.objectStore(STORE_NAME).getAll();
+            req.onsuccess = () => {
+                const files = req.result.sort((a, b) => Number(b.id) - Number(a.id));
+                renderFileList(files);
+
+                // Auto-load last active or first file
+                if (!currentId && files.length > 0) {
+                    const lastId = localStorage.getItem(LAST_KEY);
+                    const target = files.find(f => f.id === lastId) || files[0];
+                    viewFile(target);
+                }
+                if (files.length === 0) {
+                    showEmpty();
+                }
+            };
+        }
+
+        function renderFileList(files) {
+            fileList.innerHTML = '';
+            if (files.length === 0) {
+                fileList.innerHTML = '<li class="empty-list-msg">No files stored yet</li>';
+                return;
+            }
+            files.forEach(f => {
+                const li = document.createElement('li');
+                li.className = 'file-item' + (f.id === currentId ? ' active' : '');
+
+                // File info
+                const info = document.createElement('div');
+                info.className = 'file-info';
+                const name = document.createElement('div');
+                name.className = 'file-name';
+                name.textContent = f.name;
+                name.title = f.name;
+                const meta = document.createElement('div');
+                meta.className = 'file-meta';
+                meta.textContent = `${f.type} · ${f.time}`;
+                info.appendChild(name);
+                info.appendChild(meta);
+
+                // Delete button
+                const del = document.createElement('button');
+                del.className = 'delete-btn';
+                del.innerHTML = '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke-linecap="round"/></svg>';
+                del.title = 'Remove';
+                del.onclick = (e) => {
+                    e.stopPropagation();
+                    deleteFile(f.id);
+                };
+
+                li.appendChild(info);
+                li.appendChild(del);
+                li.onclick = () => {
+                    // Need to fetch full content from DB
+                    const tx2 = db.transaction(STORE_NAME, 'readonly');
+                    tx2.objectStore(STORE_NAME).get(f.id).onsuccess = (ev) => {
+                        if (ev.target.result) {
+                            viewFile(ev.target.result);
+                            closeSidebar();
+                        }
+                    };
+                };
+                fileList.appendChild(li);
+            });
+        }
+
+        // ───────── View File ─────────
+        function viewFile(file) {
+            currentId = file.id;
+            localStorage.setItem(LAST_KEY, file.id);
+            emptyState.style.display = 'none';
+
+            if (file.type === 'xml') {
+                viewerFrame.style.display = 'none';
+                xmlViewer.style.display = 'block';
+                xmlViewer.innerHTML = '';
+
+                const doc = new DOMParser().parseFromString(file.content, 'text/xml');
+                const parseError = doc.querySelector('parsererror');
+                if (parseError) {
+                    const errDiv = document.createElement('div');
+                    errDiv.className = 'xml-error';
+                    errDiv.textContent = 'XML Parse Error:\n\n' + parseError.textContent;
+                    xmlViewer.appendChild(errDiv);
+                } else {
+                    renderXMLNode(doc.documentElement, xmlViewer);
+                }
+            } else {
+                xmlViewer.style.display = 'none';
+                viewerFrame.style.display = 'block';
+                viewerFrame.srcdoc = file.content;
+            }
+
+            // Refresh list to update active state
+            loadHistory();
+        }
+
+        // ───────── XML Tree Renderer (Pure DOM — no innerHTML) ─────────
+        function renderXMLNode(node, container) {
+            if (node.nodeType === Node.TEXT_NODE) {
+                const text = node.textContent.trim();
+                if (text) {
+                    const span = document.createElement('span');
+                    span.className = 'xml-text';
+                    span.textContent = text;
+                    container.appendChild(span);
+                }
+                return;
+            }
+
+            if (node.nodeType === Node.COMMENT_NODE) {
+                const span = document.createElement('span');
+                span.style.color = 'rgba(255,255,255,0.3)';
+                span.style.fontStyle = 'italic';
+                span.textContent = `<!-- ${node.textContent.trim()} -->`;
+                container.appendChild(span);
+                return;
+            }
+
+            if (node.nodeType !== Node.ELEMENT_NODE) return;
+
+            const wrapper = document.createElement('div');
+            wrapper.className = 'xml-node';
+
+            const hasChildren = node.childNodes.length > 0;
+
+            // ── Opening tag line ──
+            const line = document.createElement('div');
+            line.className = 'xml-line';
+
+            // Toggle arrow (only if has children)
+            let contentDiv = null;
+            if (hasChildren) {
+                const toggle = document.createElement('span');
+                toggle.className = 'xml-toggle';
+                toggle.textContent = '▼';
+                contentDiv = document.createElement('div');
+                contentDiv.className = 'xml-content';
+
+                toggle.addEventListener('click', () => {
+                    contentDiv.classList.toggle('hidden');
+                    toggle.classList.toggle('collapsed');
+                });
+                line.appendChild(toggle);
+            }
+
+            // <tagName
+            const openBracket = document.createElement('span');
+            openBracket.className = 'xml-bracket';
+            openBracket.textContent = '<';
+            line.appendChild(openBracket);
+
+            const tagName = document.createElement('span');
+            tagName.className = 'xml-tag';
+            tagName.textContent = node.tagName;
+            line.appendChild(tagName);
+
+            // Attributes
+            for (let i = 0; i < node.attributes.length; i++) {
+                const attr = node.attributes[i];
+                line.appendChild(document.createTextNode(' '));
+
+                const attrName = document.createElement('span');
+                attrName.className = 'xml-attr';
+                attrName.textContent = attr.name;
+                line.appendChild(attrName);
+
+                const eq = document.createElement('span');
+                eq.className = 'xml-bracket';
+                eq.textContent = '=';
+                line.appendChild(eq);
+
+                const attrVal = document.createElement('span');
+                attrVal.className = 'xml-val';
+                attrVal.textContent = `"${attr.value}"`;
+                line.appendChild(attrVal);
+            }
+
+            // Close bracket
+            const closeBracket = document.createElement('span');
+            closeBracket.className = 'xml-bracket';
+            closeBracket.textContent = hasChildren ? '>' : ' />';
+            line.appendChild(closeBracket);
+
+            wrapper.appendChild(line);
+
+            // ── Children ──
+            if (hasChildren) {
+                for (let i = 0; i < node.childNodes.length; i++) {
+                    renderXMLNode(node.childNodes[i], contentDiv);
+                }
+                wrapper.appendChild(contentDiv);
+
+                // ── Closing tag ──
+                const closeLine = document.createElement('div');
+                closeLine.className = 'xml-line';
+
+                const cb1 = document.createElement('span');
+                cb1.className = 'xml-bracket';
+                cb1.textContent = '</';
+                closeLine.appendChild(cb1);
+
+                const closeTag = document.createElement('span');
+                closeTag.className = 'xml-tag';
+                closeTag.textContent = node.tagName;
+                closeLine.appendChild(closeTag);
+
+                const cb2 = document.createElement('span');
+                cb2.className = 'xml-bracket';
+                cb2.textContent = '>';
+                closeLine.appendChild(cb2);
+
+                wrapper.appendChild(closeLine);
+            }
+
+            container.appendChild(wrapper);
+        }
+
+        // ───────── Delete / Clear ─────────
+        function deleteFile(id) {
+            const tx = db.transaction(STORE_NAME, 'readwrite');
+            tx.objectStore(STORE_NAME).delete(id);
+            tx.oncomplete = () => {
+                if (currentId === id) {
+                    currentId = null;
+                    localStorage.removeItem(LAST_KEY);
+                    showEmpty();
+                }
+                loadHistory();
+            };
+        }
+
+        document.getElementById('clearBtn').addEventListener('click', () => {
+            if (!confirm('Erase all projections from memory?')) return;
+            const tx = db.transaction(STORE_NAME, 'readwrite');
+            tx.objectStore(STORE_NAME).clear();
+            tx.oncomplete = () => {
+                currentId = null;
+                localStorage.removeItem(LAST_KEY);
+                showEmpty();
+                loadHistory();
+            };
+        });
+
+        function showEmpty() {
+            emptyState.style.display = 'flex';
+            viewerFrame.style.display = 'none';
+            xmlViewer.style.display = 'none';
+        }
+
+        // ───────── Service Worker Registration ─────────
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').catch(() => {
+                // SW not available (e.g., file:// protocol) — graceful fallback
+            });
+        }
+    </script>
+</body>
+</html>

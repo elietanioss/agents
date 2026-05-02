@@ -1,0 +1,3 @@
+# Files blocked by GitHub push protection (contain third-party secrets from n8n-workflows)
+_shared-ref/repos/n8n-workflows-main/n8n-workflows-main/workflows/Code/1756_Code_HTTP_Automation_Webhook.json
+_shared-ref/repos/n8n-workflows-main/n8n-workflows-main/workflows/Http/1964_HTTP_Aggregate_Automation_Webhook.json

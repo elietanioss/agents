@@ -1,0 +1,38 @@
+{
+  "engagement": {
+    "id": "PENTEST-YYYY-NNN",
+    "target": "",
+    "start_date": "",
+    "end_date": "",
+    "phase": "pre-engagement",
+    "scope": [],
+    "out_of_scope": [],
+    "authorization_ref": "",
+    "emergency_contact": "",
+    "rules_of_engagement": ""
+  },
+  "coverage": {
+    "WSTG-INFO": "not-started",
+    "WSTG-CONF": "not-started",
+    "WSTG-ATHN": "not-started",
+    "WSTG-AUTHZ": "not-started",
+    "WSTG-SESS": "not-started",
+    "WSTG-INPV": "not-started",
+    "WSTG-ERRH": "not-started",
+    "WSTG-CLNT": "not-started",
+    "WSTG-BUSL": "not-started",
+    "OWASP-LLM": "not-applicable"
+  },
+  "findings_count": {
+    "critical": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "info": 0
+  },
+  "findings": [],
+  "tools_used": [],
+  "context_load": 0.0,
+  "playwright_session": null,
+  "notes": ""
+}

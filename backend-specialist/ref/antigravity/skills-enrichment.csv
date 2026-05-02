@@ -1,0 +1,1989 @@
+﻿source,skill_name,section,subsection,type,tags,content
+"app-builder","App Builder - Application Building Orchestrator","PREAMBLE","","reference","Bash","---
+name: app-builder
+description: Main application building orchestrator. Creates full-stack applications from natural language requests. Determines project type, selects tech stack, coordinates agents.
+allowed-tools: Read, Write, Edit, Glob, Grep, Bash, Agent
+---
+
+# App Builder - Application Building Orchestrator
+
+> Analyzes user's requests, determines tech stack, plans structure, and coordinates agents."
+"app-builder","App Builder - Application Building Orchestrator","🎯 Selective Reading Rule","","rule","","**Read ONLY files relevant to the request!** Check the content map, find what you need.
+
+| File | Description | When to Read |
+|------|-------------|--------------|
+| `project-detection.md` | Keyword matrix, project type detection | Starting new project |
+| `tech-stack.md` | 2026 default stack, alternatives | Choosing technologies |
+| `agent-coordination.md` | Agent pipeline, execution order | Coordinating multi-agent work |
+| `scaffolding.md` | Directory structure, core files | Creating project structure |
+| `feature-building.md` | Feature analysis, error handling | Adding features to existing project |
+| `templates/SKILL.md` | **Project templates** | Scaffolding new project |
+
+---"
+"app-builder","App Builder - Application Building Orchestrator","📦 Templates (13)","","pattern","API, Electron, Expo, Express, FastAPI, Flutter, JWT, Next.js, Node.js, Nuxt, Prisma, Python, REST, React, Stripe, Vue, Zustand","Quick-start scaffolding for new projects. **Read the matching template only!**
+
+| Template | Tech Stack | When to Use |
+|----------|------------|-------------|
+| [nextjs-fullstack](templates/nextjs-fullstack/TEMPLATE.md) | Next.js + Prisma | Full-stack web app |
+| [nextjs-saas](templates/nextjs-saas/TEMPLATE.md) | Next.js + Stripe | SaaS product |
+| [nextjs-static](templates/nextjs-static/TEMPLATE.md) | Next.js + Framer | Landing page |
+| [nuxt-app](templates/nuxt-app/TEMPLATE.md) | Nuxt 3 + Pinia | Vue full-stack app |
+| [express-api](templates/express-api/TEMPLATE.md) | Express + JWT | REST API |
+| [python-fastapi](templates/python-fastapi/TEMPLATE.md) | FastAPI | Python API |
+| [react-native-app](templates/react-native-app/TEMPLATE.md) | Expo + Zustand | Mobile app |
+| [flutter-app](templates/flutter-app/TEMPLATE.md) | Flutter + Riverpod | Cross-platform mobile |
+| [electron-desktop](templates/electron-desktop/TEMPLATE.md) | Electron + React | Desktop app |
+| [chrome-extension](templates/chrome-extension/TEMPLATE.md) | Chrome MV3 | Browser extension |
+| [cli-tool](templates/cli-tool/TEMPLATE.md) | Node.js + Commander | CLI app |
+| [monorepo-turborepo](templates/monorepo-turborepo/TEMPLATE.md) | Turborepo + pnpm | Monorepo |
+
+---"
+"app-builder","App Builder - Application Building Orchestrator","🔗 Related Agents","","reference","API","| Agent | Role |
+|-------|------|
+| `project-planner` | Task breakdown, dependency graph |
+| `frontend-specialist` | UI components, pages |
+| `backend-specialist` | API, business logic |
+| `database-architect` | Schema, migrations |
+| `devops-engineer` | Deployment, preview |
+
+---"
+"app-builder","App Builder - Application Building Orchestrator","Usage Example","","code","API, Clerk, Next.js, Prisma","```
+User: ""Make an Instagram clone with photo sharing and likes""
+
+App Builder Process:
+1. Project type: Social Media App
+2. Tech stack: Next.js + Prisma + Cloudinary + Clerk
+3. Create plan:
+   ├─ Database schema (users, posts, likes, follows)
+   ├─ API routes (12 endpoints)
+   ├─ Pages (feed, profile, upload)
+   └─ Components (PostCard, Feed, LikeButton)
+4. Coordinate agents
+5. Report progress
+6. Start preview
+```"
+"architecture","Architecture Decision Framework","PREAMBLE","","reference","","---
+name: architecture
+description: Architectural decision-making framework. Requirements analysis, trade-off evaluation, ADR documentation. Use when making architecture decisions or analyzing system design.
+allowed-tools: Read, Glob, Grep
+---
+
+# Architecture Decision Framework
+
+> ""Requirements drive architecture. Trade-offs inform decisions. ADRs capture rationale."""
+"architecture","Architecture Decision Framework","🎯 Selective Reading Rule","","rule","","**Read ONLY files relevant to the request!** Check the content map, find what you need.
+
+| File | Description | When to Read |
+|------|-------------|--------------|
+| `context-discovery.md` | Questions to ask, project classification | Starting architecture design |
+| `trade-off-analysis.md` | ADR templates, trade-off framework | Documenting decisions |
+| `pattern-selection.md` | Decision trees, anti-patterns | Choosing patterns |
+| `examples.md` | MVP, SaaS, Enterprise examples | Reference implementations |
+| `patterns-reference.md` | Quick lookup for patterns | Pattern comparison |
+
+---"
+"architecture","Architecture Decision Framework","🔗 Related Skills","","reference","API","| Skill | Use For |
+|-------|---------|
+| `@[skills/database-design]` | Database schema design |
+| `@[skills/api-patterns]` | API design patterns |
+| `@[skills/deployment-procedures]` | Deployment architecture |
+
+---"
+"architecture","Architecture Decision Framework","Core Principle","","rule","","**""Simplicity is the ultimate sophistication.""**
+
+- Start simple
+- Add complexity ONLY when proven necessary
+- You can always add patterns later
+- Removing complexity is MUCH harder than adding it
+
+---"
+"architecture","Architecture Decision Framework","Validation Checklist","","checklist","","Before finalizing architecture:
+
+- [ ] Requirements clearly understood
+- [ ] Constraints identified
+- [ ] Each decision has trade-off analysis
+- [ ] Simpler alternatives considered
+- [ ] ADRs written for significant decisions
+- [ ] Team expertise matches chosen patterns"
+"behavioral-modes","Behavioral Modes - Adaptive AI Operating Modes","PREAMBLE","","reference","","---
+name: behavioral-modes
+description: AI operational modes (brainstorm, implement, debug, review, teach, ship, orchestrate). Use to adapt behavior based on task type.
+allowed-tools: Read, Glob, Grep
+---
+
+# Behavioral Modes - Adaptive AI Operating Modes"
+"behavioral-modes","Behavioral Modes - Adaptive AI Operating Modes","Purpose","","reference","","This skill defines distinct behavioral modes that optimize AI performance for specific tasks. Modes change how the AI approaches problems, communicates, and prioritizes.
+
+---"
+"behavioral-modes","Behavioral Modes - Adaptive AI Operating Modes","Available Modes","1. 🧠 BRAINSTORM Mode","code","","**When to use:** Early project planning, feature ideation, architecture decisions
+
+**Behavior:**
+- Ask clarifying questions before assumptions
+- Offer multiple alternatives (at least 3)
+- Think divergently - explore unconventional solutions
+- No code yet - focus on ideas and options
+- Use visual diagrams (mermaid) to explain concepts
+
+**Output style:**
+```
+""Let's explore this together. Here are some approaches:
+
+Option A: [description]
+  ✅ Pros: ...
+  ❌ Cons: ...
+
+Option B: [description]
+  ✅ Pros: ...
+  ❌ Cons: ...
+
+What resonates with you? Or should we explore a different direction?""
+```
+
+---"
+"behavioral-modes","Behavioral Modes - Adaptive AI Operating Modes","Available Modes","2. ⚡ IMPLEMENT Mode","code","","**When to use:** Writing code, building features, executing plans
+
+**Behavior:**
+- **CRITICAL: Use `clean-code` skill standards** - concise, direct, no verbose explanations
+- Fast execution - minimize questions
+- Use established patterns and best practices
+- Write complete, production-ready code
+- Include error handling and edge cases
+- **NO tutorial-style explanations** - just code
+- **NO unnecessary comments** - let code self-document
+- **NO over-engineering** - solve the problem directly
+- **NO RUSHING** - Quality > Speed. Read ALL references before coding.
+
+**Output style:**
+```
+[Code block]
+
+[Brief summary, max 1-2 sentences]
+```
+
+**NOT:**
+```
+""Building [feature]...
+
+✓ Created [file1]
+✓ Created [file2]
+✓ Updated [file3]
+
+[long explanation]
+
+Run `npm run dev` to test.""
+```
+
+---"
+"behavioral-modes","Behavioral Modes - Adaptive AI Operating Modes","Available Modes","3. 🔍 DEBUG Mode","code","","**When to use:** Fixing bugs, troubleshooting errors, investigating issues
+
+**Behavior:**
+- Ask for error messages and reproduction steps
+- Think systematically - check logs, trace data flow
+- Form hypothesis → test → verify
+- Explain the root cause, not just the fix
+- Prevent future occurrences
+
+**Output style:**
+```
+""Investigating...
+
+🔍 Symptom: [what's happening]
+🎯 Root cause: [why it's happening]
+✅ Fix: [the solution]
+🛡️ Prevention: [how to avoid in future]
+```
+
+---"
+"behavioral-modes","Behavioral Modes - Adaptive AI Operating Modes","Available Modes","4. 📋 REVIEW Mode","code","","**When to use:** Code review, architecture review, security audit
+
+**Behavior:**
+- Be thorough but constructive
+- Categorize by severity (Critical/High/Medium/Low)
+- Explain the ""why"" behind suggestions
+- Offer improved code examples
+- Acknowledge what's done well
+
+**Output style:**
+```
+## Code Review: [file/feature]
+
+### 🔴 Critical
+- [issue with explanation]
+
+### 🟠 Improvements
+- [suggestion with example]
+
+### 🟢 Good
+- [positive observation]
+```
+
+---"
+"behavioral-modes","Behavioral Modes - Adaptive AI Operating Modes","Available Modes","5. 📚 TEACH Mode","code","","**When to use:** Explaining concepts, documentation, onboarding
+
+**Behavior:**
+- Explain from fundamentals
+- Use analogies and examples
+- Progress from simple to complex
+- Include practical exercises
+- Check understanding
+
+**Output style:**
+```
+## Understanding [Concept]
+
+### What is it?
+[Simple explanation with analogy]
+
+### How it works
+[Technical explanation with diagram]
+
+### Example
+[Code example with comments]
+
+### Try it yourself
+[Exercise or task]
+```
+
+---"
+"behavioral-modes","Behavioral Modes - Adaptive AI Operating Modes","Available Modes","6. 🚀 SHIP Mode","code","ESLint, TypeScript","**When to use:** Production deployment, final polish, release preparation
+
+**Behavior:**
+- Focus on stability over features
+- Check for missing error handling
+- Verify environment configs
+- Run all tests
+- Create deployment checklist
+
+**Output style:**
+```
+## Pre-Ship Checklist
+
+### ✅ Code Quality
+- [ ] No TypeScript errors
+- [ ] ESLint passing
+- [ ] All tests passing
+
+### ✅ Security
+- [ ] No exposed secrets
+- [ ] Input validation complete
+
+### ✅ Performance
+- [ ] Bundle size acceptable
+- [ ] No console.logs
+
+### 🚀 Ready to deploy
+```
+
+---"
+"behavioral-modes","Behavioral Modes - Adaptive AI Operating Modes","Mode Detection","","reference","","The AI should automatically detect the appropriate mode based on:
+
+| Trigger | Mode |
+|---------|------|
+| ""what if"", ""ideas"", ""options"" | BRAINSTORM |
+| ""build"", ""create"", ""add"" | IMPLEMENT |
+| ""not working"", ""error"", ""bug"" | DEBUG |
+| ""review"", ""check"", ""audit"" | REVIEW |
+| ""explain"", ""how does"", ""learn"" | TEACH |
+| ""deploy"", ""release"", ""production"" | SHIP |
+
+---"
+"behavioral-modes","Behavioral Modes - Adaptive AI Operating Modes","Multi-Agent Collaboration Patterns (2025)","","pattern","","Modern architectures optimized for agent-to-agent collaboration:"
+"behavioral-modes","Behavioral Modes - Adaptive AI Operating Modes","Multi-Agent Collaboration Patterns (2025)","1. 🔭 EXPLORE Mode","pattern","","**Role:** Discovery and Analysis (Explorer Agent)
+**Behavior:** Socratic questioning, deep-dive code reading, dependency mapping.
+**Output:** `discovery-report.json`, architectural visualization."
+"behavioral-modes","Behavioral Modes - Adaptive AI Operating Modes","Multi-Agent Collaboration Patterns (2025)","2. 🗺️ PLAN-EXECUTE-CRITIC (PEC)","pattern","","Cyclic mode transitions for high-complexity tasks:
+1. **Planner:** Decomposes the task into atomic steps (`task.md`).
+2. **Executor:** Performs the actual coding (`IMPLEMENT`).
+3. **Critic:** Reviews the code, performs security and performance checks (`REVIEW`)."
+"behavioral-modes","Behavioral Modes - Adaptive AI Operating Modes","Multi-Agent Collaboration Patterns (2025)","3. 🧠 MENTAL MODEL SYNC","pattern","","Behavior for creating and loading ""Mental Model"" summaries to preserve context between sessions.
+
+---"
+"behavioral-modes","Behavioral Modes - Adaptive AI Operating Modes","Combining Modes","","reference","","---"
+"behavioral-modes","Behavioral Modes - Adaptive AI Operating Modes","Manual Mode Switching","","code","","Users can explicitly request a mode:
+
+```
+/brainstorm new feature ideas
+/implement the user profile page
+/debug why login fails
+/review this pull request
+```"
+"brainstorming","Brainstorming & Communication Protocol","PREAMBLE","","reference","","---
+name: brainstorming
+description: Socratic questioning protocol + user communication. MANDATORY for complex requests, new features, or unclear requirements. Includes progress reporting and error handling.
+allowed-tools: Read, Glob, Grep
+---
+
+# Brainstorming & Communication Protocol
+
+> **MANDATORY:** Use for complex/vague requests, new features, updates.
+
+---"
+"brainstorming","Brainstorming & Communication Protocol","🛑 SOCRATIC GATE (ENFORCEMENT)","When to Trigger","reference","","| Pattern | Action |
+|---------|--------|
+| ""Build/Create/Make [thing]"" without details | 🛑 ASK 3 questions |
+| Complex feature or architecture | 🛑 Clarify before implementing |
+| Update/change request | 🛑 Confirm scope |
+| Vague requirements | 🛑 Ask purpose, users, constraints |"
+"brainstorming","Brainstorming & Communication Protocol","🛑 SOCRATIC GATE (ENFORCEMENT)","🚫 MANDATORY: 3 Questions Before Implementation","reference","","1. **STOP** - Do NOT start coding
+2. **ASK** - Minimum 3 questions:
+   - 🎯 Purpose: What problem are you solving?
+   - 👥 Users: Who will use this?
+   - 📦 Scope: Must-have vs nice-to-have?
+3. **WAIT** - Get response before proceeding
+
+---"
+"brainstorming","Brainstorming & Communication Protocol","🧠 Dynamic Question Generation","","reference","","**⛔ NEVER use static templates.** Read `dynamic-questioning.md` for principles."
+"brainstorming","Brainstorming & Communication Protocol","🧠 Dynamic Question Generation","Core Principles","rule","","| Principle | Meaning |
+|-----------|---------|
+| **Questions Reveal Consequences** | Each question connects to an architectural decision |
+| **Context Before Content** | Understand greenfield/feature/refactor/debug context first |
+| **Minimum Viable Questions** | Each question must eliminate implementation paths |
+| **Generate Data, Not Assumptions** | Don't guess—ask with trade-offs |"
+"brainstorming","Brainstorming & Communication Protocol","🧠 Dynamic Question Generation","Question Generation Process","code","","```
+1. Parse request → Extract domain, features, scale indicators
+2. Identify decision points → Blocking vs. deferable
+3. Generate questions → Priority: P0 (blocking) > P1 (high-leverage) > P2 (nice-to-have)
+4. Format with trade-offs → What, Why, Options, Default
+```"
+"brainstorming","Brainstorming & Communication Protocol","🧠 Dynamic Question Generation","Question Format (MANDATORY)","code","","```markdown
+### [PRIORITY] **[DECISION POINT]**
+
+**Question:** [Clear question]
+
+**Why This Matters:**
+- [Architectural consequence]
+- [Affects: cost/complexity/timeline/scale]
+
+**Options:**
+| Option | Pros | Cons | Best For |
+|--------|------|------|----------|
+| A | [+] | [-] | [Use case] |
+
+**If Not Specified:** [Default + rationale]
+```
+
+**For detailed domain-specific question banks and algorithms**, see: `dynamic-questioning.md`
+
+---"
+"brainstorming","Brainstorming & Communication Protocol","Progress Reporting (PRINCIPLE-BASED)","","rule","","**PRINCIPLE:** Transparency builds trust. Status must be visible and actionable."
+"brainstorming","Brainstorming & Communication Protocol","Progress Reporting (PRINCIPLE-BASED)","Status Board Format","rule","","| Agent | Status | Current Task | Progress |
+|-------|--------|--------------|----------|
+| [Agent Name] | ✅🔄⏳❌⚠️ | [Task description] | [% or count] |"
+"brainstorming","Brainstorming & Communication Protocol","Progress Reporting (PRINCIPLE-BASED)","Status Icons","rule","","| Icon | Meaning | Usage |
+|------|---------|-------|
+| ✅ | Completed | Task finished successfully |
+| 🔄 | Running | Currently executing |
+| ⏳ | Waiting | Blocked, waiting for dependency |
+| ❌ | Error | Failed, needs attention |
+| ⚠️ | Warning | Potential issue, not blocking |
+
+---"
+"brainstorming","Brainstorming & Communication Protocol","Error Handling (PRINCIPLE-BASED)","","rule","","**PRINCIPLE:** Errors are opportunities for clear communication."
+"brainstorming","Brainstorming & Communication Protocol","Error Handling (PRINCIPLE-BASED)","Error Response Pattern","code","","```
+1. Acknowledge the error
+2. Explain what happened (user-friendly)
+3. Offer specific solutions with trade-offs
+4. Ask user to choose or provide alternative
+```"
+"brainstorming","Brainstorming & Communication Protocol","Error Handling (PRINCIPLE-BASED)","Error Categories","rule","","| Category | Response Strategy |
+|----------|-------------------|
+| **Port Conflict** | Offer alternative port or close existing |
+| **Dependency Missing** | Auto-install or ask permission |
+| **Build Failure** | Show specific error + suggested fix |
+| **Unclear Error** | Ask for specifics: screenshot, console output |
+
+---"
+"brainstorming","Brainstorming & Communication Protocol","Completion Message (PRINCIPLE-BASED)","","rule","","**PRINCIPLE:** Celebrate success, guide next steps."
+"brainstorming","Brainstorming & Communication Protocol","Completion Message (PRINCIPLE-BASED)","Completion Structure","code","","```
+1. Success confirmation (celebrate briefly)
+2. Summary of what was done (concrete)
+3. How to verify/test (actionable)
+4. Next steps suggestion (proactive)
+```
+
+---"
+"brainstorming","Brainstorming & Communication Protocol","Communication Principles","","rule","","| Principle | Implementation |
+|-----------|----------------|
+| **Concise** | No unnecessary details, get to point |
+| **Visual** | Use emojis (✅🔄⏳❌) for quick scanning |
+| **Specific** | ""~2 minutes"" not ""wait a bit"" |
+| **Alternatives** | Offer multiple paths when stuck |
+| **Proactive** | Suggest next step after completion |
+
+---"
+"brainstorming","Brainstorming & Communication Protocol","Anti-Patterns (AVOID)","","pattern","","| Anti-Pattern | Why |
+|--------------|-----|
+| Jumping to solutions before understanding | Wastes time on wrong problem |
+| Assuming requirements without asking | Creates wrong output |
+| Over-engineering first version | Delays value delivery |
+| Ignoring constraints | Creates unusable solutions |
+| ""I think"" phrases | Uncertainty → Ask instead |
+
+---"
+"i18n-localization","i18n & Localization","PREAMBLE","","reference","RTL, i18n","---
+name: i18n-localization
+description: Internationalization and localization patterns. Detecting hardcoded strings, managing translations, locale files, RTL support.
+allowed-tools: Read, Glob, Grep
+---
+
+# i18n & Localization
+
+> Internationalization (i18n) and Localization (L10n) best practices.
+
+---"
+"i18n-localization","i18n & Localization","1. Core Concepts","","philosophy","RTL, i18n","| Term | Meaning |
+|------|---------|
+| **i18n** | Internationalization - making app translatable |
+| **L10n** | Localization - actual translations |
+| **Locale** | Language + Region (en-US, tr-TR) |
+| **RTL** | Right-to-left languages (Arabic, Hebrew) |
+
+---"
+"i18n-localization","i18n & Localization","2. When to Use i18n","","reference","i18n","| Project Type | i18n Needed? |
+|--------------|--------------|
+| Public web app | ✅ Yes |
+| SaaS product | ✅ Yes |
+| Internal tool | ⚠️ Maybe |
+| Single-region app | ⚠️ Consider future |
+| Personal project | ❌ Optional |
+
+---"
+"i18n-localization","i18n & Localization","3. Implementation Patterns","React (react-i18next)","code","React","```tsx
+import { useTranslation } from 'react-i18next';
+
+function Welcome() {
+  const { t } = useTranslation();
+  return <h1>{t('welcome.title')}</h1>;
+}
+```"
+"i18n-localization","i18n & Localization","3. Implementation Patterns","Next.js (next-intl)","code","","```tsx
+import { useTranslations } from 'next-intl';
+
+export default function Page() {
+  const t = useTranslations('Home');
+  return <h1>{t('title')}</h1>;
+}
+```"
+"i18n-localization","i18n & Localization","3. Implementation Patterns","Python (gettext)","code","Python, gettext","```python
+from gettext import gettext as _
+
+print(_(""Welcome to our app""))
+```
+
+---"
+"i18n-localization","i18n & Localization","4. File Structure","","code","RTL","```
+locales/
+├── en/
+│   ├── common.json
+│   ├── auth.json
+│   └── errors.json
+├── tr/
+│   ├── common.json
+│   ├── auth.json
+│   └── errors.json
+└── ar/          # RTL
+    └── ...
+```
+
+---"
+"i18n-localization","i18n & Localization","5. Best Practices","DO ✅","reference","ICU, RTL","- Use translation keys, not raw text
+- Namespace translations by feature
+- Support pluralization
+- Handle date/number formats per locale
+- Plan for RTL from the start
+- Use ICU message format for complex strings"
+"i18n-localization","i18n & Localization","5. Best Practices","DON'T ❌","reference","RTL","- Hardcode strings in components
+- Concatenate translated strings
+- Assume text length (German is 30% longer)
+- Forget about RTL layout
+- Mix languages in same file
+
+---"
+"i18n-localization","i18n & Localization","6. Common Issues","","reference","ICU","| Issue | Solution |
+|-------|----------|
+| Missing translation | Fallback to default language |
+| Hardcoded strings | Use linter/checker script |
+| Date format | Use Intl.DateTimeFormat |
+| Number format | Use Intl.NumberFormat |
+| Pluralization | Use ICU message format |
+
+---"
+"i18n-localization","i18n & Localization","7. RTL Support","","code","CSS, RTL","```css
+/* CSS Logical Properties */
+.container {
+  margin-inline-start: 1rem;  /* Not margin-left */
+  padding-inline-end: 1rem;   /* Not padding-right */
+}
+
+[dir=""rtl""] .icon {
+  transform: scaleX(-1);
+}
+```
+
+---"
+"i18n-localization","i18n & Localization","8. Checklist","","checklist","API, RTL","Before shipping:
+
+- [ ] All user-facing strings use translation keys
+- [ ] Locale files exist for all supported languages
+- [ ] Date/number formatting uses Intl API
+- [ ] RTL layout tested (if applicable)
+- [ ] Fallback language configured
+- [ ] No hardcoded strings in components
+
+---"
+"i18n-localization","i18n & Localization","Script","","reference","Python, i18n","| Script | Purpose | Command |
+|--------|---------|---------|
+| `scripts/i18n_checker.py` | Detect hardcoded strings & missing translations | `python scripts/i18n_checker.py <project_path>` |"
+"intelligent-routing","Intelligent Agent Routing","PREAMBLE","","reference","","---
+name: intelligent-routing
+description: Automatic agent selection and intelligent task routing. Analyzes user requests and automatically selects the best specialist agent(s) without requiring explicit user mentions.
+version: 1.0.0
+---
+
+# Intelligent Agent Routing
+
+**Purpose**: Automatically analyze user requests and route them to the most appropriate specialist agent(s) without requiring explicit user mentions."
+"intelligent-routing","Intelligent Agent Routing","Core Principle","","rule","","> **The AI should act as an intelligent Project Manager**, analyzing each request and automatically selecting the best specialist(s) for the job."
+"intelligent-routing","Intelligent Agent Routing","How It Works","1. Request Analysis","code","","Before responding to ANY user request, perform automatic analysis:
+
+```mermaid
+graph TD
+    A[User Request: Add login] --> B[ANALYZE]
+    B --> C[Keywords]
+    B --> D[Domains]
+    B --> E[Complexity]
+    C --> F[SELECT AGENT]
+    D --> F
+    E --> F
+    F --> G[security-auditor + backend-specialist]
+    G --> H[AUTO-INVOKE with context]
+```"
+"intelligent-routing","Intelligent Agent Routing","How It Works","2. Agent Selection Matrix","reference","API, CI/CD, Docker, authentication","**Use this matrix to automatically select agents:**
+
+| User Intent         | Keywords                                   | Selected Agent(s)                           | Auto-invoke? |
+| ------------------- | ------------------------------------------ | ------------------------------------------- | ------------ |
+| **Authentication**  | ""login"", ""auth"", ""signup"", ""password""      | `security-auditor` + `backend-specialist`   | ✅ YES       |
+| **UI Component**    | ""button"", ""card"", ""layout"", ""style""        | `frontend-specialist`                       | ✅ YES       |
+| **Mobile UI**       | ""screen"", ""navigation"", ""touch"", ""gesture"" | `mobile-developer`                          | ✅ YES       |
+| **API Endpoint**    | ""endpoint"", ""route"", ""API"", ""POST"", ""GET""  | `backend-specialist`                        | ✅ YES       |
+| **Database**        | ""schema"", ""migration"", ""query"", ""table""    | `database-architect` + `backend-specialist` | ✅ YES       |
+| **Bug Fix**         | ""error"", ""bug"", ""not working"", ""broken""    | `debugger`                                  | ✅ YES       |
+| **Test**            | ""test"", ""coverage"", ""unit"", ""e2e""          | `test-engineer`                             | ✅ YES       |
+| **Deployment**      | ""deploy"", ""production"", ""CI/CD"", ""docker""  | `devops-engineer`                           | ✅ YES       |
+| **Security Review** | ""security"", ""vulnerability"", ""exploit""     | `security-auditor` + `penetration-tester`   | ✅ YES       |
+| **Performance**     | ""slow"", ""optimize"", ""performance"", ""speed"" | `performance-optimizer`                     | ✅ YES       |
+| **Product Def**     | ""requirements"", ""user story"", ""backlog"", ""MVP"" | `product-owner`                             | ✅ YES       |
+| **New Feature**     | ""build"", ""create"", ""implement"", ""new app""  | `orchestrator` → multi-agent                | ⚠️ ASK FIRST |
+| **Complex Task**    | Multiple domains detected                  | `orchestrator` → multi-agent                | ⚠️ ASK FIRST |"
+"intelligent-routing","Intelligent Agent Routing","TIER 0 - Automatic Analysis (ALWAYS ACTIVE)","","code","JavaScript","Before responding to ANY request:
+
+```javascript
+// Pseudo-code for decision tree
+function analyzeRequest(userMessage) {
+    // 1. Classify request type
+    const requestType = classifyRequest(userMessage);
+
+    // 2. Detect domains
+    const domains = detectDomains(userMessage);
+
+    // 3. Determine complexity
+    const complexity = assessComplexity(domains);
+
+    // 4. Select agent(s)
+    if (complexity === ""SIMPLE"" && domains.length === 1) {
+        return selectSingleAgent(domains[0]);
+    } else if (complexity === ""MODERATE"" && domains.length <= 2) {
+        return selectMultipleAgents(domains);
+    } else {
+        return ""orchestrator""; // Complex task
+    }
+}
+```"
+"intelligent-routing","Intelligent Agent Routing","4. Response Format","","code","","**When auto-selecting an agent, inform the user concisely:**
+
+```markdown
+🤖 **Applying knowledge of `@security-auditor` + `@backend-specialist`...**
+
+[Proceed with specialized response]
+```
+
+**Benefits:**
+
+- ✅ User sees which expertise is being applied
+- ✅ Transparent decision-making
+- ✅ Still automatic (no /commands needed)"
+"intelligent-routing","Intelligent Agent Routing","Domain Detection Rules","Single-Domain Tasks (Auto-invoke Single Agent)","rule","API, CI/CD, CSS, Cypress, Docker, Expo, Express, FastAPI, Flutter, HTML, JWT, Jest, Kubernetes, MongoDB, Nginx, PM2, Playwright, Prisma, React, React Native, SEO, SQL, Tailwind, Vitest, Vue","| Domain          | Patterns                                   | Agent                   |
+| --------------- | ------------------------------------------ | ----------------------- |
+| **Security**    | auth, login, jwt, password, hash, token    | `security-auditor`      |
+| **Frontend**    | component, react, vue, css, html, tailwind | `frontend-specialist`   |
+| **Backend**     | api, server, express, fastapi, node        | `backend-specialist`    |
+| **Mobile**      | react native, flutter, ios, android, expo  | `mobile-developer`      |
+| **Database**    | prisma, sql, mongodb, schema, migration    | `database-architect`    |
+| **Testing**     | test, jest, vitest, playwright, cypress    | `test-engineer`         |
+| **DevOps**      | docker, kubernetes, ci/cd, pm2, nginx      | `devops-engineer`       |
+| **Debug**       | error, bug, crash, not working, issue      | `debugger`              |
+| **Performance** | slow, lag, optimize, cache, performance    | `performance-optimizer` |
+| **SEO**         | seo, meta, analytics, sitemap, robots      | `seo-specialist`        |
+| **Game**        | unity, godot, phaser, game, multiplayer    | `game-developer`        |"
+"intelligent-routing","Intelligent Agent Routing","Domain Detection Rules","Multi-Domain Tasks (Auto-invoke Orchestrator)","code","","If request matches **2+ domains from different categories**, automatically use `orchestrator`:
+
+```text
+Example: ""Create a secure login system with dark mode UI""
+→ Detected: Security + Frontend
+→ Auto-invoke: orchestrator
+→ Orchestrator will handle: security-auditor, frontend-specialist, test-engineer
+```"
+"intelligent-routing","Intelligent Agent Routing","Complexity Assessment","SIMPLE (Direct agent invocation)","reference","","- Single file edit
+- Clear, specific task
+- One domain only
+- Example: ""Fix the login button style""
+
+**Action**: Auto-invoke respective agent"
+"intelligent-routing","Intelligent Agent Routing","Complexity Assessment","MODERATE (2-3 agents)","reference","API","- 2-3 files affected
+- Clear requirements
+- 2 domains max
+- Example: ""Add API endpoint for user profile""
+
+**Action**: Auto-invoke relevant agents sequentially"
+"intelligent-routing","Intelligent Agent Routing","Complexity Assessment","COMPLEX (Orchestrator required)","reference","","- Multiple files/domains
+- Architectural decisions needed
+- Unclear requirements
+- Example: ""Build a social media app""
+
+**Action**: Auto-invoke `orchestrator` → will ask Socratic questions"
+"intelligent-routing","Intelligent Agent Routing","Implementation Rules","Rule 1: Silent Analysis","rule","","#### DO NOT announce ""I'm analyzing your request...""
+
+- ✅ Analyze silently
+- ✅ Inform which agent is being applied
+- ❌ Avoid verbose meta-commentary"
+"intelligent-routing","Intelligent Agent Routing","Implementation Rules","Rule 2: Inform Agent Selection","code","","**DO inform which expertise is being applied:**
+
+```markdown
+🤖 **Applying knowledge of `@frontend-specialist`...**
+
+I will create the component with the following characteristics:
+[Continue with specialized response]
+```"
+"intelligent-routing","Intelligent Agent Routing","Implementation Rules","Rule 3: Seamless Experience","rule","","**The user should not notice a difference from talking to the right specialist directly.**"
+"intelligent-routing","Intelligent Agent Routing","Implementation Rules","Rule 4: Override Capability","code","","**User can still explicitly mention agents:**
+
+```text
+User: ""Use @backend-specialist to review this""
+→ Override auto-selection
+→ Use explicitly mentioned agent
+```"
+"intelligent-routing","Intelligent Agent Routing","Edge Cases","Case 1: Generic Question","code","React","```text
+User: ""How does React work?""
+→ Type: QUESTION
+→ No agent needed
+→ Respond directly with explanation
+```"
+"intelligent-routing","Intelligent Agent Routing","Edge Cases","Case 2: Extremely Vague Request","code","","```text
+User: ""Make it better""
+→ Complexity: UNCLEAR
+→ Action: Ask clarifying questions first
+→ Then route to appropriate agent
+```"
+"intelligent-routing","Intelligent Agent Routing","Edge Cases","Case 3: Contradictory Patterns","code","responsive","```text
+User: ""Add mobile support to the web app""
+→ Conflict: mobile vs web
+→ Action: Ask: ""Do you want responsive web or native mobile app?""
+→ Then route accordingly
+```"
+"intelligent-routing","Intelligent Agent Routing","Integration with Existing Workflows","With /orchestrate Command","framework","","- **User types `/orchestrate`**: Explicit orchestration mode
+- **AI detects complex task**: Auto-invoke orchestrator (same result)
+
+**Difference**: User doesn't need to know the command exists."
+"intelligent-routing","Intelligent Agent Routing","Integration with Existing Workflows","With Socratic Gate","framework","","- **Auto-routing does NOT bypass Socratic Gate**
+- If task is unclear, still ask questions first
+- Then route to appropriate agent"
+"intelligent-routing","Intelligent Agent Routing","Integration with Existing Workflows","With GEMINI.md Rules","rule","","- **Priority**: GEMINI.md rules > intelligent-routing
+- If GEMINI.md specifies explicit routing, follow it
+- Intelligent routing is the DEFAULT when no explicit rule exists"
+"intelligent-routing","Intelligent Agent Routing","Testing the System","Test Cases","code","authentication","#### Test 1: Simple Frontend Task
+
+```text
+User: ""Create a dark mode toggle button""
+Expected: Auto-invoke frontend-specialist
+Verify: Response shows ""Using @frontend-specialist""
+```
+
+#### Test 2: Security Task
+
+```text
+User: ""Review the authentication flow for vulnerabilities""
+Expected: Auto-invoke security-auditor
+Verify: Security-focused analysis
+```
+
+#### Test 3: Complex Multi-Domain
+
+```text
+User: ""Build a chat application with real-time notifications""
+Expected: Auto-invoke orchestrator
+Verify: Multiple agents coordinated (backend, frontend, test)
+```
+
+#### Test 4: Bug Fix
+
+```text
+User: ""Login is not working, getting 401 error""
+Expected: Auto-invoke debugger
+Verify: Systematic debugging approach
+```"
+"intelligent-routing","Intelligent Agent Routing","Performance Considerations","Token Usage","reference","","- Analysis adds ~50-100 tokens per request
+- Tradeoff: Better accuracy vs slight overhead
+- Overall SAVES tokens by reducing back-and-forth"
+"intelligent-routing","Intelligent Agent Routing","Performance Considerations","Response Time","reference","API","- Analysis is instant (pattern matching)
+- No additional API calls required
+- Agent selection happens before first response"
+"intelligent-routing","Intelligent Agent Routing","User Education","Optional: First-Time Explanation","code","","If this is the first interaction in a project:
+
+```markdown
+💡 **Tip**: I am configured with automatic specialist agent selection.
+I will always choose the most suitable specialist for your task. You can
+still mention agents explicitly with `@agent-name` if you prefer.
+```"
+"intelligent-routing","Intelligent Agent Routing","Debugging Agent Selection","Enable Debug Mode (for development)","code","","Add to GEMINI.md temporarily:
+
+```markdown
+## DEBUG: Intelligent Routing
+
+Show selection reasoning:
+
+- Detected domains: [list]
+- Selected agent: [name]
+- Reasoning: [why]
+```"
+"intelligent-routing","Intelligent Agent Routing","Summary","","reference","","**intelligent-routing skill enables:**
+
+✅ Zero-command operation (no need for `/orchestrate`)  
+✅ Automatic specialist selection based on request analysis  
+✅ Transparent communication of which expertise is being applied  
+✅ Seamless integration with existing workflows  
+✅ Override capability for explicit agent mentions  
+✅ Fallback to orchestrator for complex tasks
+
+**Result**: User gets specialist-level responses without needing to know the system architecture.
+
+---
+
+**Next Steps**: Integrate this skill into GEMINI.md TIER 0 rules."
+"lint-and-validate","Lint and Validate Skill","PREAMBLE","","reference","Bash","---
+name: lint-and-validate
+description: Automatic quality control, linting, and static analysis procedures. Use after every code modification to ensure syntax correctness and project standards. Triggers onKeywords: lint, format, check, validate, types, static analysis.
+allowed-tools: Read, Glob, Grep, Bash
+---
+
+# Lint and Validate Skill
+
+> **MANDATORY:** Run appropriate validation tools after EVERY code change. Do not finish a task until the code is error-free."
+"lint-and-validate","Lint and Validate Skill","PREAMBLE","Procedures by Ecosystem","reference","ESLint, Node.js, Python, TypeScript, mypy, ruff","#### Node.js / TypeScript
+1. **Lint/Fix:** `npm run lint` or `npx eslint ""path"" --fix`
+2. **Types:** `npx tsc --noEmit`
+3. **Security:** `npm audit --audit-level=high`
+
+#### Python
+1. **Linter (Ruff):** `ruff check ""path"" --fix` (Fast & Modern)
+2. **Security (Bandit):** `bandit -r ""path"" -ll`
+3. **Types (MyPy):** `mypy ""path""`"
+"lint-and-validate","Lint and Validate Skill","The Quality Loop","","reference","","1. **Write/Edit Code**
+2. **Run Audit:** `npm run lint && npx tsc --noEmit`
+3. **Analyze Report:** Check the ""FINAL AUDIT REPORT"" section.
+4. **Fix & Repeat:** Submitting code with ""FINAL AUDIT"" failures is NOT allowed."
+"lint-and-validate","Lint and Validate Skill","Error Handling","","reference","","- If `lint` fails: Fix the style or syntax issues immediately.
+- If `tsc` fails: Correct type mismatches before proceeding.
+- If no tool is configured: Check the project root for `.eslintrc`, `tsconfig.json`, `pyproject.toml` and suggest creating one.
+
+---
+**Strict Rule:** No code should be committed or reported as ""done"" without passing these checks.
+
+---"
+"lint-and-validate","Lint and Validate Skill","Scripts","","reference","Python","| Script | Purpose | Command |
+|--------|---------|---------|
+| `scripts/lint_runner.py` | Unified lint check | `python scripts/lint_runner.py <project_path>` |
+| `scripts/type_coverage.py` | Type coverage analysis | `python scripts/type_coverage.py <project_path>` |"
+"mcp-builder","MCP Builder","PREAMBLE","","reference","MCP","---
+name: mcp-builder
+description: MCP (Model Context Protocol) server building principles. Tool design, resource patterns, best practices.
+allowed-tools: Read, Write, Edit, Glob, Grep
+---
+
+# MCP Builder
+
+> Principles for building MCP servers.
+
+---"
+"mcp-builder","MCP Builder","1. MCP Overview","What is MCP?","reference","","Model Context Protocol - standard for connecting AI systems with external tools and data sources."
+"mcp-builder","MCP Builder","1. MCP Overview","Core Concepts","philosophy","","| Concept | Purpose |
+|---------|---------|
+| **Tools** | Functions AI can call |
+| **Resources** | Data AI can read |
+| **Prompts** | Pre-defined prompt templates |
+
+---"
+"mcp-builder","MCP Builder","2. Server Architecture","Project Structure","code","MCP","```
+my-mcp-server/
+├── src/
+│   └── index.ts      # Main entry
+├── package.json
+└── tsconfig.json
+```"
+"mcp-builder","MCP Builder","2. Server Architecture","Transport Types","framework","WebSocket","| Type | Use |
+|------|-----|
+| **Stdio** | Local, CLI-based |
+| **SSE** | Web-based, streaming |
+| **WebSocket** | Real-time, bidirectional |
+
+---"
+"mcp-builder","MCP Builder","3. Tool Design Principles","Good Tool Design","rule","","| Principle | Description |
+|-----------|-------------|
+| Clear name | Action-oriented (get_weather, create_user) |
+| Single purpose | One thing well |
+| Validated input | Schema with types and descriptions |
+| Structured output | Predictable response format |"
+"mcp-builder","MCP Builder","3. Tool Design Principles","Input Schema Design","rule","","| Field | Required? |
+|-------|-----------|
+| Type | Yes - object |
+| Properties | Define each param |
+| Required | List mandatory params |
+| Description | Human-readable |
+
+---"
+"mcp-builder","MCP Builder","4. Resource Patterns","Resource Types","pattern","","| Type | Use |
+|------|-----|
+| Static | Fixed data (config, docs) |
+| Dynamic | Generated on request |
+| Template | URI with parameters |"
+"mcp-builder","MCP Builder","4. Resource Patterns","URI Patterns","pattern","","| Pattern | Example |
+|---------|---------|
+| Fixed | `docs://readme` |
+| Parameterized | `users://{userId}` |
+| Collection | `files://project/*` |
+
+---"
+"mcp-builder","MCP Builder","5. Error Handling","Error Types","reference","","| Situation | Response |
+|-----------|----------|
+| Invalid params | Validation error message |
+| Not found | Clear ""not found"" |
+| Server error | Generic error, log details |"
+"mcp-builder","MCP Builder","5. Error Handling","Best Practices","reference","","- Return structured errors
+- Don't expose internal details
+- Log for debugging
+- Provide actionable messages
+
+---"
+"mcp-builder","MCP Builder","6. Multimodal Handling","Supported Types","reference","","| Type | Encoding |
+|------|----------|
+| Text | Plain text |
+| Images | Base64 + MIME type |
+| Files | Base64 + MIME type |
+
+---"
+"mcp-builder","MCP Builder","7. Security Principles","Input Validation","rule","","- Validate all tool inputs
+- Sanitize user-provided data
+- Limit resource access"
+"mcp-builder","MCP Builder","7. Security Principles","API Keys","rule","","- Use environment variables
+- Don't log secrets
+- Validate permissions
+
+---"
+"mcp-builder","MCP Builder","8. Configuration","Claude Desktop Config","config","","| Field | Purpose |
+|-------|---------|
+| command | Executable to run |
+| args | Command arguments |
+| env | Environment variables |
+
+---"
+"mcp-builder","MCP Builder","9. Testing","Test Categories","reference","","| Type | Focus |
+|------|-------|
+| Unit | Tool logic |
+| Integration | Full server |
+| Contract | Schema validation |
+
+---"
+"mcp-builder","MCP Builder","10. Best Practices Checklist","","checklist","MCP","- [ ] Clear, action-oriented tool names
+- [ ] Complete input schemas with descriptions
+- [ ] Structured JSON output
+- [ ] Error handling for all cases
+- [ ] Input validation
+- [ ] Environment-based configuration
+- [ ] Logging for debugging
+
+---
+
+> **Remember:** MCP tools should be simple, focused, and well-documented. The AI relies on descriptions to use them correctly."
+"parallel-agents","Native Parallel Agents","PREAMBLE","","reference","","---
+name: parallel-agents
+description: Multi-agent orchestration patterns. Use when multiple independent tasks can run with different domain expertise or when comprehensive analysis requires multiple perspectives.
+allowed-tools: Read, Glob, Grep
+---
+
+# Native Parallel Agents
+
+> Orchestration through Antigravity's built-in Agent Tool"
+"parallel-agents","Native Parallel Agents","Overview","","reference","","This skill enables coordinating multiple specialized agents through Antigravity's native agent system. Unlike external scripts, this approach keeps all orchestration within Antigravity's control."
+"parallel-agents","Native Parallel Agents","When to Use Orchestration","","reference","","✅ **Good for:**
+- Complex tasks requiring multiple expertise domains
+- Code analysis from security, performance, and quality perspectives
+- Comprehensive reviews (architecture + security + testing)
+- Feature implementation needing backend + frontend + database work
+
+❌ **Not for:**
+- Simple, single-domain tasks
+- Quick fixes or small changes
+- Tasks where one agent suffices
+
+---"
+"parallel-agents","Native Parallel Agents","Native Agent Invocation","Single Agent","code","authentication","```
+Use the security-auditor agent to review authentication
+```"
+"parallel-agents","Native Parallel Agents","Native Agent Invocation","Sequential Chain","code","API","```
+First, use the explorer-agent to discover project structure.
+Then, use the backend-specialist to review API endpoints.
+Finally, use the test-engineer to identify test gaps.
+```"
+"parallel-agents","Native Parallel Agents","Native Agent Invocation","With Context Passing","code","React","```
+Use the frontend-specialist to analyze React components.
+Based on those findings, have the test-engineer generate component tests.
+```"
+"parallel-agents","Native Parallel Agents","Native Agent Invocation","Resume Previous Work","code","","```
+Resume agent [agentId] and continue with additional requirements.
+```
+
+---"
+"parallel-agents","Native Parallel Agents","Orchestration Patterns","Pattern 1: Comprehensive Analysis","code","API","```
+Agents: explorer-agent → [domain-agents] → synthesis
+
+1. explorer-agent: Map codebase structure
+2. security-auditor: Security posture
+3. backend-specialist: API quality
+4. frontend-specialist: UI/UX patterns
+5. test-engineer: Test coverage
+6. Synthesize all findings
+```"
+"parallel-agents","Native Parallel Agents","Orchestration Patterns","Pattern 2: Feature Review","code","","```
+Agents: affected-domain-agents → test-engineer
+
+1. Identify affected domains (backend? frontend? both?)
+2. Invoke relevant domain agents
+3. test-engineer verifies changes
+4. Synthesize recommendations
+```"
+"parallel-agents","Native Parallel Agents","Orchestration Patterns","Pattern 3: Security Audit","code","","```
+Agents: security-auditor → penetration-tester → synthesis
+
+1. security-auditor: Configuration and code review
+2. penetration-tester: Active vulnerability testing
+3. Synthesize with prioritized remediation
+```
+
+---"
+"parallel-agents","Native Parallel Agents","Available Agents","","reference","API, CI/CD, Express, Flutter, GraphQL, Next.js, Node.js, Prisma, REST, React, React Native, SEO, TDD","| Agent | Expertise | Trigger Phrases |
+|-------|-----------|-----------------|
+| `orchestrator` | Coordination | ""comprehensive"", ""multi-perspective"" |
+| `security-auditor` | Security | ""security"", ""auth"", ""vulnerabilities"" |
+| `penetration-tester` | Security Testing | ""pentest"", ""red team"", ""exploit"" |
+| `backend-specialist` | Backend | ""API"", ""server"", ""Node.js"", ""Express"" |
+| `frontend-specialist` | Frontend | ""React"", ""UI"", ""components"", ""Next.js"" |
+| `test-engineer` | Testing | ""tests"", ""coverage"", ""TDD"" |
+| `devops-engineer` | DevOps | ""deploy"", ""CI/CD"", ""infrastructure"" |
+| `database-architect` | Database | ""schema"", ""Prisma"", ""migrations"" |
+| `mobile-developer` | Mobile | ""React Native"", ""Flutter"", ""mobile"" |
+| `api-designer` | API Design | ""REST"", ""GraphQL"", ""OpenAPI"" |
+| `debugger` | Debugging | ""bug"", ""error"", ""not working"" |
+| `explorer-agent` | Discovery | ""explore"", ""map"", ""structure"" |
+| `documentation-writer` | Documentation | ""write docs"", ""create README"", ""generate API docs"" |
+| `performance-optimizer` | Performance | ""slow"", ""optimize"", ""profiling"" |
+| `project-planner` | Planning | ""plan"", ""roadmap"", ""milestones"" |
+| `seo-specialist` | SEO | ""SEO"", ""meta tags"", ""search ranking"" |
+| `game-developer` | Game Development | ""game"", ""Unity"", ""Godot"", ""Phaser"" |
+
+---"
+"parallel-agents","Native Parallel Agents","Antigravity Built-in Agents","","reference","","These work alongside custom agents:
+
+| Agent | Model | Purpose |
+|-------|-------|---------|
+| **Explore** | Haiku | Fast read-only codebase search |
+| **Plan** | Sonnet | Research during plan mode |
+| **General-purpose** | Sonnet | Complex multi-step modifications |
+
+Use **Explore** for quick searches, **custom agents** for domain expertise.
+
+---"
+"parallel-agents","Native Parallel Agents","Synthesis Protocol","","code","API","After all agents complete, synthesize:
+
+```markdown
+## Orchestration Synthesis
+
+### Task Summary
+[What was accomplished]
+
+### Agent Contributions
+| Agent | Finding |
+|-------|---------|
+| security-auditor | Found X |
+| backend-specialist | Identified Y |
+
+### Consolidated Recommendations
+1. **Critical**: [Issue from Agent A]
+2. **Important**: [Issue from Agent B]
+3. **Nice-to-have**: [Enhancement from Agent C]
+
+### Action Items
+- [ ] Fix critical security issue
+- [ ] Refactor API endpoint
+- [ ] Add missing tests
+```
+
+---"
+"parallel-agents","Native Parallel Agents","Best Practices","","reference","","1. **Available agents** - 17 specialized agents can be orchestrated
+2. **Logical order** - Discovery → Analysis → Implementation → Testing
+3. **Share context** - Pass relevant findings to subsequent agents
+4. **Single synthesis** - One unified report, not separate outputs
+5. **Verify changes** - Always include test-engineer for code modifications
+
+---"
+"parallel-agents","Native Parallel Agents","Key Benefits","","reference","","- ✅ **Single session** - All agents share context
+- ✅ **AI-controlled** - Claude orchestrates autonomously
+- ✅ **Native integration** - Works with built-in Explore, Plan agents
+- ✅ **Resume support** - Can continue previous agent work
+- ✅ **Context passing** - Findings flow between agents"
+"plan-writing","Plan Writing","PREAMBLE","","reference","","---
+name: plan-writing
+description: Structured task planning with clear breakdowns, dependencies, and verification criteria. Use when implementing features, refactoring, or any multi-step work.
+allowed-tools: Read, Glob, Grep
+---
+
+# Plan Writing
+
+> Source: obra/superpowers"
+"plan-writing","Plan Writing","Overview","","reference","","This skill provides a framework for breaking down work into clear, actionable tasks with verification criteria."
+"plan-writing","Plan Writing","Task Breakdown Principles","1. Small, Focused Tasks","rule","","- Each task should take 2-5 minutes
+- One clear outcome per task
+- Independently verifiable"
+"plan-writing","Plan Writing","Task Breakdown Principles","2. Clear Verification","rule","","- How do you know it's done?
+- What can you check/test?
+- What's the expected output?"
+"plan-writing","Plan Writing","Task Breakdown Principles","3. Logical Ordering","rule","","- Dependencies identified
+- Parallel work where possible
+- Critical path highlighted
+- **Phase X: Verification is always LAST**"
+"plan-writing","Plan Writing","Task Breakdown Principles","4. Dynamic Naming in Project Root","rule","","- Plan files are saved as `{task-slug}.md` in the PROJECT ROOT
+- Name derived from task (e.g., ""add auth"" → `auth-feature.md`)
+- **NEVER** inside `.claude/`, `docs/`, or temp folders"
+"plan-writing","Plan Writing","Planning Principles (NOT Templates!)","","rule","","> 🔴 **NO fixed templates. Each plan is UNIQUE to the task.**"
+"plan-writing","Plan Writing","Planning Principles (NOT Templates!)","Principle 1: Keep It SHORT","rule","","| ❌ Wrong | ✅ Right |
+|----------|----------|
+| 50 tasks with sub-sub-tasks | 5-10 clear tasks max |
+| Every micro-step listed | Only actionable items |
+| Verbose descriptions | One-line per task |
+
+> **Rule:** If plan is longer than 1 page, it's too long. Simplify.
+
+---"
+"plan-writing","Plan Writing","Planning Principles (NOT Templates!)","Principle 2: Be SPECIFIC, Not Generic","rule","API, NextAuth, Tailwind, authentication","| ❌ Wrong | ✅ Right |
+|----------|----------|
+| ""Set up project"" | ""Run `npx create-next-app`"" |
+| ""Add authentication"" | ""Install next-auth, create `/api/auth/[...nextauth].ts`"" |
+| ""Style the UI"" | ""Add Tailwind classes to `Header.tsx`"" |
+
+> **Rule:** Each task should have a clear, verifiable outcome.
+
+---"
+"plan-writing","Plan Writing","Planning Principles (NOT Templates!)","Principle 3: Dynamic Content Based on Project Type","rule","","**For NEW PROJECT:**
+- What tech stack? (decide first)
+- What's the MVP? (minimal features)
+- What's the file structure?
+
+**For FEATURE ADDITION:**
+- Which files are affected?
+- What dependencies needed?
+- How to verify it works?
+
+**For BUG FIX:**
+- What's the root cause?
+- What file/line to change?
+- How to test the fix?
+
+---"
+"plan-writing","Plan Writing","Planning Principles (NOT Templates!)","Principle 4: Scripts Are Project-Specific","rule","API, React, accessibility","> 🔴 **DO NOT copy-paste script commands. Choose based on project type.**
+
+| Project Type | Relevant Scripts |
+|--------------|------------------|
+| Frontend/React | `ux_audit.py`, `accessibility_checker.py` |
+| Backend/API | `api_validator.py`, `security_scan.py` |
+| Mobile | `mobile_audit.py` |
+| Database | `schema_validator.py` |
+| Full-stack | Mix of above based on what you touched |
+
+**Wrong:** Adding all scripts to every plan
+**Right:** Only scripts relevant to THIS task
+
+---"
+"plan-writing","Plan Writing","Planning Principles (NOT Templates!)","Principle 5: Verification is Simple","rule","API","| ❌ Wrong | ✅ Right |
+|----------|----------|
+| ""Verify the component works correctly"" | ""Run `npm run dev`, click button, see toast"" |
+| ""Test the API"" | ""curl localhost:3000/api/users returns 200"" |
+| ""Check styles"" | ""Open browser, verify dark mode toggle works"" |
+
+---"
+"plan-writing","Plan Writing","Plan Structure (Flexible, Not Fixed!)","","code","","```
+# [Task Name]
+
+## Goal
+One sentence: What are we building/fixing?
+
+## Tasks
+- [ ] Task 1: [Specific action] → Verify: [How to check]
+- [ ] Task 2: [Specific action] → Verify: [How to check]
+- [ ] Task 3: [Specific action] → Verify: [How to check]
+
+## Done When
+- [ ] [Main success criteria]
+```
+
+> **That's it.** No phases, no sub-sections unless truly needed.
+> Keep it minimal. Add complexity only when required."
+"plan-writing","Plan Writing","Notes","","code","","[Any important considerations]
+```
+
+---
+
+## Best Practices (Quick Reference)
+
+1. **Start with goal** - What are we building/fixing?
+2. **Max 10 tasks** - If more, break into multiple plans
+3. **Each task verifiable** - Clear ""done"" criteria
+4. **Project-specific** - No copy-paste templates
+5. **Update as you go** - Mark `[x]` when complete
+
+---
+
+## When to Use
+
+- New project from scratch
+- Adding a feature
+- Fixing a bug (if complex)
+- Refactoring multiple files"
+"python-patterns","Python Patterns","PREAMBLE","","reference","Python","---
+name: python-patterns
+description: Python development principles and decision-making. Framework selection, async patterns, type hints, project structure. Teaches thinking, not copying.
+allowed-tools: Read, Write, Edit, Glob, Grep
+---
+
+# Python Patterns
+
+> Python development principles and decision-making for 2025.
+> **Learn to THINK, not memorize patterns.**
+
+---"
+"python-patterns","Python Patterns","⚠️ How to Use This Skill","","reference","","This skill teaches **decision-making principles**, not fixed code to copy.
+
+- ASK user for framework preference when unclear
+- Choose async vs sync based on CONTEXT
+- Don't default to same framework every time
+
+---"
+"python-patterns","Python Patterns","1. Framework Selection (2025)","Decision Tree","code","API, Django, FastAPI, Flask, microservices, pydantic","```
+What are you building?
+│
+├── API-first / Microservices
+│   └── FastAPI (async, modern, fast)
+│
+├── Full-stack web / CMS / Admin
+│   └── Django (batteries-included)
+│
+├── Simple / Script / Learning
+│   └── Flask (minimal, flexible)
+│
+├── AI/ML API serving
+│   └── FastAPI (Pydantic, async, uvicorn)
+│
+└── Background workers
+    └── Celery + any framework
+```"
+"python-patterns","Python Patterns","1. Framework Selection (2025)","Comparison Principles","rule","Django, FastAPI, Flask, microservices","| Factor | FastAPI | Django | Flask |
+|--------|---------|--------|-------|
+| **Best for** | APIs, microservices | Full-stack, CMS | Simple, learning |
+| **Async** | Native | Django 5.0+ | Via extensions |
+| **Admin** | Manual | Built-in | Via extensions |
+| **ORM** | Choose your own | Django ORM | Choose your own |
+| **Learning curve** | Low | Medium | Low |"
+"python-patterns","Python Patterns","1. Framework Selection (2025)","Selection Questions to Ask:","framework","API","1. Is this API-only or full-stack?
+2. Need admin interface?
+3. Team familiar with async?
+4. Existing infrastructure?
+
+---"
+"python-patterns","Python Patterns","2. Async vs Sync Decision","When to Use Async","code","Django, FastAPI, microservices","```
+async def is better when:
+├── I/O-bound operations (database, HTTP, file)
+├── Many concurrent connections
+├── Real-time features
+├── Microservices communication
+└── FastAPI/Starlette/Django ASGI
+
+def (sync) is better when:
+├── CPU-bound operations
+├── Simple scripts
+├── Legacy codebase
+├── Team unfamiliar with async
+└── Blocking libraries (no async version)
+```"
+"python-patterns","Python Patterns","2. Async vs Sync Decision","The Golden Rule","code","","```
+I/O-bound → async (waiting for external)
+CPU-bound → sync + multiprocessing (computing)
+
+Don't:
+├── Mix sync and async carelessly
+├── Use sync libraries in async code
+└── Force async for CPU work
+```"
+"python-patterns","Python Patterns","2. Async vs Sync Decision","Async Library Selection","reference","PostgreSQL, Redis","| Need | Async Library |
+|------|---------------|
+| HTTP client | httpx |
+| PostgreSQL | asyncpg |
+| Redis | aioredis / redis-py async |
+| File I/O | aiofiles |
+| Database ORM | SQLAlchemy 2.0 async, Tortoise |
+
+---"
+"python-patterns","Python Patterns","3. Type Hints Strategy","When to Type","code","","```
+Always type:
+├── Function parameters
+├── Return types
+├── Class attributes
+├── Public APIs
+
+Can skip:
+├── Local variables (let inference work)
+├── One-off scripts
+├── Tests (usually)
+```"
+"python-patterns","Python Patterns","3. Type Hints Strategy","Common Type Patterns","code","Python","```python
+# These are patterns, understand them:
+
+# Optional → might be None
+from typing import Optional
+def find_user(id: int) -> Optional[User]: ...
+
+# Union → one of multiple types
+def process(data: str | dict) -> None: ...
+
+# Generic collections
+def get_items() -> list[Item]: ...
+def get_mapping() -> dict[str, int]: ...
+
+# Callable
+from typing import Callable
+def apply(fn: Callable[[int], str]) -> str: ...
+```"
+"python-patterns","Python Patterns","3. Type Hints Strategy","Pydantic for Validation","code","API, FastAPI, pydantic","```
+When to use Pydantic:
+├── API request/response models
+├── Configuration/settings
+├── Data validation
+├── Serialization
+
+Benefits:
+├── Runtime validation
+├── Auto-generated JSON schema
+├── Works with FastAPI natively
+└── Clear error messages
+```
+
+---"
+"python-patterns","Python Patterns","4. Project Structure Principles","Structure Selection","code","API","```
+Small project / Script:
+├── main.py
+├── utils.py
+└── requirements.txt
+
+Medium API:
+├── app/
+│   ├── __init__.py
+│   ├── main.py
+│   ├── models/
+│   ├── routes/
+│   ├── services/
+│   └── schemas/
+├── tests/
+└── pyproject.toml
+
+Large application:
+├── src/
+│   └── myapp/
+│       ├── core/
+│       ├── api/
+│       ├── services/
+│       ├── models/
+│       └── ...
+├── tests/
+└── pyproject.toml
+```"
+"python-patterns","Python Patterns","4. Project Structure Principles","FastAPI Structure Principles","code","API, pydantic","```
+Organize by feature or layer:
+
+By layer:
+├── routes/ (API endpoints)
+├── services/ (business logic)
+├── models/ (database models)
+├── schemas/ (Pydantic models)
+└── dependencies/ (shared deps)
+
+By feature:
+├── users/
+│   ├── routes.py
+│   ├── service.py
+│   └── schemas.py
+└── products/
+    └── ...
+```
+
+---"
+"python-patterns","Python Patterns","5. Django Principles (2025)","Django Async (Django 5.0+)","code","API, Django, WebSocket, middleware","```
+Django supports async:
+├── Async views
+├── Async middleware
+├── Async ORM (limited)
+└── ASGI deployment
+
+When to use async in Django:
+├── External API calls
+├── WebSocket (Channels)
+├── High-concurrency views
+└── Background task triggering
+```"
+"python-patterns","Python Patterns","5. Django Principles (2025)","Django Best Practices","code","","```
+Model design:
+├── Fat models, thin views
+├── Use managers for common queries
+├── Abstract base classes for shared fields
+
+Views:
+├── Class-based for complex CRUD
+├── Function-based for simple endpoints
+├── Use viewsets with DRF
+
+Queries:
+├── select_related() for FKs
+├── prefetch_related() for M2M
+├── Avoid N+1 queries
+└── Use .only() for specific fields
+```
+
+---"
+"python-patterns","Python Patterns","6. FastAPI Principles","async def vs def in FastAPI","code","FastAPI","```
+Use async def when:
+├── Using async database drivers
+├── Making async HTTP calls
+├── I/O-bound operations
+└── Want to handle concurrency
+
+Use def when:
+├── Blocking operations
+├── Sync database drivers
+├── CPU-bound work
+└── FastAPI runs in threadpool automatically
+```"
+"python-patterns","Python Patterns","6. FastAPI Principles","Dependency Injection","code","","```
+Use dependencies for:
+├── Database sessions
+├── Current user / Auth
+├── Configuration
+├── Shared resources
+
+Benefits:
+├── Testability (mock dependencies)
+├── Clean separation
+├── Automatic cleanup (yield)
+```"
+"python-patterns","Python Patterns","6. FastAPI Principles","Pydantic v2 Integration","code","FastAPI, Python, pydantic","```python
+# FastAPI + Pydantic are tightly integrated:
+
+# Request validation
+@app.post(""/users"")
+async def create(user: UserCreate) -> UserResponse:
+    # user is already validated
+    ...
+
+# Response serialization
+# Return type becomes response schema
+```
+
+---"
+"python-patterns","Python Patterns","7. Background Tasks","Selection Guide","reference","Redis, queue","| Solution | Best For |
+|----------|----------|
+| **BackgroundTasks** | Simple, in-process tasks |
+| **Celery** | Distributed, complex workflows |
+| **ARQ** | Async, Redis-based |
+| **RQ** | Simple Redis queue |
+| **Dramatiq** | Actor-based, simpler than Celery |"
+"python-patterns","Python Patterns","7. Background Tasks","When to Use Each","code","FastAPI, queue","```
+FastAPI BackgroundTasks:
+├── Quick operations
+├── No persistence needed
+├── Fire-and-forget
+└── Same process
+
+Celery/ARQ:
+├── Long-running tasks
+├── Need retry logic
+├── Distributed workers
+├── Persistent queue
+└── Complex workflows
+```
+
+---"
+"python-patterns","Python Patterns","8. Error Handling Principles","Exception Strategy","code","FastAPI","```
+In FastAPI:
+├── Create custom exception classes
+├── Register exception handlers
+├── Return consistent error format
+└── Log without exposing internals
+
+Pattern:
+├── Raise domain exceptions in services
+├── Catch and transform in handlers
+└── Client gets clean error response
+```"
+"python-patterns","Python Patterns","8. Error Handling Principles","Error Response Philosophy","code","","```
+Include:
+├── Error code (programmatic)
+├── Message (human readable)
+├── Details (field-level when applicable)
+└── NOT stack traces (security)
+```
+
+---"
+"python-patterns","Python Patterns","9. Testing Principles","Testing Strategy","rule","API, pytest","| Type | Purpose | Tools |
+|------|---------|-------|
+| **Unit** | Business logic | pytest |
+| **Integration** | API endpoints | pytest + httpx/TestClient |
+| **E2E** | Full workflows | pytest + DB |"
+"python-patterns","Python Patterns","9. Testing Principles","Async Testing","code","Python, asyncio, pytest","```python
+# Use pytest-asyncio for async tests
+
+import pytest
+from httpx import AsyncClient
+
+@pytest.mark.asyncio
+async def test_endpoint():
+    async with AsyncClient(app=app, base_url=""http://test"") as client:
+        response = await client.get(""/users"")
+        assert response.status_code == 200
+```"
+"python-patterns","Python Patterns","9. Testing Principles","Fixtures Strategy","code","","```
+Common fixtures:
+├── db_session → Database connection
+├── client → Test client
+├── authenticated_user → User with token
+└── sample_data → Test data setup
+```
+
+---"
+"python-patterns","Python Patterns","10. Decision Checklist","","checklist","","Before implementing:
+
+- [ ] **Asked user about framework preference?**
+- [ ] **Chosen framework for THIS context?** (not just default)
+- [ ] **Decided async vs sync?**
+- [ ] **Planned type hint strategy?**
+- [ ] **Defined project structure?**
+- [ ] **Planned error handling?**
+- [ ] **Considered background tasks?**
+
+---"
+"python-patterns","Python Patterns","11. Anti-Patterns to Avoid","❌ DON'T:","pattern","Django, FastAPI","- Default to Django for simple APIs (FastAPI may be better)
+- Use sync libraries in async code
+- Skip type hints for public APIs
+- Put business logic in routes/views
+- Ignore N+1 queries
+- Mix async and sync carelessly"
+"python-patterns","Python Patterns","11. Anti-Patterns to Avoid","✅ DO:","pattern","Python, pydantic","- Choose framework based on context
+- Ask about async requirements
+- Use Pydantic for validation
+- Separate concerns (routes → services → repos)
+- Test critical paths
+
+---
+
+> **Remember**: Python patterns are about decision-making for YOUR specific context. Don't copy code—think about what serves your application best."
+"systematic-debugging","Systematic Debugging","PREAMBLE","","reference","","---
+name: systematic-debugging
+description: 4-phase systematic debugging methodology with root cause analysis and evidence-based verification. Use when debugging complex issues.
+allowed-tools: Read, Glob, Grep
+---
+
+# Systematic Debugging
+
+> Source: obra/superpowers"
+"systematic-debugging","Systematic Debugging","Overview","","reference","","This skill provides a structured approach to debugging that prevents random guessing and ensures problems are properly understood before solving."
+"systematic-debugging","Systematic Debugging","4-Phase Debugging Process","Phase 1: Reproduce","code","","Before fixing, reliably reproduce the issue.
+
+```markdown
+## Reproduction Steps
+1. [Exact step to reproduce]
+2. [Next step]
+3. [Expected vs actual result]
+
+## Reproduction Rate
+- [ ] Always (100%)
+- [ ] Often (50-90%)
+- [ ] Sometimes (10-50%)
+- [ ] Rare (<10%)
+```"
+"systematic-debugging","Systematic Debugging","4-Phase Debugging Process","Phase 2: Isolate","code","","Narrow down the source.
+
+```markdown
+## Isolation Questions
+- When did this start happening?
+- What changed recently?
+- Does it happen in all environments?
+- Can we reproduce with minimal code?
+- What's the smallest change that triggers it?
+```"
+"systematic-debugging","Systematic Debugging","4-Phase Debugging Process","Phase 3: Understand","code","","Find the root cause, not just symptoms.
+
+```markdown
+## Root Cause Analysis
+### The 5 Whys
+1. Why: [First observation]
+2. Why: [Deeper reason]
+3. Why: [Still deeper]
+4. Why: [Getting closer]
+5. Why: [Root cause]
+```"
+"systematic-debugging","Systematic Debugging","4-Phase Debugging Process","Phase 4: Fix & Verify","code","","Fix and verify it's truly fixed.
+
+```markdown
+## Fix Verification
+- [ ] Bug no longer reproduces
+- [ ] Related functionality still works
+- [ ] No new issues introduced
+- [ ] Test added to prevent regression
+```"
+"systematic-debugging","Systematic Debugging","Debugging Checklist","","code","","```markdown
+## Before Starting
+- [ ] Can reproduce consistently
+- [ ] Have minimal reproduction case
+- [ ] Understand expected behavior
+
+## During Investigation
+- [ ] Check recent changes (git log)
+- [ ] Check logs for errors
+- [ ] Add logging if needed
+- [ ] Use debugger/breakpoints
+
+## After Fix
+- [ ] Root cause documented
+- [ ] Fix verified
+- [ ] Regression test added
+- [ ] Similar code checked
+```"
+"systematic-debugging","Systematic Debugging","Common Debugging Commands","","code","Bash, PM2","```bash
+# Recent changes
+git log --oneline -20
+git diff HEAD~5
+
+# Search for pattern
+grep -r ""errorPattern"" --include=""*.ts""
+
+# Check logs
+pm2 logs app-name --err --lines 100
+```"
+"systematic-debugging","Systematic Debugging","Anti-Patterns","","pattern","","❌ **Random changes** - ""Maybe if I change this...""
+❌ **Ignoring evidence** - ""That can't be the cause""
+❌ **Assuming** - ""It must be X"" without proof
+❌ **Not reproducing first** - Fixing blindly
+❌ **Stopping at symptoms** - Not finding root cause"
+"tdd-workflow","TDD Workflow","PREAMBLE","","reference","Bash, TDD","---
+name: tdd-workflow
+description: Test-Driven Development workflow principles. RED-GREEN-REFACTOR cycle.
+allowed-tools: Read, Write, Edit, Glob, Grep, Bash
+---
+
+# TDD Workflow
+
+> Write tests first, code second.
+
+---"
+"tdd-workflow","TDD Workflow","1. The TDD Cycle","","code","","```
+🔴 RED → Write failing test
+    ↓
+🟢 GREEN → Write minimal code to pass
+    ↓
+🔵 REFACTOR → Improve code quality
+    ↓
+   Repeat...
+```
+
+---"
+"tdd-workflow","TDD Workflow","2. The Three Laws of TDD","","reference","","1. Write production code only to make a failing test pass
+2. Write only enough test to demonstrate failure
+3. Write only enough code to make the test pass
+
+---"
+"tdd-workflow","TDD Workflow","3. RED Phase Principles","What to Write","rule","","| Focus | Example |
+|-------|---------|
+| Behavior | ""should add two numbers"" |
+| Edge cases | ""should handle empty input"" |
+| Error states | ""should throw for invalid data"" |"
+"tdd-workflow","TDD Workflow","3. RED Phase Principles","RED Phase Rules","rule","","- Test must fail first
+- Test name describes expected behavior
+- One assertion per test (ideally)
+
+---"
+"tdd-workflow","TDD Workflow","4. GREEN Phase Principles","Minimum Code","rule","","| Principle | Meaning |
+|-----------|---------|
+| **YAGNI** | You Aren't Gonna Need It |
+| **Simplest thing** | Write the minimum to pass |
+| **No optimization** | Just make it work |"
+"tdd-workflow","TDD Workflow","4. GREEN Phase Principles","GREEN Phase Rules","rule","","- Don't write unneeded code
+- Don't optimize yet
+- Pass the test, nothing more
+
+---"
+"tdd-workflow","TDD Workflow","5. REFACTOR Phase Principles","What to Improve","rule","","| Area | Action |
+|------|--------|
+| Duplication | Extract common code |
+| Naming | Make intent clear |
+| Structure | Improve organization |
+| Complexity | Simplify logic |"
+"tdd-workflow","TDD Workflow","5. REFACTOR Phase Principles","REFACTOR Rules","rule","","- All tests must stay green
+- Small incremental changes
+- Commit after each refactor
+
+---"
+"tdd-workflow","TDD Workflow","6. AAA Pattern","","pattern","","Every test follows:
+
+| Step | Purpose |
+|------|---------|
+| **Arrange** | Set up test data |
+| **Act** | Execute code under test |
+| **Assert** | Verify expected outcome |
+
+---"
+"tdd-workflow","TDD Workflow","7. When to Use TDD","","reference","TDD","| Scenario | TDD Value |
+|----------|-----------|
+| New feature | High |
+| Bug fix | High (write test first) |
+| Complex logic | High |
+| Exploratory | Low (spike, then TDD) |
+| UI layout | Low |
+
+---"
+"tdd-workflow","TDD Workflow","8. Test Prioritization","","reference","","| Priority | Test Type |
+|----------|-----------|
+| 1 | Happy path |
+| 2 | Error cases |
+| 3 | Edge cases |
+| 4 | Performance |
+
+---"
+"tdd-workflow","TDD Workflow","9. Anti-Patterns","","pattern","","| ❌ Don't | ✅ Do |
+|----------|-------|
+| Skip the RED phase | Watch test fail first |
+| Write tests after | Write tests before |
+| Over-engineer initial | Keep it simple |
+| Multiple asserts | One behavior per test |
+| Test implementation | Test behavior |
+
+---"
+"tdd-workflow","TDD Workflow","10. AI-Augmented TDD","Multi-Agent Pattern","pattern","","| Agent | Role |
+|-------|------|
+| Agent A | Write failing tests (RED) |
+| Agent B | Implement to pass (GREEN) |
+| Agent C | Optimize (REFACTOR) |
+
+---
+
+> **Remember:** The test is the specification. If you can't write a test, you don't understand the requirement."
+"testing-patterns","Testing Patterns","PREAMBLE","","reference","Bash","---
+name: testing-patterns
+description: Testing patterns and principles. Unit, integration, mocking strategies.
+allowed-tools: Read, Write, Edit, Glob, Grep, Bash
+---
+
+# Testing Patterns
+
+> Principles for reliable test suites.
+
+---"
+"testing-patterns","Testing Patterns","1. Testing Pyramid","","code","API","```
+        /\          E2E (Few)
+       /  \         Critical flows
+      /----\
+     /      \       Integration (Some)
+    /--------\      API, DB queries
+   /          \
+  /------------\    Unit (Many)
+                    Functions, classes
+```
+
+---"
+"testing-patterns","Testing Patterns","2. AAA Pattern","","pattern","","| Step | Purpose |
+|------|---------|
+| **Arrange** | Set up test data |
+| **Act** | Execute code under test |
+| **Assert** | Verify outcome |
+
+---"
+"testing-patterns","Testing Patterns","3. Test Type Selection","When to Use Each","reference","API","| Type | Best For | Speed |
+|------|----------|-------|
+| **Unit** | Pure functions, logic | Fast (<50ms) |
+| **Integration** | API, DB, services | Medium |
+| **E2E** | Critical user flows | Slow |
+
+---"
+"testing-patterns","Testing Patterns","4. Unit Test Principles","Good Unit Tests","rule","","| Principle | Meaning |
+|-----------|---------|
+| Fast | < 100ms each |
+| Isolated | No external deps |
+| Repeatable | Same result always |
+| Self-checking | No manual verification |
+| Timely | Written with code |"
+"testing-patterns","Testing Patterns","4. Unit Test Principles","What to Unit Test","rule","","| Test | Don't Test |
+|------|------------|
+| Business logic | Framework code |
+| Edge cases | Third-party libs |
+| Error handling | Simple getters |
+
+---"
+"testing-patterns","Testing Patterns","5. Integration Test Principles","What to Test","rule","API","| Area | Focus |
+|------|-------|
+| API endpoints | Request/response |
+| Database | Queries, transactions |
+| External services | Contracts |"
+"testing-patterns","Testing Patterns","5. Integration Test Principles","Setup/Teardown","config","","| Phase | Action |
+|-------|--------|
+| Before All | Connect resources |
+| Before Each | Reset state |
+| After Each | Clean up |
+| After All | Disconnect |
+
+---"
+"testing-patterns","Testing Patterns","6. Mocking Principles","When to Mock","rule","","| Mock | Don't Mock |
+|------|------------|
+| External APIs | The code under test |
+| Database (unit) | Simple dependencies |
+| Time/random | Pure functions |
+| Network | In-memory stores |"
+"testing-patterns","Testing Patterns","6. Mocking Principles","Mock Types","rule","","| Type | Use |
+|------|-----|
+| Stub | Return fixed values |
+| Spy | Track calls |
+| Mock | Set expectations |
+| Fake | Simplified implementation |
+
+---"
+"testing-patterns","Testing Patterns","7. Test Organization","Naming","reference","","| Pattern | Example |
+|---------|---------|
+| Should behavior | ""should return error when..."" |
+| When condition | ""when user not found..."" |
+| Given-when-then | ""given X, when Y, then Z"" |"
+"testing-patterns","Testing Patterns","7. Test Organization","Grouping","reference","","| Level | Use |
+|-------|-----|
+| describe | Group related tests |
+| it/test | Individual case |
+| beforeEach | Common setup |
+
+---"
+"testing-patterns","Testing Patterns","8. Test Data","Strategies","reference","","| Approach | Use |
+|----------|-----|
+| Factories | Generate test data |
+| Fixtures | Predefined datasets |
+| Builders | Fluent object creation |"
+"testing-patterns","Testing Patterns","8. Test Data","Principles","rule","","- Use realistic data
+- Randomize non-essential values (faker)
+- Share common fixtures
+- Keep data minimal
+
+---"
+"testing-patterns","Testing Patterns","9. Best Practices","","reference","","| Practice | Why |
+|----------|-----|
+| One assert per test | Clear failure reason |
+| Independent tests | No order dependency |
+| Fast tests | Run frequently |
+| Descriptive names | Self-documenting |
+| Clean up | Avoid side effects |
+
+---"
+"testing-patterns","Testing Patterns","10. Anti-Patterns","","pattern","","| ❌ Don't | ✅ Do |
+|----------|-------|
+| Test implementation | Test behavior |
+| Duplicate test code | Use factories |
+| Complex test setup | Simplify or split |
+| Ignore flaky tests | Fix root cause |
+| Skip cleanup | Reset state |
+
+---
+
+> **Remember:** Tests are documentation. If someone can't understand what the code does from the tests, rewrite them."
+"web-design-guidelines","Web Interface Guidelines","PREAMBLE","","reference","Vercel, accessibility","---
+name: web-design-guidelines
+description: Review UI code for Web Interface Guidelines compliance. Use when asked to ""review my UI"", ""check accessibility"", ""audit design"", ""review UX"", or ""check my site against best practices"".
+metadata:
+  author: vercel
+  version: ""1.0.0""
+  argument-hint: <file-or-pattern>
+---
+
+# Web Interface Guidelines
+
+Review files for compliance with Web Interface Guidelines."
+"web-design-guidelines","Web Interface Guidelines","How It Works","","reference","","1. Fetch the latest guidelines from the source URL below
+2. Read the specified files (or prompt user for files/pattern)
+3. Check against all rules in the fetched guidelines
+4. Output findings in the terse `file:line` format"
+"web-design-guidelines","Web Interface Guidelines","Guidelines Source","","code","Vercel","Fetch fresh guidelines before each review:
+
+```
+https://raw.githubusercontent.com/vercel-labs/web-interface-guidelines/main/command.md
+```
+
+Use WebFetch to retrieve the latest rules. The fetched content contains all the rules and output format instructions."
+"web-design-guidelines","Web Interface Guidelines","Usage","","reference","","When a user provides a file or pattern argument:
+1. Fetch guidelines from the source URL above
+2. Read the specified files
+3. Apply all rules from the fetched guidelines
+4. Output findings using the format specified in the guidelines
+
+If no files specified, ask the user which files to review.
+
+---"
+"web-design-guidelines","Web Interface Guidelines","Related Skills","","reference","accessibility","| Skill | When to Use |
+|-------|-------------|
+| **[frontend-design](../frontend-design/SKILL.md)** | Before coding - Learn design principles (color, typography, UX psychology) |
+| **web-design-guidelines** (this) | After coding - Audit for accessibility, performance, and best practices |"
+"web-design-guidelines","Web Interface Guidelines","Design Workflow","","code","","```
+1. DESIGN   → Read frontend-design principles
+2. CODE     → Implement the design
+3. AUDIT    → Run web-design-guidelines review ← YOU ARE HERE
+4. FIX      → Address findings from audit
+```"
+"webapp-testing","Web App Testing","PREAMBLE","","reference","Bash, Playwright","---
+name: webapp-testing
+description: Web application testing principles. E2E, Playwright, deep audit strategies.
+allowed-tools: Read, Write, Edit, Glob, Grep, Bash
+---
+
+# Web App Testing
+
+> Discover and test everything. Leave no route untested."
+"webapp-testing","Web App Testing","🔧 Runtime Scripts","","reference","Playwright, Python, accessibility","**Execute these for automated browser testing:**
+
+| Script | Purpose | Usage |
+|--------|---------|-------|
+| `scripts/playwright_runner.py` | Basic browser test | `python scripts/playwright_runner.py https://example.com` |
+| | With screenshot | `python scripts/playwright_runner.py <url> --screenshot` |
+| | Accessibility check | `python scripts/playwright_runner.py <url> --a11y` |
+
+**Requires:** `pip install playwright && playwright install chromium`
+
+---"
+"webapp-testing","Web App Testing","1. Deep Audit Approach","Discovery First","reference","API","| Target | How to Find |
+|--------|-------------|
+| Routes | Scan app/, pages/, router files |
+| API endpoints | Grep for HTTP methods |
+| Components | Find component directories |
+| Features | Read documentation |"
+"webapp-testing","Web App Testing","1. Deep Audit Approach","Systematic Testing","reference","","1. **Map** - List all routes/APIs
+2. **Scan** - Verify they respond
+3. **Test** - Cover critical paths
+
+---"
+"webapp-testing","Web App Testing","2. Testing Pyramid for Web","","code","API","```
+        /\          E2E (Few)
+       /  \         Critical user flows
+      /----\
+     /      \       Integration (Some)
+    /--------\      API, data flow
+   /          \
+  /------------\    Component (Many)
+                    Individual UI pieces
+```
+
+---"
+"webapp-testing","Web App Testing","3. E2E Test Principles","What to Test","rule","authentication","| Priority | Tests |
+|----------|-------|
+| 1 | Happy path user flows |
+| 2 | Authentication flows |
+| 3 | Critical business actions |
+| 4 | Error handling |"
+"webapp-testing","Web App Testing","3. E2E Test Principles","E2E Best Practices","rule","","| Practice | Why |
+|----------|-----|
+| Use data-testid | Stable selectors |
+| Wait for elements | Avoid flaky tests |
+| Clean state | Independent tests |
+| Avoid implementation details | Test user behavior |
+
+---"
+"webapp-testing","Web App Testing","4. Playwright Principles","Core Concepts","rule","","| Concept | Use |
+|---------|-----|
+| Page Object Model | Encapsulate page logic |
+| Fixtures | Reusable test setup |
+| Assertions | Built-in auto-wait |
+| Trace Viewer | Debug failures |"
+"webapp-testing","Web App Testing","4. Playwright Principles","Configuration","config","","| Setting | Recommendation |
+|---------|----------------|
+| Retries | 2 on CI |
+| Trace | on-first-retry |
+| Screenshots | on-failure |
+| Video | retain-on-failure |
+
+---"
+"webapp-testing","Web App Testing","5. Visual Testing","When to Use","reference","","| Scenario | Value |
+|----------|-------|
+| Design system | High |
+| Marketing pages | High |
+| Component library | Medium |
+| Dynamic content | Lower |"
+"webapp-testing","Web App Testing","5. Visual Testing","Strategy","framework","","- Baseline screenshots
+- Compare on changes
+- Review visual diffs
+- Update intentional changes
+
+---"
+"webapp-testing","Web App Testing","6. API Testing Principles","Coverage Areas","rule","","| Area | Tests |
+|------|-------|
+| Status codes | 200, 400, 404, 500 |
+| Response shape | Matches schema |
+| Error messages | User-friendly |
+| Edge cases | Empty, large, special chars |
+
+---"
+"webapp-testing","Web App Testing","7. Test Organization","File Structure","code","API","```
+tests/
+├── e2e/           # Full user flows
+├── integration/   # API, data
+├── component/     # UI units
+└── fixtures/      # Shared data
+```"
+"webapp-testing","Web App Testing","7. Test Organization","Naming Convention","reference","","| Pattern | Example |
+|---------|---------|
+| Feature-based | `login.spec.ts` |
+| Descriptive | `user-can-checkout.spec.ts` |
+
+---"
+"webapp-testing","Web App Testing","8. CI Integration","Pipeline Steps","framework","","1. Install dependencies
+2. Install browsers
+3. Run tests
+4. Upload artifacts (traces, screenshots)"
+"webapp-testing","Web App Testing","8. CI Integration","Parallelization","reference","Playwright","| Strategy | Use |
+|----------|-----|
+| Per file | Playwright default |
+| Sharding | Large suites |
+| Workers | Multiple browsers |
+
+---"
+"webapp-testing","Web App Testing","9. Anti-Patterns","","pattern","","| ❌ Don't | ✅ Do |
+|----------|-------|
+| Test implementation | Test behavior |
+| Hardcode waits | Use auto-wait |
+| Skip cleanup | Isolate tests |
+| Ignore flaky tests | Fix root cause |
+
+---
+
+> **Remember:** E2E tests are expensive. Use them for critical paths only."

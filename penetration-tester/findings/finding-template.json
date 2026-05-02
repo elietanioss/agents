@@ -1,0 +1,24 @@
+{
+  "id": "finding-NNN",
+  "title": "",
+  "severity": "Critical|High|Medium|Low|Info",
+  "cvss_score": 0.0,
+  "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+  "cwe": "CWE-XXX",
+  "owasp_category": "AXX:2025",
+  "mitre_attack": "TXXXX",
+  "description": "",
+  "reproduction_steps": [
+    "Step 1",
+    "Step 2",
+    "Step 3"
+  ],
+  "payload": "",
+  "evidence": [],
+  "impact": "",
+  "remediation": "",
+  "references": [],
+  "status": "confirmed|unconfirmed|false-positive",
+  "discovered_date": "",
+  "reported_to_client": false
+}
