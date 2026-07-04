@@ -1,5 +1,5 @@
 ---
-name: deep-research
+ref-name: deep-research
 description: |
   Generate format-controlled research reports with evidence tracking, citations, and iterative review. This skill should be used when users request a research report, literature review, market or industry analysis, competitive landscape, policy or technical brief, or require a strict report template and section formatting that a single deepresearch pass cannot reliably enforce.
 ---

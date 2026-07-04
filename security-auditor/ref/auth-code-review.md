@@ -1,5 +1,5 @@
 ---
-name: auth-code-review
+ref-name: auth-code-review
 description: JWT, OAuth 2.0, session management, and password handling code review patterns. Exact vulnerable vs safe code for each antipattern. jsonwebtoken and jose library specific patterns.
 ---
 

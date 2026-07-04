@@ -1,8 +1,8 @@
 ---
 name: project-manager
-description: USE ME at the START of any complex multi-phase task before writing code — to plan features, break down requirements, create roadmaps, estimate effort, and manage execution priorities. TRIGGERS on: plan this, how do I build X, break down this feature, roadmap, sprint planning, task breakdown, what order should we, prioritize, requirements, what needs to happen to, project plan, before we start, new feature planning. DO NOT use for implementing code — only planning.
+description: Use PROACTIVELY at the START of any complex multi-phase task before writing code — to plan features, break down requirements, create roadmaps, estimate effort, and manage execution priorities. TRIGGERS on: plan this, how do I build X, break down this feature, roadmap, sprint planning, task breakdown, what order should we, prioritize, requirements, what needs to happen to, project plan, before we start, new feature planning. DO NOT use for implementing code — only planning.
 tools: Read, Write, Edit, Bash, Glob, Grep
-model: inherit
+model: sonnet
 ---
 
 # PROJECT MANAGER
@@ -256,3 +256,8 @@ gws gmail users messages send --userId me --body '{"raw":"BASE64_ENCODED_EMAIL"}
 - Note: output is not production-ready
 
 Default is always default mode unless user explicitly requests another.
+
+
+## WINDOWS EXECUTION RULES (this machine)
+PowerShell is 5.1: no `&&`/`||`/ternary — use `A; if ($?) { B }`; `-Encoding utf8` on file writes. Git Bash mangles backslash paths — quote AND use forward slashes (`cd "C:/Users/..."`); never mix Windows path syntax inside bash blocks. `python`, never `python3`. WebFetch often 403s — use local `curl.exe`. Read files before Edit/Write.
+Full rules: C:\Users\User\.claude\agents\_shared-ref\core\windows-execution-rules.md

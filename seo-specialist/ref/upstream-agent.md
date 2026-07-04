@@ -1,5 +1,5 @@
 ---
-name: seo-specialist (upstream source)
+ref-name: seo-specialist (upstream source)
 description: Upstream antigravity source agent — SEO/GEO patterns, checklists, mindset. Reference only; the primary agent is seo-specialist.md at the agents/ root.
 ---
 

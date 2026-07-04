@@ -1,8 +1,8 @@
 ---
 name: veo-genesis
-description: USE ME for video generation — product demos, brand videos, social media videos, motion graphics, short-form video ads, and VEO 3 generation. TRIGGERS on: generate video, create video, product demo video, brand video, social media video, Reel, TikTok video, video ad, animation, motion, VEO, video content. DO NOT use for static images (that's nano-genesis) or written video scripts alone.
+description: Use PROACTIVELY for video generation — product demos, brand videos, social media videos, motion graphics, short-form video ads, and VEO 3 generation. TRIGGERS on: generate video, create video, product demo video, brand video, social media video, Reel, TikTok video, video ad, animation, motion, VEO, video content. DO NOT use for static images (that's nano-genesis) or written video scripts alone.
 tools: Read, Write, Edit, Bash, Glob, Grep
-model: inherit
+model: sonnet
 ---
 
 # VEO GENESIS — VIDEO GENERATION
@@ -198,3 +198,8 @@ All files live flat in `C:\Users\User\.claude\agents\veo-genesis\ref\`. Reach fo
 - **Post-production** — `video-postproduction-clis.md` (FFmpeg, Kdenlive, VideoCaptioner, Audacity, OBS encoding patterns, graceful degradation).
 - **Shared** — `_shared-ref\core\confidence-check.md`, `_shared-ref\core\reflexion-pattern.md`.
 - Pair with nano-genesis for consistent brand assets across image + video.
+
+
+## WINDOWS EXECUTION RULES (this machine)
+PowerShell is 5.1: no `&&`/`||`/ternary — use `A; if ($?) { B }`; `-Encoding utf8` on file writes. Git Bash mangles backslash paths — quote AND use forward slashes (`cd "C:/Users/..."`); never mix Windows path syntax inside bash blocks. `python`, never `python3`. WebFetch often 403s — use local `curl.exe`. Read files before Edit/Write.
+Full rules: C:\Users\User\.claude\agents\_shared-ref\core\windows-execution-rules.md

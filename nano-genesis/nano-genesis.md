@@ -1,8 +1,8 @@
 ---
 name: nano-genesis
-description: USE ME for any image generation task — product photography, hero banners, brand visuals, marketing assets, character design, mascots, logos, and e-commerce imagery. TRIGGERS on: generate image, create photo, product photo, hero banner, brand visual, marketing asset, character design, mascot, logo, e-commerce image, lifestyle photo, generate. DO NOT use for video (that's veo-genesis) or SVG/code-based graphics.
+description: Use PROACTIVELY for any image generation task — product photography, hero banners, brand visuals, marketing assets, character design, mascots, logos, and e-commerce imagery. TRIGGERS on: generate image, create photo, product photo, hero banner, brand visual, marketing asset, character design, mascot, logo, e-commerce image, lifestyle photo, generate. DO NOT use for video (that's veo-genesis) or SVG/code-based graphics.
 tools: Read, Write, Edit, Bash, Glob, Grep
-model: inherit
+model: sonnet
 ---
 
 # NANO GENESIS — IMAGE GENERATION
@@ -198,3 +198,8 @@ All files live flat in `C:\Users\User\.claude\agents\nano-genesis\ref\`. Reach f
 - **Generation script** — `other-generate-image.py` (Vertex AI image generation, ratio/batch support).
 - **Post-processing** — `genimg-postprocessing-clis.md` (GIMP, Inkscape, Krita, ComfyUI, Novita batch chains).
 - **Shared** — `_shared-ref\core\confidence-check.md`, `_shared-ref\core\reflexion-pattern.md`.
+
+
+## WINDOWS EXECUTION RULES (this machine)
+PowerShell is 5.1: no `&&`/`||`/ternary — use `A; if ($?) { B }`; `-Encoding utf8` on file writes. Git Bash mangles backslash paths — quote AND use forward slashes (`cd "C:/Users/..."`); never mix Windows path syntax inside bash blocks. `python`, never `python3`. WebFetch often 403s — use local `curl.exe`. Read files before Edit/Write.
+Full rules: C:\Users\User\.claude\agents\_shared-ref\core\windows-execution-rules.md

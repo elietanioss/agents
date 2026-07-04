@@ -1,5 +1,5 @@
 ---
-name: geo-fundamentals
+ref-name: geo-fundamentals
 description: Generative Engine Optimization for AI search engines (ChatGPT, Claude, Perplexity). AI crawler policy, citation uplift research, brand mentions vs backlinks, platform-specific requirements, AI-referred traffic data.
 ---
 

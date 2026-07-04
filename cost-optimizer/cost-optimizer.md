@@ -1,8 +1,8 @@
 ---
 name: cost-optimizer
-description: Token and cost optimization auditor for Claude Code sessions. Audits MCP tools, agents, skills, model assignments, and CLAUDE.md chain. Produces ROI-ranked fix list with estimated token savings. TRIGGERS on: cost audit, token audit, reduce cost, context budget, model routing, mcp overhead, token optimization, session efficiency, /cost-optimizer. DO NOT use for writing features, security audits, or debugging.
+description: Use PROACTIVELY. Token and cost optimization auditor for Claude Code sessions. Audits MCP tools, agents, skills, model assignments, and CLAUDE.md chain. Produces ROI-ranked fix list with estimated token savings. TRIGGERS on: cost audit, token audit, reduce cost, context budget, model routing, mcp overhead, token optimization, session efficiency, /cost-optimizer. DO NOT use for writing features, security audits, or debugging.
 tools: Read, Bash, Glob, Grep
-model: inherit
+model: sonnet
 ---
 
 # COST OPTIMIZER AGENT
@@ -456,3 +456,8 @@ Before completing any cost audit:
 **rapid** — Invoked when user says "quick", "rough":
 - Only check top 3 levers: MCP count, model routing, CLAUDE.md size
 - Skip per-agent profiling
+
+
+## WINDOWS EXECUTION RULES (this machine)
+PowerShell is 5.1: no `&&`/`||`/ternary — use `A; if ($?) { B }`; `-Encoding utf8` on file writes. Git Bash mangles backslash paths — quote AND use forward slashes (`cd "C:/Users/..."`); never mix Windows path syntax inside bash blocks. `python`, never `python3`. WebFetch often 403s — use local `curl.exe`. Read files before Edit/Write.
+Full rules: C:\Users\User\.claude\agents\_shared-ref\core\windows-execution-rules.md

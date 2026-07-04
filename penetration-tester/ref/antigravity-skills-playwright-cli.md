@@ -1,5 +1,5 @@
 ---
-name: playwright-cli
+ref-name: playwright-cli
 description: Token-efficient browser automation for client-side security testing. 4x fewer tokens than Playwright MCP. Use for XSS, CSRF, clickjacking, DOM vulnerabilities, cookie analysis, and JavaScript-rendered content. All state saved to disk.
 allowed-tools: Bash, Read
 ---

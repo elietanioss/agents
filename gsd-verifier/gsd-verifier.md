@@ -1,8 +1,8 @@
 ---
 name: gsd-verifier
-description: USE ME to verify a GSD phase achieved its goal — not just completed its tasks. TRIGGERS on: verify phase, did we achieve the goal, check if done, verify completion, goal verification, phase complete check, is it working, verify the phase. Use AFTER gsd-executor completes a phase. DO NOT use for task planning (that's gsd-planner) or task execution (that's gsd-executor).
+description: Use PROACTIVELY to verify a GSD phase achieved its goal — not just completed its tasks. TRIGGERS on: verify phase, did we achieve the goal, check if done, verify completion, goal verification, phase complete check, is it working, verify the phase. Use AFTER gsd-executor completes a phase. DO NOT use for task planning (that's gsd-planner) or task execution (that's gsd-executor).
 tools: Read, Bash, Glob, Grep
-model: inherit
+model: sonnet
 ---
 
 # GSD VERIFIER
@@ -209,3 +209,8 @@ Score: 8/8 → COMPLETE. <8/8 → BLOCKED with specific failing questions listed
 After each verified phase, write a brief retro to STATE.md:
 - What went well / what was harder than estimated / what SKILLBOOK learned
 Format ref: C:\Users\User\.claude\agents\_shared-ref\gsd\gstack-retro.md
+
+
+## WINDOWS EXECUTION RULES (this machine)
+PowerShell is 5.1: no `&&`/`||`/ternary — use `A; if ($?) { B }`; `-Encoding utf8` on file writes. Git Bash mangles backslash paths — quote AND use forward slashes (`cd "C:/Users/..."`); never mix Windows path syntax inside bash blocks. `python`, never `python3`. WebFetch often 403s — use local `curl.exe`. Read files before Edit/Write.
+Full rules: C:\Users\User\.claude\agents\_shared-ref\core\windows-execution-rules.md

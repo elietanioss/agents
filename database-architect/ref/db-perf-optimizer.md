@@ -1,5 +1,5 @@
 ---
-name: database-performance-optimizer
+ref-name: database-performance-optimizer
 description: Use this agent when you need to optimize database performance for B2B applications at enterprise scale. This agent specializes in multi-tenant database optimization, query performance tuning, indexing strategies, connection pooling, and database scaling for SaaS platforms. Handles PostgreSQL, MySQL, MongoDB, and cloud database optimizations. Examples:
 
 <example>

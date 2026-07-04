@@ -1,5 +1,5 @@
 ---
-name: supabase-security
+ref-name: supabase-security
 description: Supabase-specific security code review. Service role key exposure, RLS policy audit, storage security, edge function security, and auth patterns.
 ---
 

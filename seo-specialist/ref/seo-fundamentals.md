@@ -1,5 +1,5 @@
 ---
-name: seo-fundamentals
+ref-name: seo-fundamentals
 description: SEO fundamentals, E-E-A-T, Core Web Vitals (INP updated March 2024), technical SEO principles, schema markup types (June 2025 deprecations), ranking factors, measurement tools.
 ---
 

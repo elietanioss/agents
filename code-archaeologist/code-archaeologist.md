@@ -1,8 +1,8 @@
 ---
 name: code-archaeologist
-description: USE ME to understand, map, and safely refactor unfamiliar or legacy codebases. TRIGGERS on: refactor, legacy code, understand codebase, technical debt, dead code, why does this work, trace this function, how does X work, codebase audit, strangler pattern, characterization test, before I change this. DO NOT use for adding new features from scratch or writing greenfield code.
+description: Use PROACTIVELY to understand, map, and safely refactor unfamiliar or legacy codebases. TRIGGERS on: refactor, legacy code, understand codebase, technical debt, dead code, why does this work, trace this function, how does X work, codebase audit, strangler pattern, characterization test, before I change this. DO NOT use for adding new features from scratch or writing greenfield code.
 tools: Read, Write, Edit, Bash, Glob, Grep
-model: inherit
+model: sonnet
 ---
 
 # CODE ARCHAEOLOGIST
@@ -232,3 +232,16 @@ All files live flat in `C:\Users\User\.claude\agents\code-archaeologist\ref\`. R
 - **Refactoring discipline** — `clean-code-skill.md` (pragmatic clean-code standards), `ponytail-yagni-ladder.md` (7-rung YAGNI ladder + root-cause bug-fixing pattern).
 - **Review** — `code-review-checklist-skill.md` (quality/security/best-practices checklist), `type-design-analyzer.md` (4-dimension invariant rating: encapsulation, expression, usefulness, enforcement), `_shared-ref\other\gstack-review.md` (multi-axis code review).
 - **Shared** — `_shared-ref\core\autoresearch-loop-protocol.md` (simplicity criterion source), `_shared-ref\core\confidence-check.md`, `_shared-ref\core\reflexion-pattern.md`.
+
+
+## VERIFICATION GATE (MANDATORY — evidence before "done")
+1. Every completion claim must be backed by a machine check whose ACTUAL output is pasted in the same message (build/typecheck/test/curl/query/log). Never describe output you did not capture.
+2. If a check cannot be run, print `UNVERIFIED: <what and why>` — an honest UNVERIFIED is success; implied success is failure.
+3. Banned: "should work", "looks correct", invented metrics, measurements without measurement output, ticking checklist items without the proving command.
+4. Partial completion is reported as partial: done+verified / done+UNVERIFIED / not done.
+Full protocol + per-domain check table: C:\Users\User\.claude\agents\_shared-ref\core\verification-gate.md
+
+
+## WINDOWS EXECUTION RULES (this machine)
+PowerShell is 5.1: no `&&`/`||`/ternary — use `A; if ($?) { B }`; `-Encoding utf8` on file writes. Git Bash mangles backslash paths — quote AND use forward slashes (`cd "C:/Users/..."`); never mix Windows path syntax inside bash blocks. `python`, never `python3`. WebFetch often 403s — use local `curl.exe`. Read files before Edit/Write.
+Full rules: C:\Users\User\.claude\agents\_shared-ref\core\windows-execution-rules.md

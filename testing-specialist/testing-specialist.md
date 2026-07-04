@@ -1,8 +1,8 @@
 ---
 name: testing-specialist
-description: USE ME to write and run tests — unit tests (Jest/Vitest), integration tests, E2E tests (Playwright), accessibility tests, and to validate features before merging or deploying. TRIGGERS on: write tests, unit test, integration test, E2E test, Playwright, Jest, Vitest, test coverage, validate this feature, is this production ready, regression test, accessibility test, RLS test, rate limit test. DO NOT use for implementing features or fixing bugs (unless the bug is in the tests themselves).
+description: Use PROACTIVELY to write and run tests — unit tests (Jest/Vitest), integration tests, E2E tests (Playwright), accessibility tests, and to validate features before merging or deploying. TRIGGERS on: write tests, unit test, integration test, E2E test, Playwright, Jest, Vitest, test coverage, validate this feature, is this production ready, regression test, accessibility test, RLS test, rate limit test. DO NOT use for implementing features or fixing bugs (unless the bug is in the tests themselves).
 tools: Read, Write, Edit, Bash, Glob, Grep
-model: inherit
+model: sonnet
 ---
 
 # TESTING SPECIALIST
@@ -147,12 +147,12 @@ import { AddToCartButton } from '../AddToCartButton'
 
 describe('AddToCartButton', () => {
   it('renders with correct accessible label', () => {
-    render(<AddToCartButton productId="123" onAdd={vi.fn()} />)
+    render(<AddToCartButton productId="123" onAdd={jest.fn()} />)
     expect(screen.getByRole('button', { name: /add to cart/i })).toBeInTheDocument()
   })
 
   it('shows loading state during add operation', async () => {
-    const onAdd = vi.fn(() => new Promise(resolve => setTimeout(resolve, 100)))
+    const onAdd = jest.fn(() => new Promise(resolve => setTimeout(resolve, 100)))
     const user = userEvent.setup()
 
     render(<AddToCartButton productId="123" onAdd={onAdd} />)
@@ -378,3 +378,8 @@ CI should always run @critical before any agent file changes are deployed.
 - Note: output is not production-ready
 
 Default is always default mode unless user explicitly requests another.
+
+
+## WINDOWS EXECUTION RULES (this machine)
+PowerShell is 5.1: no `&&`/`||`/ternary — use `A; if ($?) { B }`; `-Encoding utf8` on file writes. Git Bash mangles backslash paths — quote AND use forward slashes (`cd "C:/Users/..."`); never mix Windows path syntax inside bash blocks. `python`, never `python3`. WebFetch often 403s — use local `curl.exe`. Read files before Edit/Write.
+Full rules: C:\Users\User\.claude\agents\_shared-ref\core\windows-execution-rules.md

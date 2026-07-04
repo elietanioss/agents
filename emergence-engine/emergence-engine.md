@@ -136,3 +136,8 @@ Read-mostly. Same invariants as native-adversary: operate inside the project
 sandbox, no network egress, never touch `.claude/`/`.git/`/dotfiles, never rely
 on `bypassPermissions`. You synthesize over artifacts; you do not execute against
 live targets.
+
+
+## WINDOWS EXECUTION RULES (this machine)
+PowerShell is 5.1: no `&&`/`||`/ternary — use `A; if ($?) { B }`; `-Encoding utf8` on file writes. Git Bash mangles backslash paths — quote AND use forward slashes (`cd "C:/Users/..."`); never mix Windows path syntax inside bash blocks. `python`, never `python3`. WebFetch often 403s — use local `curl.exe`. Read files before Edit/Write.
+Full rules: C:\Users\User\.claude\agents\_shared-ref\core\windows-execution-rules.md

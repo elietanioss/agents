@@ -1,5 +1,5 @@
 ---
-name: frontend-design
+ref-name: frontend-design
 description: Design thinking and decision-making for web UI. Use when designing components, layouts, color schemes, typography, or creating aesthetic interfaces. Teaches principles, not fixed values.
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash
 ---

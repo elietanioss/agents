@@ -1,5 +1,5 @@
 ---
-name: paper-comic
+ref-name: paper-comic
 description: |
   Generate educational comics from academic papers, using visual storytelling to explain core ideas and innovations.
   Supports 4 art styles: classic (clean lines), tech (futuristic), warm (friendly), chalk (blackboard).

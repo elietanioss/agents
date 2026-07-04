@@ -1,5 +1,5 @@
 ---
-name: typescript-vuln-patterns
+ref-name: typescript-vuln-patterns
 description: TypeScript and Node.js specific vulnerabilities with exact vulnerable vs safe code patterns. Prototype pollution, mass assignment, type confusion, deserialization, ReDoS, SSRF, path traversal.
 ---
 

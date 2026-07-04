@@ -1,5 +1,5 @@
 ---
-name: performance-profiling
+ref-name: performance-profiling
 description: Performance profiling principles. Measurement, analysis, and optimization techniques.
 allowed-tools: Read, Glob, Grep, Bash
 ---

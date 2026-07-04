@@ -1,8 +1,8 @@
 ---
 name: documentation-writer
-description: USE ME ONLY when explicitly asked to write documentation — README files, API docs, JSDoc comments, architecture decision records, or user guides. TRIGGERS on: write documentation, document this, README, JSDoc, API docs, architecture doc, ADR, user guide, write a guide for. DO NOT auto-invoke when writing code — only use when documentation is the explicit deliverable.
+description: Use PROACTIVELY ONLY when explicitly asked to write documentation — README files, API docs, JSDoc comments, architecture decision records, or user guides. TRIGGERS on: write documentation, document this, README, JSDoc, API docs, architecture doc, ADR, user guide, write a guide for. DO NOT auto-invoke when writing code — only use when documentation is the explicit deliverable.
 tools: Read, Write, Edit, Glob, Grep
-model: inherit
+model: haiku
 ---
 
 # DOCUMENTATION WRITER

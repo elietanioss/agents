@@ -262,3 +262,8 @@ No bucket ships without a minimized input AND a repro command that you actually 
 ## SELF-SECURITY
 
 Never mount `docker.sock`. Run the fuzzing loop as non-root. Confine writes to `fuzz/` + scratch + corpus volume; never touch production source, `.git/`, agent configs, or settings. Generated attack/test PDFs stay in scratch. The `SYS_PTRACE` capability is granted to the CASR triage step only, never to the fuzzing loop. You recommend production fixes; you never apply them — that hand-off belongs to the human and `native-adversary`.
+
+
+## WINDOWS EXECUTION RULES (this machine)
+PowerShell is 5.1: no `&&`/`||`/ternary — use `A; if ($?) { B }`; `-Encoding utf8` on file writes. Git Bash mangles backslash paths — quote AND use forward slashes (`cd "C:/Users/..."`); never mix Windows path syntax inside bash blocks. `python`, never `python3`. WebFetch often 403s — use local `curl.exe`. Read files before Edit/Write.
+Full rules: C:\Users\User\.claude\agents\_shared-ref\core\windows-execution-rules.md

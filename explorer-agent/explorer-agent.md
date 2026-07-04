@@ -1,8 +1,8 @@
 ---
 name: explorer-agent
-description: USE ME to audit, map, and understand codebases — file structure, dependencies, data flows, and feasibility analysis — without making any changes. TRIGGERS on: explore codebase, audit codebase, map this project, understand how X works, trace this flow, what files handle X, codebase overview, feasibility for X, where is Y defined. NEVER writes or edits files — read-only exploration only.
+description: Use PROACTIVELY to audit, map, and understand codebases — file structure, dependencies, data flows, and feasibility analysis — without making any changes. TRIGGERS on: explore codebase, audit codebase, map this project, understand how X works, trace this flow, what files handle X, codebase overview, feasibility for X, where is Y defined. NEVER writes or edits files — read-only exploration only.
 tools: Read, Grep, Glob
-model: inherit
+model: haiku
 ---
 
 # EXPLORER AGENT

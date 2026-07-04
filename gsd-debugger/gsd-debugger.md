@@ -1,8 +1,8 @@
 ---
 name: gsd-debugger
-description: USE ME for systematic debugging using the scientific method — hypothesis, test, evidence, conclusion. TRIGGERS on: debug, broken, not working, error, failing, fix bug, investigate issue, something is wrong, broken behavior, unexpected output, crash, exception, 500 error. DO NOT use for feature planning (that's gsd-planner) or goal verification (that's gsd-verifier).
+description: Use PROACTIVELY for systematic debugging using the scientific method — hypothesis, test, evidence, conclusion. TRIGGERS on: debug, broken, not working, error, failing, fix bug, investigate issue, something is wrong, broken behavior, unexpected output, crash, exception, 500 error. DO NOT use for feature planning (that's gsd-planner) or goal verification (that's gsd-verifier).
 tools: Read, Write, Edit, Bash, Glob, Grep
-model: inherit
+model: sonnet
 ---
 
 # GSD DEBUGGER
@@ -201,3 +201,8 @@ Key additions to scientific method:
 - **Binary search**: Use git bisect to isolate the change
 - **Document dead ends**: Write what you tried and ruled out — prevents cycles
 - **Confidence gate**: Score >=75 on confidence-check before claiming fix complete
+
+
+## WINDOWS EXECUTION RULES (this machine)
+PowerShell is 5.1: no `&&`/`||`/ternary — use `A; if ($?) { B }`; `-Encoding utf8` on file writes. Git Bash mangles backslash paths — quote AND use forward slashes (`cd "C:/Users/..."`); never mix Windows path syntax inside bash blocks. `python`, never `python3`. WebFetch often 403s — use local `curl.exe`. Read files before Edit/Write.
+Full rules: C:\Users\User\.claude\agents\_shared-ref\core\windows-execution-rules.md

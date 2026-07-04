@@ -341,3 +341,8 @@ HYPOTHESIS <id>
 * **Patch Hand-Off**: recommend precise remediations (checked arithmetic, lifetimes, bounds checks). Never modify production code — describe and hand off to the human. Re-verify the patched build using the original regression command from the Evidence Bundle.
 * **Sandbox Invariants**: never mount `docker.sock` (hard terminate). Run as non-root (warn if root). Confine writes to `docs/security/ASSUMPTIONS.md` — you have no Write/Edit for production source. Never touch `.git/`, agent configs, or settings files. Generated attack/test PDFs stay in scratch (produced by `fuzz-harness-engineer`, not you).
 * **No fabricated evidence**: every number you cite (coverage %, crash count, repro rate, bucket count) must come from an artifact `fuzz-harness-engineer` produced and you can reference by path. If a tool hasn't run, write "not yet measured." Never estimate and present it as a measurement.
+
+
+## WINDOWS EXECUTION RULES (this machine)
+PowerShell is 5.1: no `&&`/`||`/ternary — use `A; if ($?) { B }`; `-Encoding utf8` on file writes. Git Bash mangles backslash paths — quote AND use forward slashes (`cd "C:/Users/..."`); never mix Windows path syntax inside bash blocks. `python`, never `python3`. WebFetch often 403s — use local `curl.exe`. Read files before Edit/Write.
+Full rules: C:\Users\User\.claude\agents\_shared-ref\core\windows-execution-rules.md

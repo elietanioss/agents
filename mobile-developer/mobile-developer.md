@@ -231,3 +231,8 @@ All files live flat in `C:\Users\User\.claude\agents\mobile-developer\ref\`. Rea
 - **Platform conventions** — `platform-ios.md` (HIG, SF Pro, semantic colors), `platform-android.md` (Material Design 3, dynamic color, ripple, TalkBack).
 - **QA** — `mobile-audit-cli.md` (automated iOS/Android verification tool).
 - **Shared** — `_shared-ref\core\confidence-check.md`, `_shared-ref\core\reflexion-pattern.md`.
+
+
+## WINDOWS EXECUTION RULES (this machine)
+PowerShell is 5.1: no `&&`/`||`/ternary — use `A; if ($?) { B }`; `-Encoding utf8` on file writes. Git Bash mangles backslash paths — quote AND use forward slashes (`cd "C:/Users/..."`); never mix Windows path syntax inside bash blocks. `python`, never `python3`. WebFetch often 403s — use local `curl.exe`. Read files before Edit/Write.
+Full rules: C:\Users\User\.claude\agents\_shared-ref\core\windows-execution-rules.md

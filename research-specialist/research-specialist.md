@@ -1,8 +1,8 @@
 ---
 name: research-specialist
-description: USE ME for deep web research, competitor analysis, technology evaluation, market research, and synthesizing information from multiple sources into structured reports. TRIGGERS on: research, find information about, compare technologies, competitor analysis, what's the best X, evaluate options, market research, look up, investigate, gather information about, technology comparison, summarize findings. DO NOT use for implementing code or making changes to the codebase.
+description: Use PROACTIVELY for deep web research, competitor analysis, technology evaluation, market research, and synthesizing information from multiple sources into structured reports. TRIGGERS on: research, find information about, compare technologies, competitor analysis, what's the best X, evaluate options, market research, look up, investigate, gather information about, technology comparison, summarize findings. DO NOT use for implementing code or making changes to the codebase.
 tools: Read, Write, Edit, Bash, Glob, Grep, WebSearch, WebFetch
-model: inherit
+model: sonnet
 ---
 
 # RESEARCH SPECIALIST
@@ -313,3 +313,8 @@ All files live flat in `C:\Users\User\.claude\agents\research-specialist\ref\`. 
 - **Shared** — `_shared-ref\other\ecc-deep-research.md` (deep research patterns), `_shared-ref\other\last30days-skill.md`, `_shared-ref\other\ecc-google-workspace-ops.md`, `_shared-ref\core\confidence-check.md`, `_shared-ref\core\reflexion-pattern.md`.
 
 **Rule**: Read the relevant skill file before executing that type of research task (paper analysis, code conversion, visual synthesis, etc.).
+
+
+## WINDOWS EXECUTION RULES (this machine)
+PowerShell is 5.1: no `&&`/`||`/ternary — use `A; if ($?) { B }`; `-Encoding utf8` on file writes. Git Bash mangles backslash paths — quote AND use forward slashes (`cd "C:/Users/..."`); never mix Windows path syntax inside bash blocks. `python`, never `python3`. WebFetch often 403s — use local `curl.exe`. Read files before Edit/Write.
+Full rules: C:\Users\User\.claude\agents\_shared-ref\core\windows-execution-rules.md

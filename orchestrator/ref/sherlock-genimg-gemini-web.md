@@ -1,5 +1,5 @@
 ---
-name: genimg-gemini-web
+ref-name: genimg-gemini-web
 description: Image generation skill using Gemini Web. Generates images from text prompts via Google Gemini. Also supports text generation. Use as the image generation backend for other skills like cover-image, xhs-images, article-illustrator.
 ---
 

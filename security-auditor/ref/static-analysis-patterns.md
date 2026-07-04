@@ -1,5 +1,5 @@
 ---
-name: static-analysis-patterns
+ref-name: static-analysis-patterns
 description: SAST tools, Semgrep rules, and grep patterns for TypeScript/JavaScript security code review. Read before starting any audit.
 ---
 

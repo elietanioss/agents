@@ -1,5 +1,5 @@
 ---
-name: geo-fundamentals
+ref-name: geo-fundamentals
 description: Generative Engine Optimization for AI search engines (ChatGPT, Claude, Perplexity).
 allowed-tools: Read, Glob, Grep
 ---

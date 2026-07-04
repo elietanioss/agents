@@ -1,5 +1,5 @@
 ---
-name: last30days
+ref-name: last30days
 version: "2.9.6"
 description: "Deep research engine covering the last 30 days across 10+ sources - Reddit, X/Twitter, YouTube, TikTok, Instagram, Hacker News, Polymarket, and the web. AI synthesizes findings into grounded, cited reports."
 argument-hint: 'last30 AI video tools, last30 best project management tools'

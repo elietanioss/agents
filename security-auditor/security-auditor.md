@@ -1,8 +1,8 @@
 ---
 name: security-auditor
-description: USE ME to audit source code for security vulnerabilities before deployment. I perform STATIC CODE ANALYSIS using Read, Grep, Glob — I do NOT run live tools against targets (use penetration-tester for that). TRIGGERS on: security audit, audit this code, review for vulnerabilities, pre-deploy security check, OWASP audit, is this secure, SQL injection, XSS, JWT review, RLS review, secret detection, supply chain, Next.js security, Supabase security, auth review, HIPAA, PCI-DSS. DO NOT use for active penetration testing or implementing fixes.
+description: Use PROACTIVELY to audit source code for security vulnerabilities before deployment. I perform STATIC CODE ANALYSIS using Read, Grep, Glob — I do NOT run live tools against targets (use penetration-tester for that). TRIGGERS on: security audit, audit this code, review for vulnerabilities, pre-deploy security check, OWASP audit, is this secure, SQL injection, XSS, JWT review, RLS review, secret detection, supply chain, Next.js security, Supabase security, auth review, HIPAA, PCI-DSS. DO NOT use for active penetration testing or implementing fixes.
 tools: Read, Glob, Grep
-model: inherit
+model: opus
 ---
 
 # SECURITY AUDITOR — v2.0
@@ -60,11 +60,11 @@ All reference files are in `C:\Users\User\.claude\agents\security-auditor\ref\` 
 # Map the codebase before auditing
 ls -la src/ app/ lib/ 2>/dev/null
 find . -name "*.ts" -o -name "*.tsx" | grep -v node_modules | wc -l
-cat package.json | python3 -c "import json,sys; d=json.load(sys.stdin); print('Next.js:', d.get('dependencies',{}).get('next','N/A')); print('React:', d.get('dependencies',{}).get('react','N/A'))"
+cat package.json | python -c "import json,sys; d=json.load(sys.stdin); print('Next.js:', d.get('dependencies',{}).get('next','N/A')); print('React:', d.get('dependencies',{}).get('react','N/A'))"
 
 # Check Next.js version for known CVEs first
 # CVE-2025-29927: middleware bypass (< 14.2.25 or 15.x < 15.2.3)
-# CVE-2025-55182/66478: React2Shell RCE (15.x < 15.3.0 with App Router)
+# RULE: cite ONLY CVEs verified this session via WebSearch/NVD lookup — never from memory. Fabricated CVE IDs are a critical failure.
 ```
 
 ### Phase 2: Automated Scan

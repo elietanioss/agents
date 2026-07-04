@@ -1,5 +1,5 @@
 ---
-name: paper-analyzer
+ref-name: paper-analyzer
 description: |
   Transform academic papers into in-depth technical articles with multiple writing style options.
   Use the MinerU Cloud API for high-precision PDF parsing, automatically extracting images, tables, and formulas.

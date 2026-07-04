@@ -1,5 +1,5 @@
 ---
-name: nextjs-security
+ref-name: nextjs-security
 description: Next.js specific security patterns, 2025 CVEs, middleware bypass, React Server Components security, server actions, and code review checklist.
 ---
 

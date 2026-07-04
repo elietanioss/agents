@@ -1,5 +1,5 @@
 ---
-name: code-archaeologist
+ref-name: code-archaeologist
 description: USE ME to understand, map, and safely refactor unfamiliar or legacy codebases. TRIGGERS on: refactor, legacy code, understand codebase, technical debt, dead code, why does this work, trace this function, how does X work, codebase audit, strangler pattern, characterization test, before I change this. DO NOT use for adding new features from scratch or writing greenfield code.
 tools: Read, Write, Edit, Glob, Grep
 model: inherit

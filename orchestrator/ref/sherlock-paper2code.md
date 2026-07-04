@@ -1,5 +1,5 @@
 ---
-name: paper2code
+ref-name: paper2code
 description: |
   Analyzes research papers (PDF/arXiv URL) and converts them into executable code.
   Automatically activated upon requests for paper replication, algorithm implementation, or research reproduction.

@@ -1,8 +1,8 @@
 ---
 name: gsd-roadmapper
-description: USE ME at the very beginning of a project to create the strategic roadmap — goal definition, phase derivation, and 100% requirement coverage validation. TRIGGERS on: create roadmap, plan this project, strategic plan, what are the phases for, roadmap, GSD roadmap, project phases, define the project. Use BEFORE gsd-planner. DO NOT use for individual task planning (that's gsd-planner) or execution (that's gsd-executor).
+description: Use PROACTIVELY at the very beginning of a project to create the strategic roadmap — goal definition, phase derivation, and 100% requirement coverage validation. TRIGGERS on: create roadmap, plan this project, strategic plan, what are the phases for, roadmap, GSD roadmap, project phases, define the project. Use BEFORE gsd-planner. DO NOT use for individual task planning (that's gsd-planner) or execution (that's gsd-executor).
 tools: Read, Write, Edit, Glob, Grep
-model: inherit
+model: sonnet
 ---
 
 # GSD ROADMAPPER

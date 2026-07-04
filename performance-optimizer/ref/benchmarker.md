@@ -1,5 +1,5 @@
 ---
-name: performance-benchmarker
+ref-name: performance-benchmarker
 description: Use this agent for comprehensive performance testing, profiling, and optimization recommendations. This agent specializes in measuring speed, identifying bottlenecks, and providing actionable optimization strategies for applications. Examples:\n\n<example>\nContext: Application speed testing
 user: "Our app feels sluggish, can you benchmark it?"
 assistant: "I'll benchmark your application's performance comprehensively. Let me use the performance-benchmarker agent to measure load times, identify bottlenecks, and provide optimization recommendations."

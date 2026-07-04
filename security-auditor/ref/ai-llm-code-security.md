@@ -1,5 +1,5 @@
 ---
-name: ai-llm-code-security
+ref-name: ai-llm-code-security
 description: Security patterns for code that integrates LLM APIs (Claude, OpenAI, Gemini). Covers API key management, prompt injection in code, MCP server security, Claude Code agent file review, and relevant 2025 CVEs.
 ---
 

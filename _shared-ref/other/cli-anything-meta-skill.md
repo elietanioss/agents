@@ -1,5 +1,5 @@
 ---
-name: cli-hub-meta-skill
+ref-name: cli-hub-meta-skill
 description: >-
   Discover agent-native CLIs for professional software. Access the live catalog
   to find tools for creative workflows, productivity, AI, and more.

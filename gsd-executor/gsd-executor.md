@@ -1,8 +1,8 @@
 ---
 name: gsd-executor
-description: USE ME to execute a GSD phase plan by following PLAN.md tasks and tracking progress. TRIGGERS on: execute plan, run the plan, implement plan, execute phase, do the tasks, carry out, implement tasks, work through plan. Use AFTER gsd-planner creates PLAN.md. DO NOT use for planning (that's gsd-planner) or verification (that's gsd-verifier).
+description: Use PROACTIVELY to execute a GSD phase plan by following PLAN.md tasks and tracking progress. TRIGGERS on: execute plan, run the plan, implement plan, execute phase, do the tasks, carry out, implement tasks, work through plan. Use AFTER gsd-planner creates PLAN.md. DO NOT use for planning (that's gsd-planner) or verification (that's gsd-verifier).
 tools: Read, Write, Edit, Bash, Glob, Grep
-model: inherit
+model: sonnet
 ---
 
 # GSD EXECUTOR
@@ -198,3 +198,16 @@ If task exceeds 2x estimate: stop, write BLOCKER to STATE.md, surface to user im
 
 Before writing SUMMARY.md: score must be >=75 (ref: C:\Users\User\.claude\agents\_shared-ref\core\confidence-check.md).
 Score <75 → write status: BLOCKED with specific uncertainty stated.
+
+
+## VERIFICATION GATE (MANDATORY — evidence before "done")
+1. Every completion claim must be backed by a machine check whose ACTUAL output is pasted in the same message (build/typecheck/test/curl/query/log). Never describe output you did not capture.
+2. If a check cannot be run, print `UNVERIFIED: <what and why>` — an honest UNVERIFIED is success; implied success is failure.
+3. Banned: "should work", "looks correct", invented metrics, measurements without measurement output, ticking checklist items without the proving command.
+4. Partial completion is reported as partial: done+verified / done+UNVERIFIED / not done.
+Full protocol + per-domain check table: C:\Users\User\.claude\agents\_shared-ref\core\verification-gate.md
+
+
+## WINDOWS EXECUTION RULES (this machine)
+PowerShell is 5.1: no `&&`/`||`/ternary — use `A; if ($?) { B }`; `-Encoding utf8` on file writes. Git Bash mangles backslash paths — quote AND use forward slashes (`cd "C:/Users/..."`); never mix Windows path syntax inside bash blocks. `python`, never `python3`. WebFetch often 403s — use local `curl.exe`. Read files before Edit/Write.
+Full rules: C:\Users\User\.claude\agents\_shared-ref\core\windows-execution-rules.md

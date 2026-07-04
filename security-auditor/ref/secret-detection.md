@@ -1,5 +1,5 @@
 ---
-name: secret-detection
+ref-name: secret-detection
 description: Complete regex library for detecting hardcoded secrets in TypeScript/JavaScript/Node.js codebases. Patterns for AWS, GitHub, Stripe, Supabase, OpenAI, Anthropic, database URLs, private keys, and git history scanning.
 ---
 

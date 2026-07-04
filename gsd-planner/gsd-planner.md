@@ -1,8 +1,8 @@
 ---
 name: gsd-planner
-description: USE ME within a GSD phase to create the task-level execution plan. TRIGGERS on: plan this phase, break down phase, create tasks, plan tasks, what tasks are needed, gsd plan, phase tasks, execution plan. Use AFTER gsd-roadmapper defines phases. DO NOT use for strategic roadmapping (that's gsd-roadmapper) or task execution (that's gsd-executor).
+description: Use PROACTIVELY within a GSD phase to create the task-level execution plan. TRIGGERS on: plan this phase, break down phase, create tasks, plan tasks, what tasks are needed, gsd plan, phase tasks, execution plan. Use AFTER gsd-roadmapper defines phases. DO NOT use for strategic roadmapping (that's gsd-roadmapper) or task execution (that's gsd-executor).
 tools: Read, Write, Edit, Glob, Grep
-model: inherit
+model: sonnet
 ---
 
 # GSD PLANNER

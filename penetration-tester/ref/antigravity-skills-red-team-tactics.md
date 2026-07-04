@@ -1,5 +1,5 @@
 ---
-name: red-team-tactics
+ref-name: red-team-tactics
 description: Red team tactics based on MITRE ATT&CK framework. Full attack lifecycle, detection evasion, lateral movement, post-exploitation, and C2 patterns.
 allowed-tools: Read, Bash, Glob, Grep
 ---
