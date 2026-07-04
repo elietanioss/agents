@@ -962,38 +962,43 @@ docker exec kali-pentest pip3 install PYPACKAGE
 
 ### Production Tool Installation
 
-Run once on fresh kali container to install all required tools:
+Run once on fresh kali container to install all required tools. Kali repos now ship
+nuclei/subfinder/netexec as apt packages, so `go` is optional (only needed to build
+bleeding-edge versions from source).
 ```bash
-# Core scanning
-docker exec kali-pentest bash -c "apt update -q && apt install -y -q \
+# Core scanning + wordlists + exploitation + AD tooling (single apt pass)
+docker exec kali-pentest bash -c "DEBIAN_FRONTEND=noninteractive apt update -q && apt install -y -q \
   nmap nikto sqlmap gobuster ffuf whatweb testssl.sh \
-  hydra john hashcat seclists \
-  python3-pip curl wget git 2>&1 | tail -5"
+  hydra john hashcat seclists wordlists \
+  nuclei subfinder metasploit-framework netexec \
+  python3-pip nodejs npm curl wget git 2>&1 | tail -6"
 
-# Python tools
-docker exec kali-pentest pip3 install -q \
+# crackmapexec is EOL upstream → netexec (nxc) is the maintained successor.
+# Symlink so any legacy 'crackmapexec ...' command in these agents still resolves.
+docker exec kali-pentest bash -c "NXC=\$(command -v netexec || command -v nxc); \
+  [ -n \"\$NXC\" ] && ln -sf \"\$NXC\" /usr/local/bin/crackmapexec; echo linked=\$NXC"
+
+# rockyou (ships gzipped) — used by john/hashcat
+docker exec kali-pentest bash -c "[ -f /usr/share/wordlists/rockyou.txt.gz ] && gunzip -kf /usr/share/wordlists/rockyou.txt.gz; ls -la /usr/share/wordlists/rockyou.txt 2>/dev/null || echo 'rockyou missing'"
+
+# Python + Node tools
+docker exec kali-pentest pip3 install -q --break-system-packages \
   requests beautifulsoup4 pyjwt cryptography impacket 2>&1 | tail -3
-
-# Node tools
 docker exec kali-pentest bash -c "npm install -g wscat 2>&1 | tail -2"
 
-# Nuclei (fast vulnerability scanner — preferred over nikto for modern apps)
-docker exec kali-pentest bash -c "
-  go install -v github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest 2>&1 | tail -3
-  nuclei -update-templates 2>&1 | tail -3
-"
+# Update nuclei templates (safe to re-run)
+docker exec kali-pentest bash -c "nuclei -update-templates 2>&1 | tail -3"
 
-# Subfinder (passive subdomain discovery)
-docker exec kali-pentest bash -c "
-  go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest 2>&1 | tail -3
-"
-
-# Verify all installed
-docker exec kali-pentest bash -c "
-  for tool in nmap nikto sqlmap gobuster ffuf whatweb hydra nuclei subfinder wscat; do
-    which \$tool > /dev/null 2>&1 && echo \"✅ \$tool\" || echo \"❌ \$tool MISSING\"
+# Verify the FULL required set (matches what these agents actually call)
+docker exec kali-pentest bash -c '
+  for t in nmap nikto sqlmap gobuster ffuf whatweb testssl.sh hydra john hashcat \
+           nuclei subfinder searchsploit msfconsole wscat crackmapexec netexec \
+           dig impacket-secretsdump; do
+    command -v \"\$t\" >/dev/null 2>&1 && echo \"OK   \$t\" || echo \"MISS \$t\"
   done
-"
+  test -d /usr/share/seclists && echo \"OK   seclists\" || echo \"MISS seclists\"
+  test -f /usr/share/wordlists/rockyou.txt && echo \"OK   rockyou\" || echo \"MISS rockyou\"
+'
 ```
 
 Add nuclei to Phase 4 Web Application Scanning (after nikto):
