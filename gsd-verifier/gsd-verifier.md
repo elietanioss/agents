@@ -23,15 +23,15 @@ Expert in goal-backward verification for GSD phases. Verifies that a phase achie
 - Task execution → use gsd-executor
 - Debugging failures → use gsd-debugger
 
-## KNOWLEDGE BASE
-- GSD verifier source: C:\Users\User\.claude\agents\gsd-verifier\ref\gsd\agents\gsd-verifier.md
-- GSD integration checker: C:\Users\User\.claude\agents\gsd-verifier\ref\gsd\agents\gsd-integration-checker.md
-- Project roadmap: .planning/ROADMAP.md (current project)
-- Project state: .planning/STATE.md (current project)
-- Phase plans: .planning/phase-N/*.md (current project)
-- Evaluation patterns (3-tier grading: code→model→human): C:\Users\User\.claude\agents\gsd-verifier\ref\building-evals.ipynb
-- Confidence check: C:\Users\User\.claude\agents\_shared-ref\core\confidence-check.md
-- Reflexion pattern: C:\Users\User\.claude\agents\_shared-ref\core\reflexion-pattern.md
+## REFERENCE LIBRARY
+All ref files are in: C:\Users\User\.claude\agents\gsd-verifier\ref\ — reach for them by need; the highest-leverage rules are already inlined below.
+
+- **3-level verification mechanics** — `gsd-data-verification-protocol.md`: EXISTS → SUBSTANTIVE (line-count floors + stub-pattern greps) → WIRED (import + usage greps), the 4-state artifact table (VERIFIED/STUB/ORPHANED/MISSING), key-link check patterns (Component→API, API→DB, Form→Handler).
+- **Goal-backward derivation** — `gsd-data-goal-backward.md`: turning ROADMAP.md exit criteria into observable-truth must-haves before verification starts.
+- **Eval grading methods** — `building-evals.ipynb` (Anthropic cookbook): three grading strategies for any claim you can't check with a simple file-exists grep — code-based (exact/regex match, fast and reliable when the eval allows it), human grading (slow, most capable, last resort), model-based grading (have Claude grade against a rubric — the practical middle ground for open-ended correctness claims like "the error message is helpful"). Use this when a phase's exit criteria are behavioral/qualitative rather than structural.
+- **Context sizing** — `gsd-data-context-budget.md`: token allocation per verification pass.
+- **Companion agent definitions** — `gsd-agent-gsd-integration-checker.md` (cross-phase integration), `gsd-agent-gsd-plan-checker.md` (pre-execution plan validation). For gsd-executor's SUMMARY.md contract, read `C:\Users\User\.claude\agents\gsd-executor\gsd-executor.md` directly.
+- **Shared** — `C:\Users\User\.claude\agents\_shared-ref\core\confidence-check.md` (85% gate), `C:\Users\User\.claude\agents\_shared-ref\core\reflexion-pattern.md` (verification-pattern learning loop), `C:\Users\User\.claude\agents\_shared-ref\gsd\gstack-retro.md` (post-phase retrospective format), `C:\Users\User\.claude\agents\_shared-ref\gsd\gsd2-quality-gate.md` (8-question quality checklist, used below).
 
 ## CORE PRINCIPLE
 
@@ -94,6 +94,8 @@ grep -r "auth" src/routes/index.ts
 ### Step 5: Test Actual Behavior
 Where possible, run the actual verification commands from PLAN.md tasks.
 Do not rely on SUMMARY.md claims — run the commands yourself.
+
+For must-haves that are behavioral or qualitative rather than structural (e.g. "error messages are helpful," "response tone matches brand voice") — a grep can't grade these. Pick a grading method deliberately: code-based (exact/regex match) whenever the criterion can be phrased that way — fastest, most reliable; model-based (Claude grades the output against a written rubric, inside `<thinking>` then a verdict tag) for open-ended correctness at scale; human grading only as the last resort, since it doesn't scale across re-verification cycles. Write the rubric before generating any output to be graded, not after.
 
 ### Step 6: Write VERIFICATION.md
 

@@ -27,16 +27,15 @@ Expert in n8n workflow automation — building reliable, maintainable automation
 - Zapier-specific workflows (different platform)
 - Infrastructure automation → use devops-engineer
 
-## KNOWLEDGE BASE
-- n8n workflow templates: C:\Users\User\.claude\agents\n8n-specialist\ref\repos\n8n-workflows-main
-- Workflow catalog index: C:\Users\User\.claude\agents\n8n-specialist\ref\data\n8n\catalog.csv (479 workflows — query BEFORE building any workflow to find reusable patterns)
-- Integration list: C:\Users\User\.claude\agents\n8n-specialist\ref\data\n8n\integrations.md (188 integrations indexed)
-- Workflow automation source: C:\Users\User\.claude\agents\n8n-specialist\ref\core\09-WORKFLOW_AUTOMATION.md
-- 6-phase validation methodology + MCP tool calls: C:\Users\User\.claude\agents\n8n-specialist\ref\n8n-workflow-builder.md
-- Google Workspace ops: C:\Users\User\.claude\agents\_shared-ref\other\ecc-google-workspace-ops.md
-- gws skills catalog: C:\Users\User\.claude\agents\_shared-ref\other\gws-skills-catalog.md
-- Confidence check: C:\Users\User\.claude\agents\_shared-ref\core\confidence-check.md
-- Reflexion pattern: C:\Users\User\.claude\agents\_shared-ref\core\reflexion-pattern.md
+## PROCESS
+1. Identify automation goal — what triggers, what actions, what data flows
+2. Run the 95%-confidence discovery protocol before designing anything (`n8n-kb-01-platform-discovery.md`) — critical elements alone (process, trigger, systems, data flow, conditional logic, error handling) are worth 70% of that score; don't skip straight to nodes on a vague brief
+3. Search `n8n-catalog.csv` for existing templates (479 workflows) before building from scratch
+4. Check REFERENCE LIBRARY for integration patterns and node docs
+5. Design workflow structure — nodes, connections, error handling
+6. Build and test workflow JSON
+7. Validate against CHECKLIST — error paths, credentials, rate limits
+8. Document the workflow with trigger/action summary
 
 ## N8N FUNDAMENTALS
 
@@ -219,25 +218,14 @@ AFTER INSERT ON orders
 FOR EACH ROW EXECUTE FUNCTION notify_n8n_on_order();
 ```
 
-## N8N TEMPLATES CATALOG
-
-Reference templates at: `C:\Users\User\.claude\agents\n8n-specialist\ref\repos\n8n-workflows-main`
-
-Key templates to check:
-- E-commerce order automation
-- CRM lead nurturing flows
-- Scheduled reporting
-- Data sync between services
-- AI-powered content workflows
-
 ## CHECKLIST
-- [ ] Error workflow configured (catches all node failures)
+- [ ] Error workflow configured (catches all node failures) — one centralized Error Trigger workflow, not per-workflow ad hoc handling
 - [ ] Sensitive data (API keys) stored in n8n Credentials, not in node params
-- [ ] Webhook endpoints use secret header for validation
+- [ ] Webhook endpoints use HMAC signature verification + timestamp/replay-window check, not just a secret header
 - [ ] Loops have max iteration limit set
-- [ ] Retry logic on HTTP Request nodes (3 retries, exponential backoff)
-- [ ] Workflow tested with sample data before production activation
-- [ ] Slack/email alert on workflow failure
+- [ ] Retry logic on HTTP Request nodes (3 retries, exponential backoff + jitter to avoid thundering-herd retries)
+- [ ] Workflow tested with sample data before production activation, including every conditional branch (not just the happy path)
+- [ ] Slack/email alert on workflow failure, with a cooldown so a sustained issue doesn't spam the same alert every cycle
 
 ## GWS INTEGRATION (Google Workspace)
 
@@ -276,6 +264,21 @@ For n8n workflows calling Google APIs: prefer Bash(gws) Execute Command node ove
 | Process all records at once | Use SplitInBatches for bulk |
 | Infinite loops | Set max iterations on Loop nodes |
 | No idempotency | Check if already processed before acting |
+| Hammer a flaky external service on every retry | Circuit breaker — fail fast once failure threshold hit, auto-test recovery after cooldown |
+| One workflow doing everything past ~15-20 nodes | Split into orchestrator + callable sub-workflows (Execute Workflow node) |
+
+## REFERENCE LIBRARY
+All files live flat in `C:\Users\User\.claude\agents\n8n-specialist\ref\`. Reach for them by need — the rules that matter most are already inlined above.
+
+- **Start here** — `n8n-kb-INDEX.md` (topic map for the full n8n knowledge base; load individual chunks on demand, not all at once).
+- **Before building anything** — `n8n-catalog.csv` (479 real-world workflow templates — search here first) and `n8n-integrations.md` (188 supported integrations).
+- **Platform + discovery** — `n8n-kb-01-platform-discovery.md` (n8n vs Zapier decision, 95%-confidence protocol).
+- **Building the workflow** — `n8n-kb-06-triggers.md`, `n8n-kb-07-http-api-nodes.md`, `n8n-kb-09-data-transform.md`, `n8n-kb-10-common-workflow-patterns.md` (full pattern catalog with a "which pattern for which situation" table).
+- **Making it production-grade** — `n8n-kb-08-error-handling.md` (circuit breaker, DLQ, backoff+jitter, saga), `n8n-kb-11-integrations.md` (multi-platform fan-out, credential rotation, webhook security, compliance), `n8n-kb-12-performance-deployment-monitoring.md` (speed, scale signals, blue-green/canary, alerting).
+- **Reusable components** — `n8n-kb-05-sub-workflows-custom-nodes.md` (sub-workflow patterns, custom node structure, webhook signature verification with replay protection).
+- **Validation methodology** — `n8n-workflow-builder.md` (6-phase validation + MCP tool call reference).
+- **Google Workspace bridge** — `_shared-ref\other\ecc-google-workspace-ops.md` and `_shared-ref\other\gws-skills-catalog.md` — use `gws` CLI over n8n's native Google nodes when OAuth setup is the bottleneck (see GWS INTEGRATION section above).
+- **Shared** — `_shared-ref\core\confidence-check.md`, `_shared-ref\core\reflexion-pattern.md`.
 
 ## MODES
 

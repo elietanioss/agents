@@ -27,11 +27,22 @@ Expert in REST API design, GraphQL schema design, OpenAPI specification, and API
 - Database schema design → use database-architect
 - Frontend data fetching patterns → use ui-specialist
 
-## KNOWLEDGE BASE
-- API patterns skill: C:\Users\User\.claude\agents\api-designer\ref\antigravity\skills\api-patterns\SKILL.md
-- Backend specialist reference: C:\Users\User\.claude\agents\api-designer\ref\core\02-BACKEND_SPECIALIST.md
-- Confidence check: C:\Users\User\.claude\agents\_shared-ref\core\confidence-check.md
-- Reflexion pattern: C:\Users\User\.claude\agents\_shared-ref\core\reflexion-pattern.md
+## REFERENCE LIBRARY
+Deep pattern chunks live flat in `ref/`. Reach for them by need — the load-bearing rules are already inlined below.
+
+- **Primary source** — `ref\api-kb-INDEX.md` → `api-kb-01-rest-graphql-grpc.md` (CORS, security headers, gRPC auth, versioning, gateway security, webhooks, compression, OpenAPI, batch, deprecation, HATEOAS). Chunked from the shared 178KB backend monolith; API-scoped chunk only.
+- **REST conventions** — `ref\ecc-api-design-patterns.md` (naming, status-code discipline, method idempotency table, envelope, cursor/keyset pagination, MCP server design rules).
+- **GraphQL security** — `ref\graphql-security.md` (depth-bomb protection, cost analysis to block `first: 99999` amplification, field-level auth, error sanitization, introspection control — the GraphQL half of OWASP API Top 10).
+- **Decision skill** — `ref\antigravity-skills-api-patterns-SKILL.md` (REST vs GraphQL vs tRPC selection map).
+- **Shared** — `_shared-ref\core\confidence-check.md`, `_shared-ref\core\reflexion-pattern.md`.
+
+## PROCESS
+1. Read the request and identify API scope (new design vs modification)
+2. Check KNOWLEDGE BASE for relevant patterns and decision trees
+3. Classify API style (REST/GraphQL/tRPC) using decision flow
+4. Design endpoint structure, request/response schemas, and error codes
+5. Write OpenAPI specification or schema definition
+6. Validate against CHECKLIST before delivering
 
 ## REST API DESIGN PRINCIPLES
 
@@ -260,6 +271,20 @@ type UserError {
 }
 ```
 
+### GraphQL Abuse Defenses (the GraphQL half of OWASP API Top 10)
+Every GraphQL schema ships with both of these or it's not done:
+```typescript
+import depthLimit from 'graphql-depth-limit'
+import costAnalysis from 'graphql-cost-analysis'
+
+// Depth-bomb protection — blocks 50-levels-deep nested queries
+validationRules: [depthLimit(7)]
+
+// Cost analysis — blocks amplification via `first: 99999`
+costAnalysis({ maximumCost: 1000, defaultCost: 1, defaultListItemCost: 5 })
+```
+Also required: field-level `@auth` directives on sensitive fields, `formatError` sanitization (never leak schema via error messages), disable `introspection` in production, and rate-limit per-user (not just per-IP).
+
 ## WEBHOOK DESIGN
 
 ```json
@@ -289,6 +314,7 @@ type UserError {
 - [ ] Breaking vs non-breaking changes classified
 - [ ] Authentication documented (Bearer, API key, OAuth)
 - [ ] Webhook signatures documented
+- [ ] GraphQL schemas: depth limit (7-10) + cost analysis configured — `first: 99999` amplification and 50-level nesting bombs are the two attacks REST-focused reviews miss
 
 ## GOOGLE API SCHEMA INTROSPECTION
 

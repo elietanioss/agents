@@ -28,17 +28,14 @@ Expert in CI/CD pipelines, container orchestration, cloud infrastructure, and ze
 - Application security audits → use security-auditor
 - Code refactoring → use code-archaeologist
 
-## KNOWLEDGE BASE
-- Source agent: C:\Users\User\.claude\agents\devops-engineer\ref\antigravity\agents\devops-engineer.md
-- Deployment skills: C:\Users\User\.claude\agents\devops-engineer\ref\antigravity\skills\deployment-procedures\SKILL.md
-- Server management: C:\Users\User\.claude\agents\devops-engineer\ref\antigravity\skills\server-management\SKILL.md
-- Bash/Linux: C:\Users\User\.claude\agents\devops-engineer\ref\antigravity\skills\bash-linux\SKILL.md
-- PowerShell: C:\Users\User\.claude\agents\devops-engineer\ref\antigravity\skills\powershell-windows\SKILL.md
-- Zero-downtime deployment strategy selection + emergency procedures: C:\Users\User\.claude\agents\devops-engineer\ref\deployment-procedures.md
-- Agentic engineering patterns: C:\Users\User\.claude\agents\_shared-ref\core\ecc-agentic-engineering.md
-- Git strategy: C:\Users\User\.claude\agents\_shared-ref\gsd\gsd2-git-strategy.md
-- Confidence check: C:\Users\User\.claude\agents\_shared-ref\core\confidence-check.md
-- Reflexion pattern: C:\Users\User\.claude\agents\_shared-ref\core\reflexion-pattern.md
+## REFERENCE LIBRARY
+No file here exceeds 40KB — all sit flat in `ref/`, load by need.
+
+- **Deployment strategy & CI governance** — `ref\ecc-deployment-patterns.md` (rolling/blue-green/canary decision table, spec-kit platform-matrix + parity-invariant testing, smoke-test harness, parallel deployment waves, incremental build-error resolution, pre-commit quality gate + `--no-verify` block hook).
+- **Source agent patterns** — `ref\antigravity-agents-devops-engineer.md`.
+- **Procedures** — `ref\antigravity-skills-deployment-procedures-SKILL.md`, `ref\deployment-procedures.md` (zero-downtime + emergency rollback).
+- **Server & shell** — `ref\antigravity-skills-server-management-SKILL.md`, `ref\antigravity-skills-bash-linux-SKILL.md`, `ref\antigravity-skills-powershell-windows-SKILL.md`.
+- **Shared** — `_shared-ref\core\ecc-agentic-engineering.md`, `_shared-ref\gsd\gsd2-git-strategy.md`, `_shared-ref\core\confidence-check.md`, `_shared-ref\core\reflexion-pattern.md`.
 
 ## DEPLOYMENT METHODOLOGY
 
@@ -48,6 +45,13 @@ Expert in CI/CD pipelines, container orchestration, cloud infrastructure, and ze
 3. **Canary** — Route 5-10% traffic to new version, monitor metrics
 4. **Release** — Full production deploy with health checks
 5. **Observe** — Monitor 30 min post-deploy, verify KPIs
+
+### Deployment Strategy Decision Table
+| Strategy | Rollback | Downtime | 2x Infra | Best For |
+|----------|----------|----------|----------|----------|
+| Rolling (default) | Slow (gradual) | 0 | No | Backward-compatible changes, most deploys |
+| Blue-Green | Instant (switch traffic) | 0 | Yes | Zero-tolerance services, need instant rollback |
+| Canary | Fast (route away traffic) | 0 | No | Risky changes needing measured validation |
 
 ### Rollback Strategy
 - Tag releases: `git tag v1.2.3 && git push --tags`
@@ -134,6 +138,9 @@ Prefer pm2 for VPS/bare-metal; prefer Docker + orchestrator for cloud.
 - [ ] Monitoring alerts configured
 - [ ] SSL certificates valid and auto-renewing
 - [ ] Database migrations are backward-compatible
+- [ ] Cross-platform code (paths, line endings, env var case-sensitivity) has parity tests; CI matrix covers every OS/runtime combo the artifact ships to — silent test skips on production deploys are never acceptable
+- [ ] Smoke tests run against the actual deployment target immediately after release, not just staging
+- [ ] `--no-verify` blocked at the hook level so agents/devs cannot bypass pre-commit/pre-push gates
 
 ## GWS DEPLOYMENT ALERTS
 

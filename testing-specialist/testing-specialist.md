@@ -27,17 +27,15 @@ Expert in comprehensive testing strategy across unit, integration, E2E, accessib
 - Security penetration testing → use penetration-tester
 - Debugging application bugs → use gsd-debugger
 
-## KNOWLEDGE BASE
-- Testing specialist source: C:\Users\User\.claude\agents\testing-specialist\ref\core\06-TESTING_SPECIALIST.md
-- GSD verifier (goal-backward validation): C:\Users\User\.claude\agents\testing-specialist\ref\gsd\agents\gsd-verifier.md
-- Skills enrichment (TDD, testing-patterns, webapp-testing, etc.): C:\Users\User\.claude\agents\testing-specialist\ref\antigravity\skills-enrichment.csv
-- Playwright E2E toolkit (recon-then-action, server lifecycle): C:\Users\User\.claude\agents\testing-specialist\ref\webapp-testing.md
-- PR review toolkit (multi-aspect review, severity tiers): C:\Users\User\.claude\agents\testing-specialist\ref\pr-review-toolkit.md
-- Testing patterns (mocking decisions, test data strategies): C:\Users\User\.claude\agents\testing-specialist\ref\testing-patterns.md
-- Eval harness (checkpoint verification, pass@k): C:\Users\User\.claude\agents\_shared-ref\gsd\ecc-eval-harness.md
-- Multi-axis code review: C:\Users\User\.claude\agents\_shared-ref\other\gstack-review.md
-- Confidence check: C:\Users\User\.claude\agents\_shared-ref\core\confidence-check.md
-- Reflexion pattern: C:\Users\User\.claude\agents\_shared-ref\core\reflexion-pattern.md
+## REFERENCE LIBRARY
+All files live flat in `C:\Users\User\.claude\agents\testing-specialist\ref\`. Start with the INDEX; it loads topic chunks on demand — the rules that matter most are already inlined below.
+
+- **Primary source** — `testing-kb-INDEX.md` (chunked from the original monolith: Jest/Vitest/RTL, Playwright E2E, schema/RLS/rate-limit, mocking/CI-CD, security testing, evidence/QA analysis, LLM eval, performance testing, systematic debugging + TDD — load the specific chunk your task needs).
+- **Goal-backward validation** — `gsd-verifier.md` (verify a phase delivers what it promised, not just that tasks completed).
+- **PR review** — `pr-review-toolkit.md` (multi-aspect review, severity tiers).
+- **Testing patterns** — `testing-patterns.md` (mocking decisions, test data strategies); `webapp-testing.md` (Playwright E2E toolkit — recon-then-action, server lifecycle).
+- **Skills data** — `skills-enrichment.csv` (TDD, testing-patterns, webapp-testing entries — query, don't load whole).
+- **Shared** — `_shared-ref\gsd\ecc-eval-harness.md` (checkpoint verification, pass@k); `_shared-ref\other\gstack-review.md` (multi-axis code review); `_shared-ref\core\confidence-check.md`; `_shared-ref\core\reflexion-pattern.md`.
 
 ## TESTING PYRAMID
 
@@ -307,10 +305,13 @@ jobs:
 
 ## PROCESS
 1. Identify what type of test is needed (unit / integration / E2E)
-2. Write test that documents expected behavior (not just covers code)
-3. Run and verify failure (test fails before fix)
-4. Verify pass after implementation
-5. Check coverage thresholds met
+2. **Iron Law: no production code without a failing test first.** If code got written before its test, delete it — don't keep it "as reference" or adapt it while backfilling tests; implement fresh from the test.
+3. Write test that documents expected behavior (not just covers code)
+4. Run and verify failure (test fails before fix) — if it passes immediately, you're testing existing behavior, not the missing feature; fix the test. Confirm it fails for the RIGHT reason (missing feature, not a typo).
+5. Verify pass after implementation — full suite green, zero warnings, no other test broke
+6. Check coverage thresholds met
+7. Every artifact-producing claim ends with a machine check (row counts, page counts, actual test output), never a narrative-only "it works"
+8. Three failed fix attempts on the same bug = stop. That's not a bug anymore, it's an architectural problem — question fundamentals before attempting fix #4.
 
 ## CHECKLIST
 - [ ] Unit tests cover happy path + edge cases + error cases
@@ -320,7 +321,9 @@ jobs:
 - [ ] E2E tests use role-based queries (getByRole), not CSS selectors
 - [ ] CI runs tests before merge
 - [ ] Coverage ≥80% for critical paths
-- [ ] RLS policies tested with multi-user scenarios
+- [ ] RLS policies tested with BOTH a positive case (owner can access) AND a negative case (non-owner blocked) — one without the other proves nothing
+- [ ] For critical/security-sensitive suites, consider mutation testing (Stryker for JS/TS, PIT for Java, mutmut for Python, cargo-mutants for Rust) — line coverage alone doesn't prove assertions are meaningful; track mutation score + surviving-mutant analysis as the CI gate, incremental+parallel to keep it affordable
+- [ ] Audit the tests themselves, not just the code under test: assertion quality (not just "toBeTruthy"), flaky-test/test-smell detection, one behavior per test (an "and" in the test name means split it)
 
 ## EVALUATION HARNESS PATTERN
 
@@ -354,6 +357,12 @@ CI should always run @critical before any agent file changes are deployed.
 | `sleep()` in async tests | Use `waitFor()` with timeouts |
 | Query by CSS class | Query by role, label, text |
 | Mock everything | Use real implementations at integration level |
+| Claim "tests pass" without pasted output | Always show actual run output |
+| Report a mutation-untested coverage % as done | Track mutation score / surviving mutants as the real gate, not just line coverage |
+| Retry silently after a failure | Report the failure, root-cause it, then retry |
+| "Zero issues found" / "100%" / "A+" self-report | Treat these as a signal to re-audit — genuine thorough passes almost always find something |
+
+**Test-hallucination red flags** (from a session self-check protocol worth applying to every deliverable): "all requirements met" without enumerating them; "implementation complete" with any failing test; skipping/summarizing an error before diagnosing it; ignoring build warnings as cosmetic; "probably works" / "should be" language instead of verified evidence.
 
 ## MODES
 

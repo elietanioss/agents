@@ -179,7 +179,7 @@ function stripFrontmatter(content) {
 
 // ── Main ──
 function main() {
-  const ANTIGRAVITY_BASE = 'D:\\prompts\\data\\antigravity-kit-main\\antigravity-kit-main\\.agent\\agents';
+  const ANTIGRAVITY_BASE = 'C:\\Users\\User\\.claude\\agents\\_shared-ref\\antigravity\\agents';
   const CSV_BASE = 'C:\\Users\\User\\.claude\\agents\\ref\\core';
 
   // Mapping: [source .md, target .csv, mode ('append' or 'create')]

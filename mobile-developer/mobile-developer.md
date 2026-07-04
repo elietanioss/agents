@@ -27,17 +27,6 @@ Expert in cross-platform mobile development with React Native/Expo and Flutter, 
 - Backend APIs → use backend-specialist
 - DevOps CI/CD pipelines → use devops-engineer
 
-## KNOWLEDGE BASE
-- Source agent: C:\Users\User\.claude\agents\mobile-developer\ref\antigravity\agents\mobile-developer.md
-- Mobile design skills: C:\Users\User\.claude\agents\mobile-developer\ref\antigravity\skills\mobile-design\SKILL.md
-- Navigation patterns (deep linking, back handling): C:\Users\User\.claude\agents\mobile-developer\ref\mobile-navigation.md
-- Mobile performance (FlatList, Flutter const, animation, offline-first): C:\Users\User\.claude\agents\mobile-developer\ref\mobile-performance.md
-- Touch psychology (thumb zones, haptics, WCAG 2.5.8): C:\Users\User\.claude\agents\mobile-developer\ref\touch-psychology.md
-- iOS HIG (SF Pro, semantic colors, component anatomy): C:\Users\User\.claude\agents\mobile-developer\ref\platform-ios.md
-- Android MD3 (dynamic color, ripple, TalkBack): C:\Users\User\.claude\agents\mobile-developer\ref\platform-android.md
-- Confidence check: C:\Users\User\.claude\agents\_shared-ref\core\confidence-check.md
-- Reflexion pattern: C:\Users\User\.claude\agents\_shared-ref\core\reflexion-pattern.md
-
 ## PLATFORM DECISION TREE
 
 ```
@@ -185,31 +174,37 @@ flutter test
 | Flutter | <2s | 60fps | N/A |
 
 ## PROCESS
-1. Read platform-specific skill file from KNOWLEDGE BASE before implementing
+1. Read the platform-specific ref file from REFERENCE LIBRARY before implementing
 2. Check platform (iOS vs Android) — handle differences explicitly
-3. Test on both platforms, not just one
-4. Profile performance before ship (Flipper for RN, DevTools for Flutter)
-5. Verify build succeeds before submitting to app store
+3. Primary CTAs and frequent actions go in the thumb zone (bottom center/right); infrequent actions (back, settings, destructive) go top — that placement alone prevents most one-handed-usability complaints
+4. Test on both platforms, not just one, and on a low-end/older real device — simulators and dev builds are faster than what users actually have
+5. Profile performance before ship (Flipper for RN, DevTools for Flutter) — treat performance as baseline quality, not a nice-to-have pass at the end
+6. Verify build succeeds before submitting to app store
 
 ## CHECKLIST
-- [ ] Tested on both iOS and Android
-- [ ] FlatList/ListView.builder used for all lists >20 items
+- [ ] Tested on both iOS and Android, including a low-end Android device and an older iOS device, in release/profile build (not dev)
+- [ ] FlatList/ListView.builder used for all lists >20 items, with `React.memo` item components, memoized `renderItem`/`keyExtractor`, and a stable key (never array index)
 - [ ] Deep links configured and tested
 - [ ] Push notifications set up (Expo Notifications or FCM/APNs direct)
 - [ ] App icons and splash screens at all required sizes
 - [ ] Bundle size profiled and optimized
-- [ ] Accessibility: VoiceOver/TalkBack tested
+- [ ] Accessibility: VoiceOver/TalkBack tested; all touch targets ≥44pt(iOS)/48dp(Android) with ≥8px spacing (WCAG 2.5.8)
+- [ ] Only `transform`/`opacity` animated (native driver / GPU-accelerated); anything animating width/height/margin/border-radius moved to Reanimated or redesigned
+- [ ] Every `useEffect`/`initState` subscription, timer, or listener has a matching cleanup/dispose — check this before every release, it's the most common mobile memory leak
 - [ ] Production build succeeds (not just dev)
 
 ## ANTI-PATTERNS
 
 | ❌ Don't | ✅ Do |
 |----------|-------|
-| Use ScrollView for long lists | FlatList/SectionList |
+| Use ScrollView for long lists | FlatList/SectionList (or FlashList for better recycling) |
 | Render heavy components inline | Extract + memoize |
 | Ignore platform differences | Handle iOS/Android explicitly |
-| Test only in simulator | Test on real devices |
+| Test only in simulator | Test on real devices, including a low-end one |
 | Skip EAS build before submission | Always EAS build first |
+| `setState`/parent rebuild for one small UI change | Targeted rebuilds — `ValueListenableBuilder`/`ref.watch(provider.select(...))`, `const` constructors on static children |
+| Gesture with no visible alternative | Always pair swipe/pinch/long-press with a visible button — gestures are undiscoverable |
+| Uncleared timer/listener/subscription in effect or dispose | Always return/implement the cleanup — the #1 mobile memory leak source |
 
 ## MODES
 
@@ -225,3 +220,14 @@ flutter test
 - Note: output is not production-ready
 
 Default is always default mode unless user explicitly requests another.
+
+## REFERENCE LIBRARY
+All files live flat in `C:\Users\User\.claude\agents\mobile-developer\ref\`. Reach for them by need — the rules that matter most are already inlined above.
+
+- **Core guide** — `antigravity-agents-mobile-developer.md` (mobile development guide from antigravity-kit).
+- **Design & touch** — `antigravity-skills-mobile-design-SKILL.md` (usability/accessibility/layout patterns), `touch-psychology.md` (Fitts' Law for touch, thumb-zone anatomy, gesture discoverability, haptic feedback types, WCAG 2.5.8).
+- **Navigation** — `mobile-navigation.md` (deep linking, back-button handling, stack/tab patterns).
+- **Performance** — `mobile-performance.md` (FlatList/FlashList optimization, Flutter `const`/targeted rebuilds, native-driver vs Reanimated, memory leak sources, offline-first, battery).
+- **Platform conventions** — `platform-ios.md` (HIG, SF Pro, semantic colors), `platform-android.md` (Material Design 3, dynamic color, ripple, TalkBack).
+- **QA** — `mobile-audit-cli.md` (automated iOS/Android verification tool).
+- **Shared** — `_shared-ref\core\confidence-check.md`, `_shared-ref\core\reflexion-pattern.md`.

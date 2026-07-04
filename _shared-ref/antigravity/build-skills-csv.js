@@ -21,7 +21,7 @@ const SKILL_DIRS = [
   'webapp-testing',
 ];
 
-const SKILLS_ROOT = 'D:\\prompts\\data\\antigravity-kit-main\\antigravity-kit-main\\.agent\\skills';
+const SKILLS_ROOT = 'C:\\Users\\User\\.claude\\agents\\_shared-ref\\antigravity\\skills';
 const OUTPUT_CSV = path.join(__dirname, 'skills-enrichment.csv');
 
 // ── Tech keyword dictionary (from convert-to-csv.js) ──

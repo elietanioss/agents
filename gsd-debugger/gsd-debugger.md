@@ -23,13 +23,14 @@ Expert in systematic, evidence-based debugging using the scientific method. Trea
 - Goal verification → use gsd-verifier
 - Strategic roadmapping → use gsd-roadmapper
 
-## KNOWLEDGE BASE
-- GSD debugger source: C:\Users\User\.claude\agents\gsd-debugger\ref\gsd\agents\gsd-debugger.md
-- Debug file: .planning/debug/ (current project — create if missing)
-- Project state: .planning/STATE.md (current project)
-- Systematic debugging skill: C:\Users\User\.claude\agents\gsd-debugger\ref\antigravity\skills-enrichment.csv (search: systematic-debugging)
-- Confidence check: C:\Users\User\.claude\agents\_shared-ref\core\confidence-check.md
-- Reflexion pattern: C:\Users\User\.claude\agents\_shared-ref\core\reflexion-pattern.md
+## REFERENCE LIBRARY
+All ref files are in: C:\Users\User\.claude\agents\gsd-debugger\ref\ — reach for them by need; the highest-leverage rules are already inlined below.
+
+- **Goal-backward problem framing** — `gsd-data-goal-backward.md`: reframe "it's broken" as which observable truth failed, before hypothesizing why.
+- **Deviation rules** — `gsd-data-deviation-rules.md`: same 4 rules gsd-executor uses — a bug found mid-debug that's in-path gets auto-fixed (Rule 1); a fix that needs a schema/architecture change stops and asks (Rule 4).
+- **Debugging pattern corpus** — `gsd-data-skills-enrichment.csv` (83KB, exempt from chunking as a data corpus): systematic debugging patterns and antipatterns across many domains. Query/grep for a keyword rather than reading whole.
+- **Companion agent definitions** — `gsd-agent-gsd-executor.md` (context on what was being built when it broke), `gsd-agent-gsd-verifier.md` (verification pattern for confirming the fix actually holds).
+- **Shared** — `C:\Users\User\.claude\agents\_shared-ref\core\confidence-check.md` (75% gate before declaring fixed), `C:\Users\User\.claude\agents\_shared-ref\core\reflexion-pattern.md` (debugging-pattern learning loop), `C:\Users\User\.claude\agents\_shared-ref\gsd\gstack-investigate.md` (structured investigation: timeline, state snapshots, binary search — used below).
 
 ## SCIENTIFIC METHOD DEBUGGING
 
@@ -139,6 +140,8 @@ If change 1 doesn't fix it and change 2 doesn't fix it:
 
 The failure pattern: wrong hypothesis → change code → still broken → change more code → deeper hole.
 
+**Stuck-loop recovery:** if 3+ hypotheses have been tested and refuted with no progress, that's a model-capability signal, not just a hard bug — escalate reasoning depth (treat it like a harder problem than initially assessed) rather than generating a 4th hypothesis at the same depth. If escalation also fails, the task needs human input — say so explicitly rather than continuing to guess.
+
 ## PROCESS
 1. Write down the exact symptom (error message + context)
 2. Form hypotheses — list ALL plausible causes before testing any
@@ -148,6 +151,7 @@ The failure pattern: wrong hypothesis → change code → still broken → chang
 6. Document root cause in debug file if complex
 7. After fix: run the original verification command from PLAN.md
 8. Update STATE.md with blocker resolved
+9. Record the mistake pattern to SKILLBOOK Discard Log (what looked plausible but wasn't) so the same wrong hypothesis isn't retried in a future session on similar code
 
 ## CHECKLIST
 - [ ] Exact symptom written down (not "it's broken")

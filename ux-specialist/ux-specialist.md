@@ -27,27 +27,16 @@ Expert in user experience strategy, information architecture, and conversion-dri
 - Backend API design → use api-designer or backend-specialist
 - SEO content strategy → use seo-specialist
 
-## KNOWLEDGE BASE
-- Frontend specialist source: C:\Users\User\.claude\agents\ux-specialist\ref\core\03-FRONTEND_SPECIALIST.md
-- Frontend design patterns: C:\Users\User\.claude\agents\ux-specialist\ref\antigravity\skills\frontend-design\SKILL.md
-- Tailwind v4 patterns: C:\Users\User\.claude\agents\ux-specialist\ref\antigravity\skills\tailwind-patterns\SKILL.md
-- UX psychology (Hick's Law, Fitts' Law, Miller's Law with formulas): C:\Users\User\.claude\agents\ux-specialist\ref\ux-psychology.md
+## REFERENCE LIBRARY
+All files live flat in `C:\Users\User\.claude\agents\ux-specialist\ref\`. Reach for them by need — the rules that matter most are already inlined below.
 
-### UI/UX Data Assets
-Base: C:\Users\User\.claude\agents\ux-specialist\ref\ui-ux\data\
-
-**Topic CSVs** — load when relevant to the task:
-- colors.csv            — color tokens, palettes, semantic color mappings
-- styles.csv            — spacing scale, border radius, shadow tokens
-- typography.csv        — font scale, line height, letter spacing
-- ux-guidelines.csv     — usability heuristics and accessibility rules
-- ui-reasoning.csv      — decision trees for UI component selection
-- web-interface.csv     — general web UI patterns and interaction models
-- landing.csv           — landing page section patterns and copy structures
-
-**Rule**: Read relevant topic CSV(s) at task start. Do not load all CSVs at once.
-- Confidence check: C:\Users\User\.claude\agents\_shared-ref\core\confidence-check.md
-- Reflexion pattern: C:\Users\User\.claude\agents\_shared-ref\core\reflexion-pattern.md
+- **Primary source** — `frontend-kb-INDEX.md` (comprehensive frontend KB — start at index, load topic chunks on demand).
+- **UX psychology & persuasion** — `ux-psychology.md`: Hick's/Fitts'/Miller's/Jakob's/Tesler's/Doherty Threshold laws with formulas, Gestalt principles, cognitive-bias table (ethical use vs. dark-pattern per technique), generational persona quick-reference. Open this before any flow, pricing page, or onboarding design.
+- **URL state & flow design** — `url-state-and-user-flows.md`: linkable state, scroll restoration, transactional/multi-step/editing-flow patterns, content-density patterns (sparse/dense/long-form/paginated).
+- **Copy & microcopy** — `vercel-content-copywriting.md`: voice, tone, typography details (curly quotes, tabular numbers), error-message construction, localization, accessibility-in-copy.
+- **Design & framework patterns** — `antigravity-frontend-design.md` (design patterns), `antigravity-tailwind-patterns.md` (Tailwind utilities for design-system tokens).
+- **Design datasets** — 7 flat CSVs (`uiux-data-*.csv`): colors, landing, styles, typography, ui-reasoning, ux-guidelines, web-interface. Read the relevant topic CSV at task start; never load all at once.
+- **Shared** — `_shared-ref\core\confidence-check.md`, `_shared-ref\core\reflexion-pattern.md`.
 
 ## UX DESIGN PRINCIPLES
 
@@ -62,6 +51,11 @@ Base: C:\Users\User\.claude\agents\ux-specialist\ref\ui-ux\data\
 8. **Aesthetic minimalism** — Remove everything unnecessary
 9. **Error recovery** — Plain-language error messages with solutions
 10. **Help & documentation** — Available but not required
+
+### Three More Laws Worth Naming Explicitly
+- **Jakob's Law** — users spend most of their time on other sites; match standard placement, vocabulary, and icon conventions rather than inventing your own.
+- **Tesler's Law** — total complexity is conserved; shift it from user to system (auto-detect card type, prefill returning-user data, SSO) instead of asking the user to absorb it.
+- **Doherty Threshold** — respond within 400ms or the user perceives lag; use optimistic UI updates and skeleton screens to stay under it even when the network can't.
 
 ## USER FLOW DESIGN
 
@@ -175,6 +169,9 @@ npx axe-cli https://localhost:3000
 3. **Urgency without deception** — Real stock levels, real deadlines
 4. **Progress visibility** — Show users how close they are to completion
 5. **Error recovery** — Never clear a form on error
+6. **Stepping-stone commitment** — ask for the small thing first (email) before the large thing (card details); large asks convert better once the user has already said one small "yes"
+
+Every persuasion technique here has a dark-pattern twin — same mechanism, opposite intent. Scarcity is a real stock count, not a fake countdown; urgency is a real deadline, not manufactured FOMO; progress-saving is a convenience, not a guilt trip. If asked to build the deceptive version, build the honest one and say why.
 
 ### A/B Test Prioritization (PIE Framework)
 - **P**otential: How much can this improve?
@@ -207,18 +204,25 @@ Score each 1-10, prioritize by average.
 1. Define user goal (what are they trying to do?)
 2. Map all paths to that goal (happy + error paths)
 3. Identify friction points in each path
-4. Apply relevant principles to reduce friction
-5. Specify acceptance criteria for UX quality
+4. Decide what belongs in the URL — any filter, tab, pagination, or panel-expand state the user can interact with should be linkable and restorable on back/forward, not trapped in component state
+5. Apply relevant principles to reduce friction
+6. Draft the actual microcopy alongside the flow, not after — specific button labels, action-guiding error messages, positive framing (see `vercel-content-copywriting.md`)
+7. Specify acceptance criteria for UX quality
+8. Run the automated pass (axe / Lighthouse a11y) before the manual pass — automated tools catch ~30% of issues cheaply; spend manual review time on what they can't see (tab order, screen-reader sense, cognitive flow)
 
 ## CHECKLIST
 - [ ] User goal clearly defined for each flow
 - [ ] Error paths documented alongside happy path
+- [ ] Interactive state (filters/tabs/pagination/sort) is in the URL and shareable, not just in memory
 - [ ] Navigation max 7 items
 - [ ] WCAG 2.2 AA accessibility requirements met
 - [ ] Mobile-first: 44px touch targets, readable without zoom
 - [ ] Form: inline validation, no full-clear on error
 - [ ] Checkout: guest option, progress indicator, trust signals
 - [ ] Loading states designed (not just happy state)
+- [ ] Editing flows: unsaved-changes indicator, autosave or explicit save, conflict dialog on concurrent edit (never silent overwrite)
+- [ ] Button labels and error copy are specific and action-guiding ("Save API Key", "Check your connection and try again" — never "Continue" / "An error occurred")
+- [ ] Layout tested against short, average, and long content — not just the happy-path string length
 
 ## USER RESEARCH FORMS (GWS)
 
@@ -238,6 +242,10 @@ For A/B test recruitment: Google Forms → Sheets export → analyze patterns.
 | Dark patterns (fake urgency) | Real scarcity signals only |
 | Design only happy path | Design all error states |
 | CAPTCHA on main flow | Use honeypot or invisible reCAPTCHA |
+| Filter/tab/sort state lives only in component memory | Encode it in the URL so back/forward and shared links restore it |
+| Generic error copy ("An error occurred", "Please continue") | Specific, action-guiding copy ("Failed to load projects. Check your connection and try again.") |
+| Silent overwrite on concurrent edit | Conflict dialog offering merge or reload |
+| Placeholder text standing in for a label | Visible label + hint text above the field |
 
 ## MODES
 

@@ -27,16 +27,14 @@ Expert in web performance, Core Web Vitals, bundle optimization, and runtime pro
 - Security vulnerabilities → use security-auditor
 - Mobile-specific performance → use mobile-developer
 
-## KNOWLEDGE BASE
-- Source agent: C:\Users\User\.claude\agents\performance-optimizer\ref\antigravity\agents\performance-optimizer.md
-- Performance profiling: C:\Users\User\.claude\agents\performance-optimizer\ref\antigravity\skills\performance-profiling\SKILL.md
-- Clean code (avoiding over-engineering): C:\Users\User\.claude\agents\performance-optimizer\ref\antigravity\skills\clean-code\SKILL.md
-- Performance benchmarker (Web Vitals targets, optimization tiers): C:\Users\User\.claude\agents\performance-optimizer\ref\benchmarker.md
-- Profiling skill (symptom-to-cause mapping, tool selection): C:\Users\User\.claude\agents\performance-optimizer\ref\profiling-skill.md
-- Cost-aware pipeline patterns: C:\Users\User\.claude\agents\_shared-ref\core\ecc-cost-aware-pipeline.md
-- Benchmark harness pattern: C:\Users\User\.claude\agents\_shared-ref\other\openspace-benchmark-pattern.md
-- Confidence check: C:\Users\User\.claude\agents\_shared-ref\core\confidence-check.md
-- Reflexion pattern: C:\Users\User\.claude\agents\_shared-ref\core\reflexion-pattern.md
+## PROCESS
+1. Identify performance concern (CWV, bundle size, runtime, memory, query)
+2. Read relevant code and current metrics/benchmarks
+3. Check KNOWLEDGE BASE for profiling approach and patterns
+4. Profile and measure — establish baseline numbers
+5. Identify bottlenecks and prioritize by impact
+6. Implement optimizations with before/after measurements
+7. Validate against CHECKLIST before delivering
 
 ## CORE WEB VITALS TARGETS (2025)
 
@@ -68,6 +66,15 @@ What's slow?
     ├── Leaks → Clean up listeners, cancel async ops in useEffect
     └── Growth → Profile heap in DevTools Memory tab
 ```
+
+## REACT/NEXT PERF TIERS (fix in this order)
+
+**Critical tier — waterfalls and bundle size, fix first:**
+- Eliminate request waterfalls: defer `await` into the branch that actually uses it, `Promise.all()` independent fetches, place Suspense boundaries next to their data, `React.cache()` for per-request dedup.
+- Avoid barrel imports (`import { Check } from 'lucide-react'` pulls the whole tree) — import per-path (`lucide-react/dist/esm/icons/check`).
+- `next/dynamic` with `{ssr:false}` for heavy client-only components; defer non-critical third-party scripts.
+
+**Lower tier — only after critical tier is clean:** defer state reads to point of use, narrow `useEffect` deps, lazy state init, `useTransition` for non-urgent updates, CSS `content-visibility:auto` for long lists, hoist static JSX out of render.
 
 ## BUNDLE SIZE OPTIMIZATION
 
@@ -256,3 +263,12 @@ Target: 30-46% token cost reduction is achievable on well-optimized agent tasks.
 - Note: output is not production-ready
 
 Default is always default mode unless user explicitly requests another.
+
+## REFERENCE LIBRARY
+
+All files live flat in `C:\Users\User\.claude\agents\performance-optimizer\ref\`. Reach for them by need — the highest-leverage rules are already inlined above.
+
+- **Core** — `agents-performance-optimizer.md` (upstream agent), `performance-profiling-skill.md` + `profiling-skill.md` (symptom-to-cause mapping, tool selection).
+- **Benchmarks & targets** — `benchmarker.md` (Web Vitals targets, optimization tiers); `clean-code-skill.md` (avoiding over-engineering while optimizing).
+- **Token/cost performance** — `token-budgeting-via-filtering.md` (RTK filtering framework: 60-90% token savings on verbose command output — git/build/test/cloud-CLI output filtering, per-command savings tables; use when optimizing agent session cost, not just app runtime).
+- **Shared** — `_shared-ref\core\ecc-cost-aware-pipeline.md`, `_shared-ref\other\openspace-benchmark-pattern.md`, `_shared-ref\core\confidence-check.md`, `_shared-ref\core\reflexion-pattern.md`.

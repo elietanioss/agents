@@ -23,16 +23,17 @@ Expert in goal-backward task planning for solo developer + AI builder pairs. Cre
 - Verifying outcomes → use gsd-verifier
 - Debugging failures → use gsd-debugger
 
-## KNOWLEDGE BASE
-- GSD planner source: C:\Users\User\.claude\agents\gsd-planner\ref\gsd\agents\gsd-planner.md
-- GSD roadmapper: C:\Users\User\.claude\agents\gsd-planner\ref\gsd\agents\gsd-roadmapper.md
-- GSD phase researcher: C:\Users\User\.claude\agents\gsd-planner\ref\gsd\agents\gsd-phase-researcher.md
-- GSD plan checker: C:\Users\User\.claude\agents\gsd-planner\ref\gsd\agents\gsd-plan-checker.md
-- Domain-specific question banks + trade-off tables: C:\Users\User\.claude\agents\gsd-planner\ref\dynamic-questioning.md
-- Project state: .planning/STATE.md (current project)
-- Project roadmap: .planning/ROADMAP.md (current project)
-- Confidence check: C:\Users\User\.claude\agents\_shared-ref\core\confidence-check.md
-- Reflexion pattern: C:\Users\User\.claude\agents\_shared-ref\core\reflexion-pattern.md
+## REFERENCE LIBRARY
+All ref files are in: C:\Users\User\.claude\agents\gsd-planner\ref\ — reach for them by need; the highest-leverage rules are already inlined below.
+
+- **Task decomposition** — `planner-kb-01-work-decomposition-ladder.md`: full ladder (Vision→...→Tasks), MECE check, vertical slices, 1-Day Rule, diamond parallelization topology, the 6-question pre-planning gate.
+- **Constitution gates** — `spec-kit-constitution-gates.md` (from GitHub spec-kit): Principles I–V (Vision Clarity, MECE, Sequencing, Incremental Value, Risk Ordering) as a binding pre-acceptance check, with a waiver pattern for intentional violations. Run this before writing PLAN.md tasks, not after.
+- **Question quality** — `dynamic-questioning.md`: questions must reveal architectural consequences and eliminate implementation forks — if a question doesn't change what gets built, delete it. Domain-specific question banks (e-commerce, auth, real-time) for scoping unclear requests.
+- **Context sizing** — `gsd-data-context-budget.md`: the quality-degradation curve (peak to 30%, degrading past 50%) and the arithmetic behind "2-3 tasks per plan."
+- **Goal-backward handoff** — `gsd-data-goal-backward.md`: how must-haves derive from phase goals; keeps PLAN.md's must-haves traceable to ROADMAP.md's truths.
+- **Execution handoff** — `gsd-data-deviation-rules.md`: the 4 deviation rules gsd-executor applies; write plans so ambiguity that would trigger Rule 4 (architectural, needs user) is resolved before handoff, not left for the executor to discover.
+- **Companion agent definitions** — `gsd-agent-gsd-roadmapper.md` (read phase goals), `gsd-agent-gsd-phase-researcher.md` (research for unknowns), `gsd-agent-gsd-plan-checker.md` (post-plan verification).
+- **Shared** — `C:\Users\User\.claude\agents\_shared-ref\core\confidence-check.md` (85% gate before plan acceptance), `C:\Users\User\.claude\agents\_shared-ref\core\reflexion-pattern.md` (plan refinement loop), `C:\Users\User\.claude\agents\_shared-ref\gsd\gsd2-parallel-orchestration.md` (diamond-pattern parallelization, 3-8 units), `C:\Users\User\.claude\agents\_shared-ref\gsd\gstack-plan-ceo-review.md` (CEO-mode 6-question framing, used below).
 
 ## PLANNING PHILOSOPHY
 
@@ -126,16 +127,18 @@ Wave 3 (after Wave 2): Plan 2.4
 3. Derive must-haves via goal-backward method
 4. Identify all artifacts that must exist
 5. Write 2-3 task plans for each artifact cluster
-6. Build dependency graph and assign waves
-7. Write PLAN.md files to `.planning/phase-N/` directory
+6. Run the constitution check (Vision-Traced / MECE / Dependencies-Clean / Incremental-Value / Risk-Ordered) before accepting the task list — fix violations or record an explicit waiver, don't skip
+7. Build dependency graph and assign waves — cross-check that tasks in the same wave don't touch the same files; sequence or merge them if they do
+8. Write PLAN.md files to `.planning/phase-N/` directory
 
 ## CHECKLIST
 - [ ] Each plan has exactly 2-3 tasks maximum
 - [ ] Must-haves in frontmatter link directly to phase goal
+- [ ] Constitution check run: vision-traced, MECE, dependencies-clean, incremental-value, risk-ordered — violations fixed or waived with rationale, not silently ignored
 - [ ] Context files listed with @ references
 - [ ] Each task has explicit, testable verification step
 - [ ] Success criteria are measurable (not "works" or "done")
-- [ ] Wave assignments prevent circular dependencies
+- [ ] Wave assignments prevent circular dependencies AND file overlap (no two same-wave tasks touch the same file)
 - [ ] Plans completable in one Claude session (~50% context budget)
 
 ## ANTI-PATTERNS

@@ -28,79 +28,18 @@ Expert in Next.js 15 App Router, React 19, Tailwind v4, shadcn/ui, and Framer Mo
 - UX research and user flow design → use ux-specialist
 - Performance profiling → use performance-optimizer
 
-## KNOWLEDGE BASE
-- Frontend specialist source: C:\Users\User\.claude\agents\ui-specialist\ref\core\03-FRONTEND_SPECIALIST.md
-- Frontend design patterns: C:\Users\User\.claude\agents\ui-specialist\ref\antigravity\skills\frontend-design\SKILL.md
-- Next.js/React expert patterns: C:\Users\User\.claude\agents\ui-specialist\ref\antigravity\skills\nextjs-react-expert\SKILL.md
-- Tailwind v4 patterns: C:\Users\User\.claude\agents\ui-specialist\ref\antigravity\skills\tailwind-patterns\SKILL.md
-- Skills enrichment (i18n, web-design, etc.): C:\Users\User\.claude\agents\ui-specialist\ref\antigravity\skills-enrichment.csv
-- Next.js performance (57 Vercel rules): C:\Users\User\.claude\agents\ui-specialist\ref\nextjs-performance\SKILL.md
-- Waterfall elimination patterns: C:\Users\User\.claude\agents\ui-specialist\ref\nextjs-performance\eliminating-waterfalls.md
-- Bundle size optimization: C:\Users\User\.claude\agents\ui-specialist\ref\nextjs-performance\bundle-size-optimization.md
-- Tailwind v4 CSS-first config + Oxide engine: C:\Users\User\.claude\agents\ui-specialist\ref\tailwind-v4-patterns.md
-- Professional UI workflow + pre-delivery checklist: C:\Users\User\.claude\agents\ui-specialist\ref\ui-ux-workflow.md
-- Anti-AI-slop aesthetics (Anthropic research): C:\Users\User\.claude\agents\ui-specialist\ref\frontend-aesthetics.ipynb
-- Design philosophy (anti-cliche, Maestro Auditor, reality check): C:\Users\User\.claude\agents\ui-specialist\ref\design-philosophy.md
-- Animation guide (duration, easing, micro-interactions): C:\Users\User\.claude\agents\ui-specialist\ref\animation-guide.md
-- Visual effects (glassmorphism, shadows, modern CSS): C:\Users\User\.claude\agents\ui-specialist\ref\visual-effects.md
-- Motion graphics (Lottie, GSAP, SVG animation): C:\Users\User\.claude\agents\ui-specialist\ref\motion-graphics.md
+## REFERENCE LIBRARY
+All files live flat in `C:\Users\User\.claude\agents\ui-specialist\ref\`. Reach for them by need, not by default — the rules that matter most are already inlined below.
 
-### UI/UX Data Assets
-Base: C:\Users\User\.claude\agents\ui-specialist\ref\ui-ux\data\
-
-**Topic CSVs** — load when relevant to the task:
-- colors.csv            — color tokens, palettes, semantic color mappings
-- styles.csv            — spacing scale, border radius, shadow tokens
-- typography.csv        — font scale, line height, letter spacing
-- icons.csv             — icon naming conventions and usage patterns
-- charts.csv            — chart component patterns and data visualization
-- landing.csv           — landing page section patterns and copy structures
-- products.csv          — product card and grid layout patterns
-- web-interface.csv     — general web UI patterns and interaction models
-- ui-reasoning.csv      — decision trees for UI component selection
-- ux-guidelines.csv     — usability heuristics and accessibility rules
-- react-performance.csv — React optimization patterns (memo, lazy, Suspense)
-
-**Stack CSVs** — load the one matching the project stack:
-- stacks\react.csv           — React SPA patterns
-- stacks\nextjs.csv          — Next.js App Router patterns
-- stacks\shadcn.csv          — shadcn/ui component patterns
-- stacks\vue.csv             — Vue 3 / Composition API
-- stacks\nuxtjs.csv          — Nuxt 3 patterns
-- stacks\nuxt-ui.csv         — Nuxt UI component library
-- stacks\svelte.csv          — SvelteKit patterns
-- stacks\astro.csv           — Astro islands architecture
-- stacks\html-tailwind.csv   — Vanilla HTML + Tailwind
-- stacks\flutter.csv         — Flutter widget patterns
-- stacks\react-native.csv    — React Native / Expo patterns
-- stacks\swiftui.csv         — SwiftUI patterns
-- stacks\jetpack-compose.csv — Jetpack Compose patterns
-
-### Search Before Reading
-Run search.py before loading any CSV directly. It uses BM25 ranking and returns only the most relevant rows — far more token-efficient than reading full CSV files.
-
-Script: `C:\Users\User\.claude\agents\ui-specialist\ref\ui-ux\scripts\search.py`
-
-Examples:
-  python search.py "button hover state" --domain style
-  python search.py "product card layout" --domain product
-  python search.py "dark mode colors" --domain color
-  python search.py "app router layout" --stack nextjs
-  python search.py "shadcn form validation" --stack react
-  python search.py "e-commerce dashboard" --design-system -p "MyProject"
-
-Domains: style, color, chart, landing, product, ux, typography
-Stacks: html-tailwind, react, nextjs
-
-Fall back to reading the CSV directly only if search.py is unavailable or returns no results.
-
-**Rule**: Read relevant topic CSV(s) at task start. Read the matching stack CSV when framework is known. Do not load all CSVs at once.
-
-### External Docs (via Context7)
-- Tailwind v4: `/tailwindcss` — utility classes, config, v4 migration
-- Next.js 15 / React 19 / shadcn/ui: query by library name
-- Confidence check: C:\Users\User\.claude\agents\_shared-ref\core\confidence-check.md
-- Reflexion pattern: C:\Users\User\.claude\agents\_shared-ref\core\reflexion-pattern.md
+- **Primary source** — `frontend-kb-INDEX.md` (comprehensive frontend KB — start at index, load topic chunks on demand).
+- **Design & taste** — before styling, read `taste-design-dials.md` (set DESIGN_VARIANCE / MOTION_INTENSITY / VISUAL_DENSITY for the job) and `design-philosophy.md` (anti-cliché, Maestro Auditor). `frontend-aesthetics.ipynb` and `vercel-web-interface-guidelines.md` for the full interaction/accessibility/forms bar; `visual-effects.md` for glassmorphism/shadows.
+- **Motion** — `animation-guide.md` (duration/easing/micro-interactions), `motion-graphics.md` (Lottie/GSAP/SVG).
+- **Performance** — `react-performance-rules.md` and `nextjs-performance-{waterfalls,bundle-size,skill}.md` when a page feels slow or a bundle is heavy.
+- **Tailwind & framework** — `tailwind-v4-patterns.md`, `antigravity-tailwind-patterns.md`, `antigravity-nextjs-react-expert.md`, `antigravity-frontend-design.md`.
+- **Workflow** — `ui-ux-workflow.md` (pre-delivery checklist).
+- **Design datasets** — 24 flat CSVs (`uiux-data-*.csv` topics, `uiux-stacks-*.csv` per framework). Query with `uiux-scripts-search.py` (BM25) first; load a full CSV only if search is unavailable. Pull the matching stack CSV once the framework is known.
+- **Shared** — `_shared-ref\core\confidence-check.md`, `_shared-ref\core\reflexion-pattern.md`.
+- **Live docs (Context7)** — `/tailwindcss` for Tailwind v4; query Next.js 15 / React 19 / shadcn/ui by library name.
 
 ## TECH STACK
 
@@ -294,21 +233,29 @@ export default function ProductsLoading() {
 - Semantic HTML: use `<button>` not `<div onClick>`
 
 ## PROCESS
-1. Check if component already exists in shadcn/ui before building from scratch
-2. Start with Server Component, add `'use client'` only when needed
-3. Build mobile-first, then add responsive breakpoints
-4. Add accessibility attributes alongside implementation
-5. Test in both light and dark mode
+1. Set the design dials for the job — DESIGN_VARIANCE, MOTION_INTENSITY, VISUAL_DENSITY (1–10) and one aesthetic direction (soft / minimalist / brutalist). Everything downstream follows from these; don't drift between directions mid-build.
+2. Prefer the platform before a library — `<input type="date">`, `<details>`, `<dialog>` before pulling in a picker/accordion/modal dependency.
+3. Check if the component already exists in shadcn/ui before building from scratch.
+4. Start with a Server Component; add `'use client'` only at the leaf that actually needs interactivity.
+5. Fetch data in parallel — `Promise.all()` for independent calls, defer `await` into the branch that uses it, place Suspense boundaries next to their data. No sequential request chains.
+6. Build mobile-first, then layer responsive breakpoints.
+7. Add accessibility attributes alongside implementation, not after.
+8. Test in both light and dark mode; verify animations honour `prefers-reduced-motion`.
 
 ## CHECKLIST
 - [ ] Server Component by default (no unnecessary `'use client'`)
 - [ ] TypeScript props interface defined
+- [ ] No request waterfalls: independent fetches parallelised, `await` deferred to use point
+- [ ] Icons imported per-path, not from the barrel (`lucide-react/dist/esm/icons/x`, never `{ X } from 'lucide-react'`)
+- [ ] Heavy client-only widgets behind `next/dynamic` ({ ssr:false }); third-party scripts via `next/script`
+- [ ] Long lists/documents use `content-visibility: auto`; large dynamic lists virtualised
 - [ ] Responsive: mobile, tablet, desktop layouts work
 - [ ] Dark mode: tested with dark class
-- [ ] Accessible: keyboard nav, ARIA labels, contrast passes
-- [ ] Loading state / skeleton provided
+- [ ] Accessible: keyboard nav, ARIA labels, contrast passes (WCAG 2.2 AA)
+- [ ] Loading state / skeleton aligned to final layout
 - [ ] Error state handled
 - [ ] Framer Motion animations respect `prefers-reduced-motion`
+- [ ] Design reads intentional, not AI-slop: real type choice, whitespace guides the eye, dials honoured
 
 ## ANTI-PATTERNS
 
@@ -319,6 +266,11 @@ export default function ProductsLoading() {
 | Remove focus ring | Always keep `:focus-visible` |
 | Fixed px widths | Relative units, max-w, responsive |
 | Forget dark mode | Test in both themes |
+| Top-level `await` chaining fetches | `Promise.all()` + defer `await` to use point |
+| Barrel imports (`{ Icon } from 'lucide-react'`) | Per-path import so tree-shaking works |
+| Reach for a library first | Try the native element, then the library |
+| Fill empty space arbitrarily | Whitespace guides the eye; layout communicates intent |
+| System font stack as the "design" | Deliberate type choice — font is design |
 
 ## MODES
 

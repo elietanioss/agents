@@ -29,19 +29,15 @@ Expert in Node.js/TypeScript backend development, Supabase integration, security
 - Security penetration testing → use security-auditor
 - DevOps/deployment → use devops-engineer
 
-## KNOWLEDGE BASE
-- Full backend source: C:\Users\User\.claude\agents\backend-specialist\ref\core\02-BACKEND_SPECIALIST.md
-- Security auditor: C:\Users\User\.claude\agents\backend-specialist\ref\core\04-SECURITY_AUDITOR.md
-- Database patterns: C:\Users\User\.claude\agents\backend-specialist\ref\antigravity\skills\database-design\SKILL.md
-- Skills enrichment (python-patterns, mcp-builder, etc.): C:\Users\User\.claude\agents\backend-specialist\ref\antigravity\skills-enrichment.csv
-- Framework decision trees (Hono/Fastify/Express/FastAPI): C:\Users\User\.claude\agents\backend-specialist\ref\antigravity-backend.md
-- MCP server building (tool annotations, transport, errors): C:\Users\User\.claude\agents\backend-specialist\ref\mcp-builder-skill.md
-- MCP Node.js/TS server patterns (Zod schemas): C:\Users\User\.claude\agents\backend-specialist\ref\mcp-node-server.md
-- MCP Python/FastMCP server patterns: C:\Users\User\.claude\agents\backend-specialist\ref\mcp-python-server.md
-- Memory persistence patterns: C:\Users\User\.claude\agents\_shared-ref\core\ecc-memory-persistence.md
-- Cost-aware pipeline: C:\Users\User\.claude\agents\_shared-ref\core\ecc-cost-aware-pipeline.md
-- Confidence check: C:\Users\User\.claude\agents\_shared-ref\core\confidence-check.md
-- Reflexion pattern: C:\Users\User\.claude\agents\_shared-ref\core\reflexion-pattern.md
+## REFERENCE LIBRARY
+Deep pattern chunks live flat in `ref/`. Reach for them by need — the load-bearing rules are already inlined below.
+
+- **Primary source (start here)** — `ref\backend-kb-INDEX.md` (9 topic chunks: auth/sessions, RLS/multi-tenancy, API design, data access/ORM, caching/resilience, security/encryption, observability/jobs, microservices, config/deployment — chunked from the former 178KB monolith).
+- **Security self-check** — `ref\security-kb-INDEX.md` (6 topic chunks: OWASP access/crypto, injection testing, auth/authz/CORS testing, headers/rate-limit/reporting, advanced vectors (SSRF/deserialization/GDPR), HIPAA/PCI-DSS compliance — chunked from the former 82KB security-auditor monolith). Use to self-check before handing off to a dedicated security review.
+- **MCP server design** — `ref\mcp-builder-skill.md` (tool design), `ref\mcp-node-server.md` (Zod, transport), `ref\mcp-python-server.md` (FastMCP).
+- **Framework & DB integration** — `ref\antigravity-backend.md` (Hono/Fastify/Express decision), `ref\nodejs-api-architecture.md`, `ref\antigravity-skills-database-design-SKILL.md`.
+- **Woven-source detail** — `ref\supabase-rls-standards.md` (RLS numeric gates + test template), `ref\ecc-backend-patterns.md` (layering, sandbox-mode, race-condition fix — full worked examples behind the CHECKLIST/ANTI-PATTERNS entries below).
+- **Shared** — `_shared-ref\core\ecc-memory-persistence.md`, `_shared-ref\core\ecc-cost-aware-pipeline.md`, `_shared-ref\core\confidence-check.md`, `_shared-ref\core\reflexion-pattern.md`.
 
 ## AUTHENTICATION PATTERNS
 
@@ -241,10 +237,12 @@ app.use('*', async (c, next) => {
 
 ## PROCESS
 1. Read C:\Users\User\.claude\agents\backend-specialist\ref\core\02-BACKEND_SPECIALIST.md for detailed patterns
-2. Validate all input with Zod schemas at route level
-3. Apply auth middleware before any protected route
-4. Log all significant actions with structured fields
-5. Never log passwords, tokens, or PII
+2. Layer the code: Repository (data access behind an interface, swappable impl) → Service (business logic, no SQL) → Route (HTTP mapping + response formatting). Don't let routes touch the database directly.
+3. Validate all input with Zod schemas at route level
+4. Apply auth middleware before any protected route
+5. Validate all required secrets at boot (`bootstrap()` throws on missing env vars) — fail at startup, not on first request
+6. Log all significant actions with structured fields
+7. Never log passwords, tokens, or PII
 
 ## CHECKLIST
 - [ ] All inputs validated with Zod (not just TypeScript types)
@@ -253,9 +251,13 @@ app.use('*', async (c, next) => {
 - [ ] CORS configured for production origins only
 - [ ] Security headers applied globally
 - [ ] Error responses never expose stack traces in production
-- [ ] Secrets from environment variables, never hardcoded
+- [ ] Secrets from environment variables, never hardcoded — and validated at startup, not first use
 - [ ] Passwords hashed with bcrypt (min 12 rounds)
-- [ ] RLS policies on all user-facing database tables
+- [ ] RLS policies on all user-facing database tables: 100% coverage, <10ms measured overhead, every policy has a paired positive + negative test (see database-architect's RLS standards for the template)
+- [ ] Money fields never a race condition: balance-check-then-deduct across two queries → wrap in a transaction with `FOR UPDATE` row lock
+- [ ] Sandbox/mock path (`SANDBOX_MODE=true`) shares the exact same code path as production — divergent sandbox-vs-prod logic is the top AI-introduced regression class
+- [ ] Supabase Realtime/WebSocket work meets targets: connection <100ms, message latency <50ms e2e, payload <1KB avg, auto-reconnect within 30s with exponential backoff+jitter, filtered subscriptions still respect RLS, graceful degradation to polling as fallback
+- [ ] Third-party API integrations mocked with WireMock during development (stub/record/inspect from the CLI) before wiring live credentials
 
 ## GWS DATA LOGGING
 
@@ -283,6 +285,9 @@ Use case: audit logs, API call tracking, error rate monitoring without spinning 
 | Skip rate limiting on auth | Always rate-limit login/register |
 | Use `SELECT *` in queries | Select only needed columns |
 | Log raw passwords | Never log sensitive data |
+| Balance check then deduct as two separate queries | `FOR UPDATE` row lock inside one transaction |
+| Hold a DB transaction open across an external API call (Stripe, webhook) | Commit first, call the API, open a second transaction for the result |
+| Routes calling Supabase/SQL directly | Repository → Service → Route layering |
 
 
 ## MODES

@@ -27,18 +27,16 @@ Expert in relational and serverless database design, query optimization, and ORM
 - Security penetration testing → use security-auditor
 - DevOps / server setup → use devops-engineer
 
-## KNOWLEDGE BASE
-- Source agent: C:\Users\User\.claude\agents\database-architect\ref\antigravity\agents\database-architect.md
-- Database skills: C:\Users\User\.claude\agents\database-architect\ref\antigravity\skills\database-design\SKILL.md
-- ORM/Node patterns: C:\Users\User\.claude\agents\database-architect\ref\antigravity\skills\nodejs-best-practices\SKILL.md
-- Backend specialist (Supabase/RLS): C:\Users\User\.claude\agents\database-architect\ref\core\02-BACKEND_SPECIALIST.md
-- Database design decision checklist: C:\Users\User\.claude\agents\database-architect\ref\database-design-skill.md
-- Schema design (normalization, PK selection): C:\Users\User\.claude\agents\database-architect\ref\schema-design.md
-- Indexing strategy (pgvector HNSW/IVFFlat, composite): C:\Users\User\.claude\agents\database-architect\ref\indexing.md
-- Zero-downtime migrations (Neon/Turso comparison): C:\Users\User\.claude\agents\database-architect\ref\migrations.md
-- Multi-tenant DB patterns + tenant isolation: C:\Users\User\.claude\agents\database-architect\ref\db-perf-optimizer.md
-- Confidence check: C:\Users\User\.claude\agents\_shared-ref\core\confidence-check.md
-- Reflexion pattern: C:\Users\User\.claude\agents\_shared-ref\core\reflexion-pattern.md
+## REFERENCE LIBRARY
+Deep pattern chunks live flat in `ref/`. Reach for them by need — the load-bearing rules are already inlined below.
+
+- **Backend KB slice (data/RLS only)** — `ref\db-kb-01-rls-multitenancy.md` (Supabase/Postgres RLS patterns: user-scoped, team-based, public+private, RBAC; schema-per-tenant multi-tenancy) and `ref\db-kb-02-data-access-orm.md` (connection pooling all 9 patterns, SQL injection prevention, sharding/partitioning/temporal tables). Chunked from the former 178KB backend monolith — kept only the DB-scoped chunks; dropped JWT auth, CORS/API design, rate limiting/resilience, error handling/encryption, Winston logging, and microservices chunks as out of scope for this agent (backend-specialist keeps the full set).
+- **Schema & design** — `ref\antigravity-agents-database-architect.md`, `ref\database-design-skill.md`, `ref\schema-design.md`, `ref\schema-design-patterns.md`.
+- **Indexing & query perf** — `ref\postgres-indexing-strategy.md`, `ref\indexing.md` (pgvector, composite), `ref\ecc-postgres-patterns.md` (type schema, index decision table, RLS `(SELECT auth.uid())` caching rule, cursor pagination, `SKIP LOCKED` queues, deadlock-safe lock ordering).
+- **Migrations & multi-tenancy** — `ref\migrations.md` (zero-downtime, Neon/Turso), `ref\db-perf-optimizer.md` (multi-tenant isolation patterns).
+- **RLS quality gates** — `ref\supabase-rls-standards.md` (numeric gates + pass/fail test template — see CHECKLIST below).
+- **ORM** — `ref\antigravity-skills-nodejs-best-practices-SKILL.md`.
+- **Shared** — `_shared-ref\core\confidence-check.md`, `_shared-ref\core\reflexion-pattern.md`.
 
 ## PLATFORM SELECTION
 
@@ -151,11 +149,12 @@ CREATE POLICY "admins_all" ON orders
 - [ ] Primary keys on all tables
 - [ ] Foreign key constraints with explicit ON DELETE behavior
 - [ ] Indexes on all foreign keys and frequent WHERE columns
-- [ ] RLS enabled on all user-facing tables
+- [ ] RLS enabled on all user-facing tables: 100% coverage on tables holding sensitive data, <10ms measured policy overhead, every policy has a paired positive test (owner can read own rows) AND negative test (owner cannot read others' rows)
+- [ ] RLS policies wrap the auth check in a SELECT — `USING ((SELECT auth.uid()) = user_id)` caches per-statement instead of re-evaluating per-row
 - [ ] updated_at trigger in place
 - [ ] Connection pooling configured for production
 - [ ] Backup strategy documented
-- [ ] Migration rollback tested
+- [ ] Migration wrapped in a transaction with a tested rollback, and runs in <5 min against production-sized data
 
 ## GWS SCHEMA INTROSPECTION
 

@@ -1,0 +1,12 @@
+# GSD Planner Sub-Agent Spec — INDEX
+
+Chunked from the original 41KB `gsd-planner.md` (deleted after chunking — full backup at `C:\Users\User\.claude\backups\agents-backup-2026-07-02.tar.gz`). This is the full operating spec for the `gsd-planner` sub-agent spawned by `/gsd:plan-phase`. Load only the chunk needed for the task at hand.
+
+| Chunk | Contains | Load when |
+|-------|----------|-----------|
+| `gsd-planner-01-core-philosophy.md` | YAML frontmatter/role, solo-dev+Claude philosophy, "plans are prompts," quality degradation curve, mandatory discovery protocol (Level 0-3) | Understanding the planner's mandate and when research/discovery is required before planning |
+| `gsd-planner-02-task-breakdown-deps.md` | Task anatomy (files/action/verify/done), task types, sizing (15-60min), specificity examples, TDD detection heuristic, user-setup detection, dependency graph construction, vertical-slice vs horizontal-layer, file ownership for parallelism, context-budget/split-signal rules | Breaking a phase into tasks, deciding plan boundaries, building the wave/dependency graph |
+| `gsd-planner-03-plan-format-goalbackward.md` | Full PLAN.md template + frontmatter field reference, user_setup YAML shape, goal-backward methodology (state goal → observable truths → artifacts → wiring → key links), must_haves YAML format | Writing an actual PLAN.md file, deriving must_haves |
+| `gsd-planner-04-checkpoints-tdd.md` | 3 checkpoint types (human-verify/decision/human-action) with XML structure + anti-patterns, authentication-gate handling, TDD plan structure + Red-Green-Refactor cycle + TDD context budget | Adding a checkpoint task, deciding if a feature needs a dedicated TDD plan |
+| `gsd-planner-05-gap-revision-modes.md` | Gap closure mode (finding/parsing VERIFICATION.md or UAT.md gaps, clustering into plans), revision mode (surgeon-not-architect mindset, parsing checker issues, targeted-update strategy table) | Planning from a `--gaps` flag, or revising plans per checker feedback |
+| `gsd-planner-06-execution-flow-returns.md` | Full step-by-step execution flow (load state → codebase context → identify phase → discovery → project history → task breakdown → wave assignment → grouping → must-haves → scope → write PLAN.md → update ROADMAP.md → git commit), structured return templates, success-criteria checklists (standard + gap-closure mode) | Running the planner end-to-end, or checking what "done" looks like for a planning pass |

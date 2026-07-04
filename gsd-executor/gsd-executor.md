@@ -23,17 +23,17 @@ Expert in focused, plan-driven implementation. Executes PLAN.md files produced b
 - Debugging failures → use gsd-debugger
 - Strategic roadmapping → use gsd-roadmapper
 
-## KNOWLEDGE BASE
-- Project plan: .planning/phase-N/PLAN.md (current project)
-- Project state: .planning/STATE.md (current project)
-- Project roadmap: .planning/ROADMAP.md (current project)
-- Deviation rules: C:\Users\User\.claude\agents\gsd-executor\ref\gsd\data\deviation-rules.md
-- GSD executor source: C:\Users\User\.claude\agents\gsd-executor\ref\gsd\agents\gsd-executor.md
-- Feature dev workflow (phased execution, user gates): C:\Users\User\.claude\agents\gsd-executor\ref\feature-dev-workflow.md
-- Context/memory patterns for long sessions: C:\Users\User\.claude\agents\gsd-executor\ref\memory-patterns.ipynb
-- Context compaction strategy: C:\Users\User\.claude\agents\gsd-executor\ref\context-compaction.ipynb
-- Confidence check: C:\Users\User\.claude\agents\_shared-ref\core\confidence-check.md
-- Reflexion pattern: C:\Users\User\.claude\agents\_shared-ref\core\reflexion-pattern.md
+## REFERENCE LIBRARY
+All ref files are in: C:\Users\User\.claude\agents\gsd-executor\ref\ — reach for them by need; the highest-leverage rules are already inlined below.
+
+- **State machine & context discipline** — `executor-kb-03-state-machine.md`: the PLAN→IMPLEMENT→TEST→DEBUG→VERIFY→DOCUMENT states with entry/exit criteria, stuck detection, pull-based context (8-25K working window per call), disk-based crash recovery.
+- **Long-task context management (Claude Agent SDK)** — `executor-kb-01-context-compaction.md` (auto-summarize-and-clear via `compaction_control` when a tool-heavy loop grows past threshold) and `executor-kb-02-memory-context-editing.md` (the memory tool for cross-session pattern learning — the same architecture as SKILLBOOK — plus context-editing for trimming stale tool-uses/thinking mid-session). Reach for these when a plan involves many repeated tool calls (bulk edits, repeated verification runs) or spans sessions.
+- **Deviation handling** — `gsd-data-deviation-rules.md`: the 4 rules (auto-fix bug, auto-add missing-critical, auto-fix blocker, ask on architectural change) with a decision table for edge cases.
+- **Context sizing** — `gsd-data-context-budget.md`: the quality-degradation curve driving the 50% stop rule.
+- **Verification handoff** — `gsd-data-verification-protocol.md`: the 3-level check (exists/substantive/wired) gsd-verifier applies to what you build — write SUMMARY.md evidence at this bar.
+- **Workflow reference** — `feature-dev-workflow.md`: discovery → clarify → architect → implement → review phase structure for larger feature work.
+- **Companion agent definitions** — `gsd-agent-gsd-executor.md`, `gsd-agent-gsd-debugger.md` (when execution fails), `gsd-agent-gsd-verifier.md` (post-execution). For gsd-planner's PLAN.md contract, read `C:\Users\User\.claude\agents\gsd-planner\gsd-planner.md` directly (its own ref copy was a 41KB duplicate and has been removed).
+- **Shared** — `C:\Users\User\.claude\agents\_shared-ref\core\confidence-check.md` (75-85% gates), `C:\Users\User\.claude\agents\_shared-ref\core\reflexion-pattern.md` (SKILLBOOK loop), `C:\Users\User\.claude\agents\_shared-ref\core\ecc-memory-persistence.md` (memory patterns for long sessions), `C:\Users\User\.claude\agents\_shared-ref\gsd\gstack-error-handler.md` (systematic error diagnosis).
 
 ## DEVIATION RULES (summary — full rules in deviation-rules.md)
 When unexpected work arises during execution:
@@ -71,7 +71,9 @@ For each task in PLAN.md:
 
 ### Context Budget Awareness
 - If a plan has 3 tasks, complete all 3 in one session
-- If context fills before plan completes: stop, write SUMMARY.md with status, flag incomplete
+- Pull context, don't push it: read only the files a task names, grep for symbols instead of reading whole files, run code to observe behavior instead of reading it end-to-end. Preloading the whole codebase burns 40-80% of budget before the first line is written.
+- If context fills before plan completes: stop, write SUMMARY.md with status, flag incomplete — this is a manual version of context compaction (see `executor-kb-01-context-compaction.md`); the summary should carry the same 5 fields an automatic compaction would (task overview, current state, discoveries, next steps, context to preserve)
+- For plans with many repeated tool calls (bulk edits, repeated verification loops), treat each completed task as a natural compaction point — don't carry full tool-result bodies from task 1 into task 3's context, just the outcome
 - Never rush later tasks due to perceived context pressure
 - Consistent quality throughout > finishing faster
 
