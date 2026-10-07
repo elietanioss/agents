@@ -1,0 +1,23 @@
+{
+  "id": "finding-recon-20260716T171825Z-unauthenticated-health-endpoint",
+  "title": "Unauthenticated backend health-check endpoint publicly accessible at /api/health",
+  "severity": "Info",
+  "cvss_score": 0.0,
+  "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N",
+  "cwe": "CWE-200",
+  "owasp_category": "A01:2025",
+  "mitre_attack": "T1595.002",
+  "description": "https://zakerne.com/api/health returns HTTP 200 with JSON body {\"ok\":true} and no authentication required, confirming the existence of a live backend API reverse-proxied through Cloudflare under the same domain (distinct from the SPA's client-side catch-all routing, which returns the index.html shell for unmatched paths). This is a minor information-exposure/attack-surface confirmation finding: it validates that a real API host exists at /api/* and responds distinctly from the SPA fallback, which is useful for subsequent web-app testing but is not itself sensitive data.",
+  "reproduction_steps": [
+    "curl -s -D - https://zakerne.com/api/health (observe content-type: application/json, body {\"ok\":true})",
+    "Compare to curl -s -D - https://zakerne.com/api/v1 or other unmapped API paths (which correctly 404 with text/plain), and to arbitrary unmapped paths at the site root (which return the 4250-byte SPA index.html with HTTP 200 - a false-positive trap for naive directory brute-forcing)."
+  ],
+  "payload": "",
+  "evidence": ["evidence/recon/headers.txt"],
+  "impact": "Very low impact on its own (no secrets, no version banner, just a liveness boolean). Primarily useful as a map of real backend attack surface for the pentest-web phase: confirms /api/* is a genuine backend route namespace (with proper 404 handling for unmapped sub-paths) as opposed to the SPA's universal catch-all, and that CORS on /api/* does not reflect arbitrary Origin headers (Access-Control-Allow-Origin was not present in a cross-origin OPTIONS preflight test with Origin: https://evil.example.com), which is a positive control.",
+  "remediation": "No action strictly required; optionally restrict /api/health to internal monitoring / require a shared secret or IP allowlist if the client wants to minimize any automated-scanner attack-surface fingerprinting, though this is standard practice for most SaaS apps and low priority.",
+  "references": [],
+  "status": "confirmed",
+  "discovered_date": "2026-07-16T17:18:25Z",
+  "reported_to_client": false
+}

@@ -1,0 +1,72 @@
+RECON SUMMARY - PENTEST-2026-ZAK-001
+Target: zakerne.com (and discovered *.zakerne.com subdomains)
+Phase: OBJ-001 (port/service scan) + OBJ-002 (DNS/subdomain discovery) + OBJ-003 (technology fingerprinting)
+Scan date: 2026-07-16 (UTC)
+Scope note: zakerne.com is fronted by Cloudflare. All active scanning below was performed against the hostname (HTTP/HTTPS layer) at moderate pace, per RoE. No full-range/high-rate nmap or vuln-script scans were run against the Cloudflare IP (172.67.218.191 / 104.21.38.37), consistent with the exclusion of shared CDN infrastructure from scope.
+
+=== DNS / SUBDOMAINS ===
+A records (zakerne.com):     172.67.218.191, 104.21.38.37   (both Cloudflare anycast ranges - no origin IP exposed)
+AAAA records:                 none
+NS records:                   felicity.ns.cloudflare.com, eva.ns.cloudflare.com
+MX records:                   mx1.privateemail.com, mx2.privateemail.com (10) - third-party mail, Namecheap PrivateEmail
+TXT (SPF):                    v=spf1 include:spf.privateemail.com ~all
+Zone transfer (AXFR):         refused / failed (correctly configured)
+CAA record:                   NONE configured (informational finding, low)
+
+Subdomains discovered (subfinder passive + light gobuster dns brute force, 500-word list):
+  - www.zakerne.com           -> 172.67.218.191, 104.21.38.37 (Cloudflare, in-scope app)
+  - security.zakerne.com      -> 172.67.218.191, 104.21.38.37 (Cloudflare, in-scope app; self-identifies via meta description as "Zakerne security monitoring dashboard", client-rendered SPA; NOTE: likely related to the client's existing monitoring security team mentioned in RoE - flag for deconfliction)
+  - mail.zakerne.com          -> 198.54.122.136 (NOT Cloudflare; third-party Namecheap PrivateEmail infra - OUT OF SCOPE, not tested beyond DNS resolution)
+
+Origin IP exposure check: NO real origin IP found. Both apex A records resolve within Cloudflare's IP space; no subdomain other than mail.* (third-party, unrelated to the web app origin) resolves off-Cloudflare. No evidence of a Cloudflare-bypass vector. Cloudflare protection for the web application appears properly enforced at DNS level (informational - positive control, not independently verified beyond DNS/header inspection since active origin discovery techniques were intentionally not attempted per RoE).
+
+=== PORTS / SERVICES (hostname-level scan only, top-100 ports, -sV -sC, T3 timing) ===
+53/tcp   open  domain    Cloudflare anycast DNS edge (NXDOMAIN generic response; CHAOS/version.bind query reflects Cloudflare's own resolver infra metadata - not a zakerne.com application artifact)
+80/tcp   open  http      Cloudflare http proxy (redirects/serves over Cloudflare edge; title "Zakerne — Never miss an appointment"; robots.txt present)
+443/tcp  open  ssl/http  Cloudflare http proxy; cert CN=zakerne.com, SAN=zakerne.com,security.zakerne.com,*.security.zakerne.com; issued by Google Trust Services (pki.goog), RSA 2048/SHA256, valid 2026-06-28 to 2026-09-26
+8080/tcp open  http      Cloudflare http proxy (same content as 443, standard Cloudflare edge behavior)
+8443/tcp open  ssl/http  Cloudflare http proxy (same cert/content as 443)
+All 5 open ports are Cloudflare edge infrastructure fronting the app - no origin server ports were scanned (out of scope). No non-Cloudflare services identified on the hostname.
+
+=== TECHNOLOGY STACK ===
+Frontend: React (react-dom confirmed in bundle) + React Router + Redux Toolkit, built with Vite (hashed asset filenames e.g. index-sxBIrYLU.js/css), client-side-rendered SPA with a boot/loading screen and PWA manifest (manifest.webmanifest, apple-touch-icon, theme-color #0D3B66)
+Libraries observed in bundle: jsPDF (client-side PDF generation), Amplitude (product analytics), Google Maps embed, wa.me (WhatsApp deep links)
+Payment integration: "Whish" string confirmed present in bundle (matches known payment processor per engagement scope - out of scope, not tested); a "stripe" string reference was also observed - unclear if active/secondary processor or unused dependency remnant, flagged as a hypothesis only, not confirmed by active testing
+Backend: reverse-proxied API under /api/* on the same domain (confirmed via /api/health -> HTTP 200 {"ok":true}, application/json; distinct 404 text/plain behavior for unmapped /api/* sub-paths e.g. /api/v1, /api/auth, /api/users, /api/docs, /api/swagger, /api/version, /api/status). No version/framework banner disclosed for the backend.
+CORS: /api/health does NOT reflect Access-Control-Allow-Origin for an arbitrary cross-origin Origin header (tested with https://evil.example.com) - properly restrictive, positive control.
+Cookies: none set on initial GET of / (no session cookie leaked pre-auth); app likely uses token-based auth via JS, not verified further (out of scope for recon).
+Edge/CDN: Cloudflare (server: cloudflare on all responses; cf-ray present; Cloudflare-managed robots.txt content-signal block present, opting out of AI training crawlers while allowing search indexing)
+Security headers (main app, zakerne.com & www.zakerne.com): Content-Security-Policy (self-hosted, no unsafe-inline for scripts), Strict-Transport-Security (max-age=31536000; includeSubDomains; preload), X-Frame-Options: DENY, X-Content-Type-Options: nosniff, Permissions-Policy (camera/mic/geo denied), Referrer-Policy: strict-origin-when-cross-origin -- solid baseline, no findings against the main app's header set.
+Security headers (security.zakerne.com): MISSING the entire baseline above (no CSP/HSTS/X-Frame-Options/X-Content-Type-Options/Permissions-Policy) - see findings.
+No API keys, tokens, or private-key material found in a passive grep of the main JS bundle (checked for sk_live_/sk_test_/AIza.../AKIA.../pk_live_/pk_test_/PEM private key patterns - none found).
+
+Directory/file discovery caveat: ffuf against raft-medium-files.txt produced ~2995 apparent "200 OK" hits, but this is a FALSE-POSITIVE artifact of the SPA's catch-all client-side routing (the server returns the same 4250-byte index.html shell with HTTP 200 for effectively any unmapped path, e.g. /login2.php, /.env, /.git/config all return the identical SPA shell). Traditional wordlist-based directory brute forcing is unreliable against this app architecture; targeted path probing (e.g. checking for distinct response size/content-type/status) was used instead and is the recommended technique for the pentest-web phase.
+
+=== TLS/SSL ===
+Certificate: valid, CN=zakerne.com, SAN covers zakerne.com/security.zakerne.com/*.security.zakerne.com, issued by Google Trust Services, expires 2026-09-26 (72 days remaining at scan time - OK), SHA256 signature, RSA 2048-bit key, no OCSP stapling, Certificate Transparency present.
+Issues found:
+  - TLS 1.0 and TLS 1.1 offered/accepted (deprecated) - MEDIUM (see finding-recon-20260716T171825Z-tls-legacy-protocols.json)
+  - 3DES/IDEA (64-bit block cipher) offered -> SWEET32 VULNERABLE (CVE-2016-2183) - MEDIUM, same finding as above
+  - BEAST (CVE-2011-3389): TLS1 CBC ciphers offered but likely mitigated since TLS1.2 also available - noted, folded into same finding
+  - TLS 1.3 NOT offered (unusual for Cloudflare defaults; likely a side effect of the legacy-compatible cipher/minimum-TLS configuration) - noted in same finding
+  - No CAA DNS record - LOW/INFO (see finding-recon-20260716T171825Z-missing-caa-record.json)
+  - Heartbleed, CCS, Ticketbleed, ROBOT, CRIME, POODLE, FREAK, DROWN, LOGJAM: all NOT VULNERABLE (OK)
+  - Secure Renegotiation: supported (OK); TLS_FALLBACK_SCSV: supported (OK)
+
+=== CVE CANDIDATES (searchsploit) ===
+No directly applicable CVE candidates identified. searchsploit lookups against "cloudflare" and "nginx" returned only unrelated results (Cloudflare WARP Windows local privesc, Ingress-NGINX Kubernetes admission-controller RCE - neither applies to this Cloudflare-fronted SaaS SPA where no origin server version/banner was disclosed). No backend framework version was disclosed anywhere in scope, so no version-specific CVE lookup was possible; this is expected/typical for a well-configured Cloudflare-fronted SPA and is not itself a gap.
+Known-CVE items from TLS scan: CVE-2016-2183 (SWEET32), CVE-2011-3389 (BEAST) - see TLS section above.
+
+=== FINDINGS FILED ===
+1. finding-recon-20260716T171825Z-tls-legacy-protocols.json (Medium) - TLS 1.0/1.1 + weak cipher (SWEET32) accepted on Cloudflare edge for zakerne.com/www.zakerne.com
+2. finding-recon-20260716T171825Z-missing-headers-security-subdomain.json (Low) - security.zakerne.com missing full security header baseline present on main app
+3. finding-recon-20260716T171825Z-missing-caa-record.json (Info) - no DNS CAA record
+4. finding-recon-20260716T171825Z-unauthenticated-health-endpoint.json (Info) - /api/health confirms real backend API namespace, unauthenticated but non-sensitive
+5. finding-recon-20260716T171825Z-third-party-mail-subdomain.json (Info) - mail.zakerne.com is third-party PrivateEmail infra, out of scope, not tested
+
+=== HANDOFF NOTES FOR pentest-web ===
+- Real backend API confirmed at /api/* on zakerne.com (proxied through Cloudflare); /api/health is a safe, confirmed-live reference endpoint to validate connectivity/auth flows against.
+- Do NOT rely on raw wordlist directory brute forcing against this target - SPA catch-all routing returns false-positive 200s for almost any path. Use response-size/content-type differentials or targeted, framework-aware path lists (React/Vite + REST API under /api/*) instead.
+- security.zakerne.com is a separate first-party SPA ("Zakerne security monitoring dashboard") covered by the same TLS cert - in scope, but verify with the orchestrator whether this is the client's OWN existing security-monitoring tool (RoE mentions "another security team monitoring the site") before treating it as a standard test target, to avoid duplicate/conflicting activity.
+- Payment flows: Whish integration confirmed in bundle; a "stripe" string was also observed and is unconfirmed/unexplained - do not interact with either beyond passive/GET-level fingerprinting per RoE constraint on cost-incurring actions.
+- No origin-IP-bypass vector identified; Cloudflare enforcement appears intact based on DNS/header inspection only (not actively validated by attempting a bypass, per RoE).

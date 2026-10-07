@@ -1,0 +1,27 @@
+{
+  "id": "finding-recon-20260716T171825Z-tls-legacy-protocols",
+  "title": "Deprecated TLS protocols (TLS 1.0/1.1) and weak cipher suites (3DES/64-bit block ciphers) accepted on zakerne.com Cloudflare edge",
+  "severity": "Medium",
+  "cvss_score": 5.9,
+  "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N",
+  "cwe": "CWE-327",
+  "owasp_category": "A02:2025",
+  "mitre_attack": "T1600",
+  "description": "The Cloudflare edge TLS configuration for zakerne.com and www.zakerne.com accepts deprecated TLS 1.0 and TLS 1.1 protocols, and offers a 3DES/IDEA cipher suite vulnerable to the SWEET32 birthday attack (CVE-2016-2183). TLS 1.3 is not offered/negotiated, which is unusual and suggests the site's Cloudflare SSL/TLS 'Minimum TLS Version' and cipher suite settings are configured for broad legacy client compatibility rather than modern security defaults. Confirmed by testssl.sh scan and manual curl handshake tests forcing --tlsv1.0 and --tlsv1.1 (both returned HTTP 200).",
+  "reproduction_steps": [
+    "Run: testssl --fast zakerne.com (observe TLS1/TLS1_1 'offered (deprecated)', cipherlist_3DES_IDEA 'offered', SWEET32 'VULNERABLE')",
+    "Run: curl -I --tlsv1.0 --tls-max 1.0 https://zakerne.com (returns HTTP/200, confirming TLS 1.0 handshake succeeds)",
+    "Run: curl -I --tlsv1.1 --tls-max 1.1 https://zakerne.com (returns HTTP/200, confirming TLS 1.1 handshake succeeds)"
+  ],
+  "payload": "",
+  "evidence": ["evidence/recon/tls-fast.json"],
+  "impact": "Deprecated TLS protocols and weak 64-bit block ciphers weaken transport security and could theoretically allow a well-positioned attacker to conduct downgrade or block-cipher birthday attacks (SWEET32) against long-lived HTTPS sessions to intercept small amounts of plaintext. This is a defense-in-depth / compliance issue (PCI-DSS and modern browser vendors require TLS 1.2+ only) rather than an immediately exploitable flaw, since Cloudflare's stack mitigates most practical BEAST/downgrade risk. This is a site-configurable Cloudflare dashboard setting, not an attack on Cloudflare's own shared infrastructure.",
+  "remediation": "In the Cloudflare dashboard for zakerne.com, set SSL/TLS > Edge Certificates > Minimum TLS Version to 1.2, disable legacy/weak cipher suites (remove 3DES/IDEA from the custom cipher suite list, or reset to Cloudflare 'Modern' compatibility default), and enable TLS 1.3.",
+  "references": [
+    "https://nvd.nist.gov/vuln/detail/CVE-2016-2183",
+    "https://developers.cloudflare.com/ssl/edge-certificates/additional-options/minimum-tls/"
+  ],
+  "status": "confirmed",
+  "discovered_date": "2026-07-16T17:18:25Z",
+  "reported_to_client": false
+}

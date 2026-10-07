@@ -1,0 +1,41 @@
+HTTP/2 200 
+date: Thu, 16 Jul 2026 17:10:02 GMT
+content-type: text/html
+cf-cache-status: HIT
+cache-control: public, max-age=0, must-revalidate
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+content-security-policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https://zakerne.com https://www.zakerne.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
+permissions-policy: camera=(), microphone=(), geolocation=(), clipboard-read=(self), clipboard-write=(self)
+referrer-policy: strict-origin-when-cross-origin
+x-content-type-options: nosniff
+x-frame-options: DENY
+report-to: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=oanHMsNRHiDLe126azoHPIZ6TPX%2BjDydOkFqzSIioLVyn0sOXnjGw3WS2%2BrNWSCciIXroMNvhZXQi2ooHnx6kr0fB0G4t0fE0P53HoCaa5p3yg51wNwfyemhhdZavQ%3D%3D"}]}
+nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+server: cloudflare
+cf-ray: a1c29e375b4acfa3-MRS
+
+HTTP/2 200 
+date: Thu, 16 Jul 2026 17:10:02 GMT
+content-type: text/html
+cf-cache-status: HIT
+cache-control: public, max-age=0, must-revalidate
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+content-security-policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https://zakerne.com https://www.zakerne.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
+permissions-policy: camera=(), microphone=(), geolocation=(), clipboard-read=(self), clipboard-write=(self)
+referrer-policy: strict-origin-when-cross-origin
+x-content-type-options: nosniff
+x-frame-options: DENY
+report-to: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=BiBbKCplrhscsg4jKGVeFj3HM445TRdkLVk1dB%2B%2FzmAO0JUut0B94%2B%2BFl%2FdtRJno01UyfaoHVlTSdnMfXHm30AP12%2FuADhXH29gcAIMpBcVC%2FTtbW%2FOKe6u5GzAmHSmIkzk%3D"}]}
+nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+server: cloudflare
+cf-ray: a1c29e38af0ca60e-MRS
+
+HTTP/2 200 
+date: Thu, 16 Jul 2026 17:10:02 GMT
+content-type: text/html; charset=utf-8
+cache-control: no-cache
+report-to: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=cAE4FSaWH1i0iucZBh9LCc%2BOdlqCECLzqXt%2Bj1SiqeQfwl1UxYONl4BIAjJkozU066W%2FGUJc2QDPmbXWIJQq2sqBDVJV3tvLXnG%2BOKm3JlLCSDOUOS5sh88ZvRNfTl168h1RIFifJw%3D%3D"}]}
+nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+server: cloudflare
+cf-ray: a1c29e39eac69aca-MRS
+

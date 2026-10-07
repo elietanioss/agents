@@ -1,0 +1,4 @@
+# Nmap 7.99 scan initiated Thu Jul 16 17:09:00 2026 as: /usr/lib/nmap/nmap -sV -sC --top-ports 100 -T3 -oA /evidence/recon/nmap-zakerne zakerne.com
+Host: 172.67.218.191 ()	Status: Up
+Host: 172.67.218.191 ()	Ports: 53/open/tcp//domain//(generic dns response: NXDOMAIN)/, 80/open/tcp//http//Cloudflare http proxy/, 443/open/tcp//ssl|http//Cloudflare http proxy/, 8080/open/tcp//http//Cloudflare http proxy/, 8443/open/tcp//ssl|http//Cloudflare http proxy/	Ignored State: filtered (95)
+# Nmap done at Thu Jul 16 17:09:28 2026 -- 1 IP address (1 host up) scanned in 28.47 seconds

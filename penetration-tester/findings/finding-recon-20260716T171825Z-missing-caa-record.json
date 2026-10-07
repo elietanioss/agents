@@ -1,0 +1,23 @@
+{
+  "id": "finding-recon-20260716T171825Z-missing-caa-record",
+  "title": "No DNS CAA record configured for zakerne.com",
+  "severity": "Info",
+  "cvss_score": 0.0,
+  "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:N",
+  "cwe": "CWE-295",
+  "owasp_category": "A02:2025",
+  "mitre_attack": "T1584",
+  "description": "testssl.sh reported no CAA (Certification Authority Authorization) DNS record for zakerne.com. Without a CAA record, any publicly trusted certificate authority is permitted to issue certificates for the domain, offering no defense-in-depth against mis-issuance.",
+  "reproduction_steps": [
+    "dig +short zakerne.com CAA (returns empty)",
+    "testssl --fast zakerne.com -> DNS_CAArecord: -- | LOW"
+  ],
+  "payload": "",
+  "evidence": ["evidence/recon/tls-fast.json"],
+  "impact": "Low likelihood, low-severity gap. Absence of a CAA record slightly increases the theoretical risk of certificate mis-issuance by an unauthorized/compromised CA, since there is no DNS-level restriction on which CAs may issue for the domain.",
+  "remediation": "Add a CAA record restricting issuance to the CA(s) actually used (e.g. Google Trust Services / Cloudflare's configured CA), e.g. `zakerne.com. CAA 0 issue \"pki.goog\"`.",
+  "references": ["https://developers.cloudflare.com/ssl/edge-certificates/caa-records/"],
+  "status": "confirmed",
+  "discovered_date": "2026-07-16T17:18:25Z",
+  "reported_to_client": false
+}

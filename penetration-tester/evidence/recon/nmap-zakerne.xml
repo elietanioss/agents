@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.99 scan initiated Thu Jul 16 17:09:00 2026 as: /usr/lib/nmap/nmap -sV -sC -&#45;top-ports 100 -T3 -oA /evidence/recon/nmap-zakerne zakerne.com -->
+<nmaprun scanner="nmap" args="/usr/lib/nmap/nmap -sV -sC -&#45;top-ports 100 -T3 -oA /evidence/recon/nmap-zakerne zakerne.com" start="1784221740" startstr="Thu Jul 16 17:09:00 2026" version="7.99" xmloutputversion="1.05">
+<scaninfo type="syn" protocol="tcp" numservices="100" services="7,9,13,21-23,25-26,37,53,79-81,88,106,110-111,113,119,135,139,143-144,179,199,389,427,443-445,465,513-515,543-544,548,554,587,631,646,873,990,993,995,1025-1029,1110,1433,1720,1723,1755,1900,2000-2001,2049,2121,2717,3000,3128,3306,3389,3986,4899,5000,5009,5051,5060,5101,5190,5357,5432,5631,5666,5800,5900,6000-6001,6646,7070,8000,8008-8009,8080-8081,8443,8888,9100,9999-10000,32768,49152-49157"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<hosthint><status state="up" reason="unknown-response" reason_ttl="0"/>
+<address addr="172.67.218.191" addrtype="ipv4"/>
+<hostnames>
+<hostname name="zakerne.com" type="user"/>
+</hostnames>
+</hosthint>
+<host starttime="1784221740" endtime="1784221768"><status state="up" reason="reset" reason_ttl="63"/>
+<address addr="172.67.218.191" addrtype="ipv4"/>
+<hostnames>
+<hostname name="zakerne.com" type="user"/>
+</hostnames>
+<ports><extraports state="filtered" count="95">
+<extrareasons reason="no-response" count="95" proto="tcp" ports="7,9,13,21-23,25-26,37,79,81,88,106,110-111,113,119,135,139,143-144,179,199,389,427,444-445,465,513-515,543-544,548,554,587,631,646,873,990,993,995,1025-1029,1110,1433,1720,1723,1755,1900,2000-2001,2049,2121,2717,3000,3128,3306,3389,3986,4899,5000,5009,5051,5060,5101,5190,5357,5432,5631,5666,5800,5900,6000-6001,6646,7070,8000,8008-8009,8081,8888,9100,9999-10000,32768,49152-49157"/>
+</extraports>
+<port protocol="tcp" portid="53"><state state="open" reason="syn-ack" reason_ttl="63"/><service name="domain" extrainfo="generic dns response: NXDOMAIN" servicefp="SF-Port53-TCP:V=7.99%I=7%D=7/16%Time=6A591039%P=x86_64-pc-linux-gnu%r(DNSVersionBindReqTCP,127,&quot;\x01%\0\x06\x81\x83\0\x01\0\0\0\x01\0\x06\x07version\x04bind\0\0\x10\0\x03\0\0\x06\0\x01\0\0\x02k\0@\x01a\x0croot-servers\x03net\0\x05nstld\x0cverisign-grs\x03com\0x\xc3f0\0\0\x07\x08\0\0\x03\x84\0\t:\x80\0\x01Q\x80\tclient-ip\x0badguard-dns\xc0P\0\x10\0\x03\0\0\x0e\x10\0\r\x0c185\.99\.32\.58\tserver-ip\xc0s\0\x10\0\x03\0\0\x0e\x10\0\r\x0c94\.140\.15\.15\tnode-name\xc0s\0\x10\0\x03\0\0\x0e\x10\0\x06\x05fra-1\x07country\xc0s\0\x10\0\x03\0\0\x0e\x10\0\x03\x02LB\x03asn\xc0s\0\x10\0\x03\0\0\x0e\x10\0\x06\x0543824\x04resp\x08res-type\xc0s\0\x10\0\x03\0\0\x0e\x10\0\x07\x06normal&quot;);" method="probed" conf="10"/><script id="dns-nsid" output="&#xa;  NSID:  ()"><table key="NSID">
+<elem key="hex"></elem>
+<elem key="raw"></elem>
+</table>
+</script><script id="fingerprint-strings" output="&#xa;  DNSVersionBindReqTCP: &#xa;    version&#xa;    bind&#xa;    root-servers&#xa;    nstld&#xa;    verisign-grs&#xa;    client-ip&#xa;    adguard-dns&#xa;    185.99.32.58 server-ip&#xa;    94.140.15.15 node-name&#xa;    fra-1&#xa;    country&#xa;    43824&#xa;    resp&#xa;    res-type&#xa;    normal"><elem key="DNSVersionBindReqTCP">&#xa;    version&#xa;    bind&#xa;    root-servers&#xa;    nstld&#xa;    verisign-grs&#xa;    client-ip&#xa;    adguard-dns&#xa;    185.99.32.58 server-ip&#xa;    94.140.15.15 node-name&#xa;    fra-1&#xa;    country&#xa;    43824&#xa;    resp&#xa;    res-type&#xa;    normal</elem>
+</script></port>
+<port protocol="tcp" portid="80"><state state="open" reason="syn-ack" reason_ttl="63"/><service name="http" product="Cloudflare http proxy" method="probed" conf="10"/><script id="http-trane-info" output="Problem with XML parsing of /evox/about"/><script id="http-title" output="Zakerne \xE2\x80\x94 Never miss an appointment"><elem key="title">Zakerne \xE2\x80\x94 Never miss an appointment</elem>
+</script><script id="http-robots.txt" output="1 disallowed entry &#xa;/"/><script id="http-server-header" output="cloudflare"><elem>cloudflare</elem>
+</script></port>
+<port protocol="tcp" portid="443"><state state="open" reason="syn-ack" reason_ttl="63"/><service name="http" product="Cloudflare http proxy" tunnel="ssl" method="probed" conf="10"/><script id="ssl-cert" output="Subject: commonName=zakerne.com&#xa;Subject Alternative Name: DNS:zakerne.com, DNS:security.zakerne.com, DNS:*.security.zakerne.com&#xa;Not valid before: 2026-06-28T19:02:30&#xa;Not valid after:  2026-09-26T20:02:20"><table key="subject">
+<elem key="commonName">zakerne.com</elem>
+</table>
+<table key="issuer">
+<elem key="commonName">WE1</elem>
+<elem key="countryName">US</elem>
+<elem key="organizationName">Google Trust Services</elem>
+</table>
+<table key="pubkey">
+<elem key="type">ec</elem>
+<elem key="bits">256</elem>
+<table key="ecdhparams">
+<table key="curve_params">
+<elem key="ec_curve_type">namedcurve</elem>
+<elem key="curve">prime256v1</elem>
+</table>
+</table>
+</table>
+<table key="extensions">
+<table>
+<elem key="name">X509v3 Key Usage</elem>
+<elem key="value">Digital Signature</elem>
+<elem key="critical">true</elem>
+</table>
+<table>
+<elem key="name">X509v3 Extended Key Usage</elem>
+<elem key="value">TLS Web Server Authentication</elem>
+</table>
+<table>
+<elem key="name">X509v3 Basic Constraints</elem>
+<elem key="value">CA:FALSE</elem>
+<elem key="critical">true</elem>
+</table>
+<table>
+<elem key="name">X509v3 Subject Key Identifier</elem>
+<elem key="value">D6:0E:2E:A8:3F:48:0F:DB:10:6F:DB:AE:D4:05:9B:C5:7E:42:BD:51</elem>
+</table>
+<table>
+<elem key="name">X509v3 Authority Key Identifier</elem>
+<elem key="value">90:77:92:35:67:C4:FF:A8:CC:A9:E6:7B:D9:80:79:7B:CC:93:F9:38</elem>
+</table>
+<table>
+<elem key="name">Authority Information Access</elem>
+<elem key="value">CA Issuers - URI:http://i.pki.goog/we1.crt</elem>
+</table>
+<table>
+<elem key="name">X509v3 Subject Alternative Name</elem>
+<elem key="value">DNS:zakerne.com, DNS:security.zakerne.com, DNS:*.security.zakerne.com</elem>
+</table>
+<table>
+<elem key="name">X509v3 Certificate Policies</elem>
+<elem key="value">Policy: 2.23.140.1.2.1</elem>
+</table>
+<table>
+<elem key="name">X509v3 CRL Distribution Points</elem>
+<elem key="value">Full Name:&#xa;  URI:http://c.pki.goog/we1/6lexwfD8peQ.crl&#xa;</elem>
+</table>
+<table>
+<elem key="name">CT Precertificate SCTs</elem>
+<elem key="value">Signed Certificate Timestamp:&#xa;    Version   : v1 (0x0)&#xa;    Log ID    : D7:6D:7D:10:D1:A7:F5:77:C2:C7:E9:5F:D7:00:BF:F9:&#xa;                82:C9:33:5A:65:E1:D0:B3:01:73:17:C0:C8:C5:69:77&#xa;    Timestamp : Jun 28 20:02:31.270 2026 GMT&#xa;    Extensions: none&#xa;    Signature : ecdsa-with-SHA256&#xa;                30:45:02:20:0A:A6:8F:50:9B:7C:F7:61:58:36:80:32:&#xa;                E1:27:AF:E2:D0:71:60:90:51:2C:BB:1D:D5:F1:8E:6A:&#xa;                85:3B:C8:08:02:21:00:DC:1C:EF:C8:33:8C:43:DF:D1:&#xa;                EA:EF:2A:1D:11:82:D1:DD:6D:B1:70:BA:81:85:0F:D2:&#xa;                B6:B1:C9:C4:33:0C:07&#xa;Signed Certificate Timestamp:&#xa;    Version   : v1 (0x0)&#xa;    Log ID    : 94:4E:43:87:FA:EC:C1:EF:81:F3:19:24:26:A8:18:65:&#xa;                01:C7:D3:5F:38:02:01:3F:72:67:7D:55:37:2E:19:D8&#xa;    Timestamp : Jun 28 20:02:31.283 2026 GMT&#xa;    Extensions: none&#xa;    Signature : ecdsa-with-SHA256&#xa;                30:44:02:20:7F:26:3B:4F:98:E4:ED:4A:49:70:18:F8:&#xa;                B2:38:3F:AB:BA:2F:6E:F1:F6:E2:C8:32:75:E1:5B:3D:&#xa;                0A:F9:40:64:02:20:21:B5:95:37:56:22:E7:31:E2:A2:&#xa;                5C:2A:FC:8B:E2:68:0B:57:67:36:6C:73:25:96:77:14:&#xa;                0C:7E:A7:98:16:71</elem>
+</table>
+</table>
+<elem key="sig_algo">ecdsa-with-SHA256</elem>
+<table key="validity">
+<elem key="notBefore">2026-06-28T19:02:30</elem>
+<elem key="notAfter">2026-09-26T20:02:20</elem>
+</table>
+<elem key="md5">6b58b7b0a3a8f972b234fff3432399ed</elem>
+<elem key="sha1">eed27af8a6748fe180891d4829a13ceff3917e80</elem>
+<elem key="sha256">ffb30674c7a7fbeea6855775d340727df5d662809d84297e078b266737164fcc</elem>
+<elem key="pem">-&#45;&#45;&#45;&#45;BEGIN CERTIFICATE-&#45;&#45;&#45;&#45;&#xa;MIIDmzCCA0CgAwIBAgIRAJrV7lOZ+3drE98EaClaxDswCgYIKoZIzj0EAwIwOzEL&#xa;MAkGA1UEBhMCVVMxHjAcBgNVBAoTFUdvb2dsZSBUcnVzdCBTZXJ2aWNlczEMMAoG&#xa;A1UEAxMDV0UxMB4XDTI2MDYyODE5MDIzMFoXDTI2MDkyNjIwMDIyMFowFjEUMBIG&#xa;A1UEAxMLemFrZXJuZS5jb20wWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATi4lB4&#xa;5yh+4HAqmA7rLZySweXjHBPrdinNtT5oeh8U/zoeKqo45mat5NeEWuL38f9HP3h1&#xa;CVrCbS7yMhYsGjNNo4ICSDCCAkQwDgYDVR0PAQH/BAQDAgeAMBMGA1UdJQQMMAoG&#xa;CCsGAQUFBwMBMAwGA1UdEwEB/wQCMAAwHQYDVR0OBBYEFNYOLqg/SA/bEG/brtQF&#xa;m8V+Qr1RMB8GA1UdIwQYMBaAFJB3kjVnxP+ozKnme9mAeXvMk/k4MDUGCCsGAQUF&#xa;BwEBBCkwJzAlBggrBgEFBQcwAoYZaHR0cDovL2kucGtpLmdvb2cvd2UxLmNydDBE&#xa;BgNVHREEPTA7ggt6YWtlcm5lLmNvbYIUc2VjdXJpdHkuemFrZXJuZS5jb22CFiou&#xa;c2VjdXJpdHkuemFrZXJuZS5jb20wEwYDVR0gBAwwCjAIBgZngQwBAgEwNgYDVR0f&#xa;BC8wLTAroCmgJ4YlaHR0cDovL2MucGtpLmdvb2cvd2UxLzZsZXh3ZkQ4cGVRLmNy&#xa;bDCCAQMGCisGAQQB1nkCBAIEgfQEgfEA7wB2ANdtfRDRp/V3wsfpX9cAv/mCyTNa&#xa;ZeHQswFzF8DIxWl3AAABnw/TkOYAAAQDAEcwRQIgCqaPUJt892FYNoAy4Sev4tBx&#xa;YJBRLLsd1fGOaoU7yAgCIQDcHO/IM4xD39Hq7yodEYLR3W2xcLqBhQ/StrHJxDMM&#xa;BwB1AJROQ4f67MHvgfMZJCaoGGUBx9NfOAIBP3JnfVU3LhnYAAABnw/TkPMAAAQD&#xa;AEYwRAIgfyY7T5jk7UpJcBj4sjg/q7ovbvH24sgydeFbPQr5QGQCICG1lTdWIucx&#xa;4qJcKvyL4mgLV2c2bHMllncUDH6nmBZxMAoGCCqGSM49BAMCA0kAMEYCIQCtphAX&#xa;v1BIdx0Fw6hdSwilt57Xvvjv187Y/MOjSlChGwIhAKrYmJCt8TlOnvCd3u39plkl&#xa;GLLGTlzw2oIBud8IO8kU&#xa;-&#45;&#45;&#45;&#45;END CERTIFICATE-&#45;&#45;&#45;&#45;&#xa;</elem>
+</script><script id="http-trane-info" output="Problem with XML parsing of /evox/about"/><script id="http-robots.txt" output="1 disallowed entry &#xa;/"/><script id="http-title" output="Zakerne \xE2\x80\x94 Never miss an appointment"><elem key="title">Zakerne \xE2\x80\x94 Never miss an appointment</elem>
+</script><script id="http-server-header" output="cloudflare"><elem>cloudflare</elem>
+</script></port>
+<port protocol="tcp" portid="8080"><state state="open" reason="syn-ack" reason_ttl="63"/><service name="http" product="Cloudflare http proxy" method="probed" conf="10"/><script id="http-trane-info" output="Problem with XML parsing of /evox/about"/><script id="http-server-header" output="cloudflare"><elem>cloudflare</elem>
+</script><script id="http-title" output="Zakerne \xE2\x80\x94 Never miss an appointment"><elem key="title">Zakerne \xE2\x80\x94 Never miss an appointment</elem>
+</script><script id="http-robots.txt" output="1 disallowed entry &#xa;/"/></port>
+<port protocol="tcp" portid="8443"><state state="open" reason="syn-ack" reason_ttl="63"/><service name="http" product="Cloudflare http proxy" tunnel="ssl" method="probed" conf="10"/><script id="http-trane-info" output="Problem with XML parsing of /evox/about"/><script id="http-server-header" output="cloudflare"><elem>cloudflare</elem>
+</script><script id="ssl-cert" output="Subject: commonName=zakerne.com&#xa;Subject Alternative Name: DNS:zakerne.com, DNS:security.zakerne.com, DNS:*.security.zakerne.com&#xa;Not valid before: 2026-06-28T19:02:30&#xa;Not valid after:  2026-09-26T20:02:20"><table key="subject">
+<elem key="commonName">zakerne.com</elem>
+</table>
+<table key="issuer">
+<elem key="commonName">WE1</elem>
+<elem key="countryName">US</elem>
+<elem key="organizationName">Google Trust Services</elem>
+</table>
+<table key="pubkey">
+<elem key="type">ec</elem>
+<elem key="bits">256</elem>
+<table key="ecdhparams">
+<table key="curve_params">
+<elem key="ec_curve_type">namedcurve</elem>
+<elem key="curve">prime256v1</elem>
+</table>
+</table>
+</table>
+<table key="extensions">
+<table>
+<elem key="name">X509v3 Key Usage</elem>
+<elem key="value">Digital Signature</elem>
+<elem key="critical">true</elem>
+</table>
+<table>
+<elem key="name">X509v3 Extended Key Usage</elem>
+<elem key="value">TLS Web Server Authentication</elem>
+</table>
+<table>
+<elem key="name">X509v3 Basic Constraints</elem>
+<elem key="value">CA:FALSE</elem>
+<elem key="critical">true</elem>
+</table>
+<table>
+<elem key="name">X509v3 Subject Key Identifier</elem>
+<elem key="value">D6:0E:2E:A8:3F:48:0F:DB:10:6F:DB:AE:D4:05:9B:C5:7E:42:BD:51</elem>
+</table>
+<table>
+<elem key="name">X509v3 Authority Key Identifier</elem>
+<elem key="value">90:77:92:35:67:C4:FF:A8:CC:A9:E6:7B:D9:80:79:7B:CC:93:F9:38</elem>
+</table>
+<table>
+<elem key="name">Authority Information Access</elem>
+<elem key="value">CA Issuers - URI:http://i.pki.goog/we1.crt</elem>
+</table>
+<table>
+<elem key="name">X509v3 Subject Alternative Name</elem>
+<elem key="value">DNS:zakerne.com, DNS:security.zakerne.com, DNS:*.security.zakerne.com</elem>
+</table>
+<table>
+<elem key="name">X509v3 Certificate Policies</elem>
+<elem key="value">Policy: 2.23.140.1.2.1</elem>
+</table>
+<table>
+<elem key="name">X509v3 CRL Distribution Points</elem>
+<elem key="value">Full Name:&#xa;  URI:http://c.pki.goog/we1/6lexwfD8peQ.crl&#xa;</elem>
+</table>
+<table>
+<elem key="name">CT Precertificate SCTs</elem>
+<elem key="value">Signed Certificate Timestamp:&#xa;    Version   : v1 (0x0)&#xa;    Log ID    : D7:6D:7D:10:D1:A7:F5:77:C2:C7:E9:5F:D7:00:BF:F9:&#xa;                82:C9:33:5A:65:E1:D0:B3:01:73:17:C0:C8:C5:69:77&#xa;    Timestamp : Jun 28 20:02:31.270 2026 GMT&#xa;    Extensions: none&#xa;    Signature : ecdsa-with-SHA256&#xa;                30:45:02:20:0A:A6:8F:50:9B:7C:F7:61:58:36:80:32:&#xa;                E1:27:AF:E2:D0:71:60:90:51:2C:BB:1D:D5:F1:8E:6A:&#xa;                85:3B:C8:08:02:21:00:DC:1C:EF:C8:33:8C:43:DF:D1:&#xa;                EA:EF:2A:1D:11:82:D1:DD:6D:B1:70:BA:81:85:0F:D2:&#xa;                B6:B1:C9:C4:33:0C:07&#xa;Signed Certificate Timestamp:&#xa;    Version   : v1 (0x0)&#xa;    Log ID    : 94:4E:43:87:FA:EC:C1:EF:81:F3:19:24:26:A8:18:65:&#xa;                01:C7:D3:5F:38:02:01:3F:72:67:7D:55:37:2E:19:D8&#xa;    Timestamp : Jun 28 20:02:31.283 2026 GMT&#xa;    Extensions: none&#xa;    Signature : ecdsa-with-SHA256&#xa;                30:44:02:20:7F:26:3B:4F:98:E4:ED:4A:49:70:18:F8:&#xa;                B2:38:3F:AB:BA:2F:6E:F1:F6:E2:C8:32:75:E1:5B:3D:&#xa;                0A:F9:40:64:02:20:21:B5:95:37:56:22:E7:31:E2:A2:&#xa;                5C:2A:FC:8B:E2:68:0B:57:67:36:6C:73:25:96:77:14:&#xa;                0C:7E:A7:98:16:71</elem>
+</table>
+</table>
+<elem key="sig_algo">ecdsa-with-SHA256</elem>
+<table key="validity">
+<elem key="notBefore">2026-06-28T19:02:30</elem>
+<elem key="notAfter">2026-09-26T20:02:20</elem>
+</table>
+<elem key="md5">6b58b7b0a3a8f972b234fff3432399ed</elem>
+<elem key="sha1">eed27af8a6748fe180891d4829a13ceff3917e80</elem>
+<elem key="sha256">ffb30674c7a7fbeea6855775d340727df5d662809d84297e078b266737164fcc</elem>
+<elem key="pem">-&#45;&#45;&#45;&#45;BEGIN CERTIFICATE-&#45;&#45;&#45;&#45;&#xa;MIIDmzCCA0CgAwIBAgIRAJrV7lOZ+3drE98EaClaxDswCgYIKoZIzj0EAwIwOzEL&#xa;MAkGA1UEBhMCVVMxHjAcBgNVBAoTFUdvb2dsZSBUcnVzdCBTZXJ2aWNlczEMMAoG&#xa;A1UEAxMDV0UxMB4XDTI2MDYyODE5MDIzMFoXDTI2MDkyNjIwMDIyMFowFjEUMBIG&#xa;A1UEAxMLemFrZXJuZS5jb20wWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATi4lB4&#xa;5yh+4HAqmA7rLZySweXjHBPrdinNtT5oeh8U/zoeKqo45mat5NeEWuL38f9HP3h1&#xa;CVrCbS7yMhYsGjNNo4ICSDCCAkQwDgYDVR0PAQH/BAQDAgeAMBMGA1UdJQQMMAoG&#xa;CCsGAQUFBwMBMAwGA1UdEwEB/wQCMAAwHQYDVR0OBBYEFNYOLqg/SA/bEG/brtQF&#xa;m8V+Qr1RMB8GA1UdIwQYMBaAFJB3kjVnxP+ozKnme9mAeXvMk/k4MDUGCCsGAQUF&#xa;BwEBBCkwJzAlBggrBgEFBQcwAoYZaHR0cDovL2kucGtpLmdvb2cvd2UxLmNydDBE&#xa;BgNVHREEPTA7ggt6YWtlcm5lLmNvbYIUc2VjdXJpdHkuemFrZXJuZS5jb22CFiou&#xa;c2VjdXJpdHkuemFrZXJuZS5jb20wEwYDVR0gBAwwCjAIBgZngQwBAgEwNgYDVR0f&#xa;BC8wLTAroCmgJ4YlaHR0cDovL2MucGtpLmdvb2cvd2UxLzZsZXh3ZkQ4cGVRLmNy&#xa;bDCCAQMGCisGAQQB1nkCBAIEgfQEgfEA7wB2ANdtfRDRp/V3wsfpX9cAv/mCyTNa&#xa;ZeHQswFzF8DIxWl3AAABnw/TkOYAAAQDAEcwRQIgCqaPUJt892FYNoAy4Sev4tBx&#xa;YJBRLLsd1fGOaoU7yAgCIQDcHO/IM4xD39Hq7yodEYLR3W2xcLqBhQ/StrHJxDMM&#xa;BwB1AJROQ4f67MHvgfMZJCaoGGUBx9NfOAIBP3JnfVU3LhnYAAABnw/TkPMAAAQD&#xa;AEYwRAIgfyY7T5jk7UpJcBj4sjg/q7ovbvH24sgydeFbPQr5QGQCICG1lTdWIucx&#xa;4qJcKvyL4mgLV2c2bHMllncUDH6nmBZxMAoGCCqGSM49BAMCA0kAMEYCIQCtphAX&#xa;v1BIdx0Fw6hdSwilt57Xvvjv187Y/MOjSlChGwIhAKrYmJCt8TlOnvCd3u39plkl&#xa;GLLGTlzw2oIBud8IO8kU&#xa;-&#45;&#45;&#45;&#45;END CERTIFICATE-&#45;&#45;&#45;&#45;&#xa;</elem>
+</script><script id="http-title" output="Zakerne \xE2\x80\x94 Never miss an appointment"><elem key="title">Zakerne \xE2\x80\x94 Never miss an appointment</elem>
+</script></port>
+</ports>
+<times srtt="20307" rttvar="25621" to="122791"/>
+</host>
+<runstats><finished time="1784221768" timestr="Thu Jul 16 17:09:28 2026" summary="Nmap done at Thu Jul 16 17:09:28 2026; 1 IP address (1 host up) scanned in 28.47 seconds" elapsed="28.47" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>

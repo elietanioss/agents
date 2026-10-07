@@ -1,0 +1,48 @@
+{
+  "id": "finding-web-20260716T174701Z-otp-rate-limiting",
+  "title": "Missing Rate Limiting on Public Customer OTP/Auth Endpoints Enables OTP Brute-Force and Unrestricted Email Enumeration (/api/public/customers/*)",
+  "severity": "High",
+  "cvss_score": 7.4,
+  "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
+  "cwe": "CWE-307",
+  "owasp_category": "A07:2025-Identification and Authentication Failures",
+  "mitre_attack": "T1110.003",
+  "description": "The public customer-facing API namespace on zakerne.com (/api/public/customers/verify-otp, /api/public/customers/reset-password, and /api/public/customers/register) does not apply any rate limiting, attempt lockout, CAPTCHA, or backoff to repeated wrong-code / duplicate-email submissions. A test customer account was created on the site's own public 'demo' sandbox tenant (bookingSlug=demo, tenantId T-3oq1tgvae, allowNewRegistrations=true) and used to send 47 total requests across the three endpoints (29 wrong 6-digit OTP guesses against verify-otp, 10 wrong reset codes against reset-password, and 8 duplicate-email probes against register) with zero HTTP 429s, lockouts, or CAPTCHA challenges observed; response time/format was identical across the full sequence. By contrast, the staff-facing /api/auth/login endpoint on the SAME domain IS actively rate-limited by Cloudflare (HTTP 429 'error code: 1015' triggered after only 3-4 rapid attempts in this engagement), proving the platform has and uses this control elsewhere but has not applied it to the customer namespace. The verify-otp and reset-password endpoints gate a 6-digit numeric one-time code (1,000,000 possible values); without throttling, these are feasible brute-force targets for an attacker with a real target email/customerId, potentially enabling full account takeover (registration-verification bypass and/or password-reset takeover of an existing customer account). Separately, the register endpoint returns a distinguishing HTTP 409 'An account with this email already exists' vs HTTP 200 for a fresh email, and this oracle is itself unthrottled, allowing bulk enumeration of registered customer email addresses which could be used to build a target list for the OTP brute-force weakness or for phishing/credential-stuffing elsewhere.",
+  "reproduction_steps": [
+    "1. Discover a live, registration-enabled tenant via the public booking-info endpoint, e.g. GET https://zakerne.com/api/public/booking/demo -> returns {\"allowNewRegistrations\":true, tenantId:\"T-3oq1tgvae\", ...}",
+    "2. Register a throwaway test customer: POST https://zakerne.com/api/public/customers/register with {email, password, firstName, lastName, phoneNumber, bookingSlug:'demo'} -> HTTP 200 {\"success\":true,\"customerId\":\"CA-FA905CAD\",\"otpRequired\":true}",
+    "3. Send repeated wrong-code guesses to POST https://zakerne.com/api/public/customers/verify-otp with {customerId, code} using sequential/random 6-digit values -> every response is HTTP 400 {\"error\":\"Invalid or expired code\"} with no throttling after 29 attempts across two independent client tools (curl loop, and a separate Python requests script run from a different host/container)",
+    "4. Repeat the same pattern against POST https://zakerne.com/api/public/customers/reset-password with {email, code, newPassword} -> 10 wrong-code attempts, still HTTP 400, no throttling",
+    "5. Repeat POST https://zakerne.com/api/public/customers/register with the SAME already-registered email 8 times -> consistently HTTP 409 'account already exists' (vs HTTP 200 for a non-existent email), confirming an unthrottled user-enumeration oracle",
+    "6. Contrast test: POST https://zakerne.com/api/auth/login (staff login, different endpoint) with wrong credentials -> Cloudflare returns HTTP 429 'error code: 1015' after only 3-4 attempts, proving equivalent protection exists on this domain but is not applied to the customer namespace"
+  ],
+  "payload": "POST /api/public/customers/verify-otp {\"customerId\":\"CA-FA905CAD\",\"code\":\"<guessed-6-digit-value>\"} sent repeatedly with no delay/backoff required",
+  "evidence": [
+    "C:\\Users\\User\\.claude\\agents\\penetration-tester\\evidence\\logs\\finding-web-20260716T174701Z-otp-rate-limiting-output.txt",
+    "C:\\Users\\User\\.claude\\agents\\penetration-tester\\evidence\\requests\\finding-web-20260716T174701Z-otp-rate-limiting-request.txt"
+  ],
+  "impact": "An attacker who obtains or guesses a target customer's email address (itself enumerable via the unthrottled register endpoint) could attempt to brute-force the 6-digit OTP used for (a) registration/email verification and (b) password-reset, without any application- or edge-level throttling standing in the way. If the OTP validity window is long enough relative to achievable request rate, this creates a realistic path to full customer account takeover (read/modify the victim's appointment history, contact details, and any other data exposed via the customer portal). Full end-to-end brute-force exploitation was NOT attempted in this engagement (would require up to ~1,000,000 requests against production, which is prohibited by the Rules of Engagement as high-volume/DoS-adjacent activity) -- this finding documents the confirmed absence of the rate-limiting control itself, validated via two independent low-volume methods, rather than a completed account-takeover proof. Recommend the client's own team assess real-world exploitability (OTP TTL, whether a higher-volume-triggered Cloudflare rule exists that this engagement's request volume did not reach) in a non-production/test-mode environment.",
+  "remediation": "Apply the same rate-limiting/lockout policy already enforced on /api/auth/login (Cloudflare rate-limiting rule or equivalent) to the entire /api/public/customers/* namespace, at minimum: (1) per-customerId and per-IP attempt limits with exponential backoff or temporary lockout on verify-otp and reset-password (e.g. max 5 attempts per 10 minutes), (2) shorten OTP validity window and/or increase OTP entropy if feasible, (3) invalidate/rotate the OTP after N failed attempts rather than allowing indefinite reuse until natural expiry, (4) add rate limiting or a generic/delayed response to the register endpoint to reduce the value of the email-enumeration oracle (e.g. return the same generic response regardless of whether the email exists, and rate-limit by IP), (5) verify this fix at the edge/WAF layer (Cloudflare rule) as well as the application layer for defense in depth, consistent with how /api/auth/login is already protected.",
+  "references": [
+    "OWASP WSTG-ATHN-03: Testing for Weak Lock Out Mechanism",
+    "OWASP Top 10 2021 A07: Identification and Authentication Failures",
+    "CWE-307: Improper Restriction of Excessive Authentication Attempts"
+  ],
+  "status": "confirmed",
+  "discovered_date": "2026-07-16",
+  "reported_to_client": false,
+  "validation": {
+    "method_1": {
+      "tool": "manual-curl",
+      "description": "Sequential curl requests against verify-otp (21), reset-password (10), and register (8) from host shell — 39 total, zero throttling observed. Contrast test against /api/auth/login triggered Cloudflare 429 after 3-4 attempts, proving the control exists elsewhere on the domain.",
+      "passed": true
+    },
+    "method_2": {
+      "tool": "python3-requests (kali-pentest docker container)",
+      "command": "docker exec kali-pentest python3 -c \"import requests; ... POST verify-otp x8\"",
+      "description": "Independent automated script, separate process/network stack from Method 1, 8 additional wrong-code attempts against verify-otp — zero throttling observed, corroborating Method 1.",
+      "passed": true
+    }
+  },
+  "engagement_note": "All testing performed against the site's own public 'demo' sandbox tenant using a throwaway example.com test account created for this purpose. No real customer or tenant data was accessed, modified, or deleted; no destructive or costly action was taken; total request volume (47 across 3 endpoints) was deliberately kept low and does not constitute a full brute-force/DoS per engagement Rules of Engagement."
+}

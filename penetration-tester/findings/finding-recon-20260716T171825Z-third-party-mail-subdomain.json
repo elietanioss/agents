@@ -1,0 +1,24 @@
+{
+  "id": "finding-recon-20260716T171825Z-third-party-mail-subdomain",
+  "title": "mail.zakerne.com is a DNS-only pointer to third-party PrivateEmail (Namecheap) hosting infrastructure - informational, not tested",
+  "severity": "Info",
+  "cvss_score": 0.0,
+  "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:N",
+  "cwe": "",
+  "owasp_category": "",
+  "mitre_attack": "T1590.002",
+  "description": "DNS brute-force discovered mail.zakerne.com resolving to 198.54.122.136, which is NOT a Cloudflare address and does not match zakerne.com's own A records (172.67.218.191 / 104.21.38.37). MX records for the apex domain (mx1/mx2.privateemail.com) and the SPF TXT record (v=spf1 include:spf.privateemail.com ~all) confirm the domain's email is hosted on Namecheap's PrivateEmail service, a third-party mail provider not directly controlled by the site. Per engagement scope (CDN/hosting-provider infrastructure not directly controlled by the site is out of scope), this host was NOT port-scanned, fingerprinted, or otherwise actively tested - it is recorded here purely as a DNS enumeration result for completeness.",
+  "reproduction_steps": [
+    "gobuster dns --domain zakerne.com -w deepmagic.com-prefixes-top500.txt -> mail.zakerne.com 198.54.122.136",
+    "dig +short zakerne.com MX -> mx1/mx2.privateemail.com",
+    "dig +short zakerne.com TXT -> v=spf1 include:spf.privateemail.com ~all"
+  ],
+  "payload": "",
+  "evidence": ["evidence/recon/gobuster-dns.txt", "evidence/recon/dns.txt"],
+  "impact": "None assessed - out-of-scope third-party infrastructure. Recorded for client awareness only (e.g. to confirm this is expected/intended email hosting).",
+  "remediation": "No action required from a pentest perspective. If this finding is unexpected, the client should verify mail.zakerne.com/PrivateEmail is an intentionally provisioned service.",
+  "references": [],
+  "status": "unconfirmed",
+  "discovered_date": "2026-07-16T17:18:25Z",
+  "reported_to_client": false
+}

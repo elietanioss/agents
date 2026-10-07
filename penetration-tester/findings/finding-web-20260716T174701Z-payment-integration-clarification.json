@@ -1,0 +1,29 @@
+{
+  "id": "finding-web-20260716T174701Z-payment-integration-clarification",
+  "title": "Informational: Payment/Checkout Architecture Clarified -- No Live Whish Gateway Call or Card-Entry Flow Found in Client Bundle; 'stripe' String Was a Recharts False Positive",
+  "severity": "Info",
+  "cvss_score": 0.0,
+  "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:N",
+  "cwe": "N/A",
+  "owasp_category": "N/A",
+  "mitre_attack": "N/A",
+  "description": "Recon (OBJ-003) flagged two open questions for pentest-web to resolve: (1) whether 'Whish' represents a live/active payment-gateway integration, and (2) an unexplained 'stripe' string possibly indicating a secondary payment processor. Static analysis of the production JS bundle (index-sxBIrYLU.js, 1.7MB) resolves both: (1) 'Whish' appears ONLY as one of four manual payment-method labels in a staff-facing <select> dropdown alongside 'Cash', 'Bank Transfer', and 'OMT' -- used when tenant staff manually record how a client/tenant-license payment was received (client's own POST /api/payments and /api/payments/:id/complete endpoints, both properly gated behind Bearer-token auth, confirmed via unauthenticated probe returning 401). No outbound calls to any whish.money (or similar) domain, no Whish SDK/JS, and no card-entry form were found anywhere in the bundle; the CSP's connect-src is restricted to 'self', https://zakerne.com, and https://www.zakerne.com, which would block any client-side call to an external payment gateway even if one were attempted. This means the web application itself has no reachable flow that can trigger a real external charge -- offline/manual payment recording is the entire 'Whish' surface in scope. (2) The 'stripe' string match was confirmed to originate entirely from the bundled Recharts charting library's CSS class names ('recharts-cartesian-grid stripes-horizontal' / 'stripes-vertical', used for chart gridline styling) -- unrelated to the Stripe payment processor. No Stripe SDK, API calls, or publishable keys were found. This closes recon's open hypothesis as a false positive.",
+  "reproduction_steps": [
+    "1. Download production bundle: curl -s -o index.js https://zakerne.com/assets/index-sxBIrYLU.js",
+    "2. grep -io 'stripe[a-z0-9_-]*' index.js -> only 'stripes-horizontal'/'stripes-vertical' (Recharts CSS classes), 2 total occurrences, both in chart-gridline rendering code",
+    "3. Search for 'Whish' occurrences -> all instances are inside a payment-method <option> dropdown (Cash/Bank Transfer/Whish/OMT), never as a URL, SDK reference, or API call target",
+    "4. grep -oE 'https?://[a-zA-Z0-9.-]+' index.js -> no whish.money, stripe.com, or any payment-gateway domain present",
+    "5. Confirm CSP connect-src restricts outbound fetch/XHR to self + zakerne.com/www.zakerne.com only (blocks any third-party payment API call from client JS even if attempted)",
+    "6. Confirm /api/payments and /api/payments/:id/complete require authentication (unauthenticated POST -> HTTP 401)"
+  ],
+  "payload": "N/A (static/passive analysis only)",
+  "evidence": [
+    "C:\\Users\\User\\.claude\\agents\\penetration-tester\\evidence\\logs\\finding-web-20260716T174701Z-otp-rate-limiting-output.txt"
+  ],
+  "impact": "None -- informational. This materially reduces the RoE risk surface for 'payment/checkout flow' testing on this engagement: there is no in-app flow capable of triggering a real Whish (or Stripe) charge, so the hard RoE constraint against costly/real-money actions was never realistically at risk of being violated by any endpoint reachable in this engagement. The only payment-adjacent surface is tenant-staff-only manual invoice/license-payment bookkeeping (auth-gated, not reachable without staff credentials).",
+  "remediation": "None required. Recommend the client confirm this understanding matches their actual architecture (i.e., that Whish/OMT charges genuinely happen out-of-band, e.g. via bank transfer or a separate Whish merchant app, with the SaaS only recording the outcome) and, if that ever changes to a real-time gateway integration, that a follow-up assessment specifically covers the new checkout flow.",
+  "references": [],
+  "status": "confirmed",
+  "discovered_date": "2026-07-16",
+  "reported_to_client": false
+}

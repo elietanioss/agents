@@ -1,0 +1,37 @@
+Note: Unnecessary use of -X or --request, POST is already inferred.
+* Host zakerne.com:443 was resolved.
+* IPv6: (none)
+* IPv4: 172.67.218.191, 104.21.38.37
+*   Trying 172.67.218.191:443...
+* schannel: disabled automatic use of client certificate
+* ALPN: curl offers http/1.1
+* ALPN: server accepted http/1.1
+* Established connection to zakerne.com (172.67.218.191 port 443) from 192.168.10.39 port 26449 
+* using HTTP/1.x
+> POST /api/public/customers/verify-otp HTTP/1.1
+> Host: zakerne.com
+> User-Agent: curl/8.21.0
+> Accept: */*
+> Content-Type: application/json
+> Content-Length: 44
+> 
+} [44 bytes data]
+* upload completely sent off: 44 bytes
+< HTTP/1.1 400 Bad Request
+< Date: Thu, 16 Jul 2026 17:47:54 GMT
+< Content-Type: application/json
+< Content-Length: 35
+< Connection: keep-alive
+< Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+< Permissions-Policy: camera=(), microphone=(), geolocation=(), clipboard-read=(self), clipboard-write=(self)
+< Referrer-Policy: strict-origin-when-cross-origin
+< X-Content-Type-Options: nosniff
+< X-Frame-Options: DENY
+< Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=ovJLA1WiQQEAsHX8OV6TW5%2FCYuB6pE44r%2FRFaae%2Bg15%2BhhQE83digVbL2970YVJiV%2BqI69FsJB3JhM5wJuEsa%2FPYYXfcE8OM%2FrpYStmLWfwlPA1ee0P8hf1G2VNIjg%3D%3D"}]}
+< Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+< Server: cloudflare
+< CF-RAY: a1c2d5ada9f1e22f-MRS
+< 
+{ [35 bytes data]
+* Connection #0 to host zakerne.com:443 left intact
+{"error":"Invalid or expired code"}

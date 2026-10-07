@@ -1,0 +1,70 @@
+# Nmap 7.99 scan initiated Thu Jul 16 17:09:00 2026 as: /usr/lib/nmap/nmap -sV -sC --top-ports 100 -T3 -oA /evidence/recon/nmap-zakerne zakerne.com
+Nmap scan report for zakerne.com (172.67.218.191)
+Host is up (0.020s latency).
+Other addresses for zakerne.com (not scanned): 104.21.38.37
+Not shown: 95 filtered tcp ports (no-response)
+PORT     STATE SERVICE  VERSION
+53/tcp   open  domain   (generic dns response: NXDOMAIN)
+| dns-nsid: 
+|_  NSID:  ()
+| fingerprint-strings: 
+|   DNSVersionBindReqTCP: 
+|     version
+|     bind
+|     root-servers
+|     nstld
+|     verisign-grs
+|     client-ip
+|     adguard-dns
+|     185.99.32.58 server-ip
+|     94.140.15.15 node-name
+|     fra-1
+|     country
+|     43824
+|     resp
+|     res-type
+|_    normal
+80/tcp   open  http     Cloudflare http proxy
+|_http-trane-info: Problem with XML parsing of /evox/about
+|_http-title: Zakerne \xE2\x80\x94 Never miss an appointment
+| http-robots.txt: 1 disallowed entry 
+|_/
+|_http-server-header: cloudflare
+443/tcp  open  ssl/http Cloudflare http proxy
+| ssl-cert: Subject: commonName=zakerne.com
+| Subject Alternative Name: DNS:zakerne.com, DNS:security.zakerne.com, DNS:*.security.zakerne.com
+| Not valid before: 2026-06-28T19:02:30
+|_Not valid after:  2026-09-26T20:02:20
+|_http-trane-info: Problem with XML parsing of /evox/about
+| http-robots.txt: 1 disallowed entry 
+|_/
+|_http-title: Zakerne \xE2\x80\x94 Never miss an appointment
+|_http-server-header: cloudflare
+8080/tcp open  http     Cloudflare http proxy
+|_http-trane-info: Problem with XML parsing of /evox/about
+|_http-server-header: cloudflare
+|_http-title: Zakerne \xE2\x80\x94 Never miss an appointment
+| http-robots.txt: 1 disallowed entry 
+|_/
+8443/tcp open  ssl/http Cloudflare http proxy
+|_http-trane-info: Problem with XML parsing of /evox/about
+|_http-server-header: cloudflare
+| ssl-cert: Subject: commonName=zakerne.com
+| Subject Alternative Name: DNS:zakerne.com, DNS:security.zakerne.com, DNS:*.security.zakerne.com
+| Not valid before: 2026-06-28T19:02:30
+|_Not valid after:  2026-09-26T20:02:20
+|_http-title: Zakerne \xE2\x80\x94 Never miss an appointment
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port53-TCP:V=7.99%I=7%D=7/16%Time=6A591039%P=x86_64-pc-linux-gnu%r(DNSV
+SF:ersionBindReqTCP,127,"\x01%\0\x06\x81\x83\0\x01\0\0\0\x01\0\x06\x07vers
+SF:ion\x04bind\0\0\x10\0\x03\0\0\x06\0\x01\0\0\x02k\0@\x01a\x0croot-server
+SF:s\x03net\0\x05nstld\x0cverisign-grs\x03com\0x\xc3f0\0\0\x07\x08\0\0\x03
+SF:\x84\0\t:\x80\0\x01Q\x80\tclient-ip\x0badguard-dns\xc0P\0\x10\0\x03\0\0
+SF:\x0e\x10\0\r\x0c185\.99\.32\.58\tserver-ip\xc0s\0\x10\0\x03\0\0\x0e\x10
+SF:\0\r\x0c94\.140\.15\.15\tnode-name\xc0s\0\x10\0\x03\0\0\x0e\x10\0\x06\x
+SF:05fra-1\x07country\xc0s\0\x10\0\x03\0\0\x0e\x10\0\x03\x02LB\x03asn\xc0s
+SF:\0\x10\0\x03\0\0\x0e\x10\0\x06\x0543824\x04resp\x08res-type\xc0s\0\x10\
+SF:0\x03\0\0\x0e\x10\0\x07\x06normal");
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Thu Jul 16 17:09:28 2026 -- 1 IP address (1 host up) scanned in 28.47 seconds

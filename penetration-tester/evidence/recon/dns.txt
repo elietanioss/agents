@@ -1,0 +1,20 @@
+=== A records ===
+172.67.218.191
+104.21.38.37
+=== AAAA records ===
+=== MX records ===
+10 mx2.privateemail.com.
+10 mx1.privateemail.com.
+=== NS records ===
+felicity.ns.cloudflare.com.
+eva.ns.cloudflare.com.
+=== TXT records ===
+"v=spf1 include:spf.privateemail.com ~all"
+=== SOA ===
+eva.ns.cloudflare.com. dns.cloudflare.com. 2409074696 10000 2400 604800 1800
+=== CNAME www ===
+=== Zone transfer attempt ===
+
+; <<>> DiG 9.20.20-1-Debian <<>> axfr zakerne.com @felicity.ns.cloudflare.com.
+;; global options: +cmd
+; Transfer failed.

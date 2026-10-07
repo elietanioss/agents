@@ -1,0 +1,2526 @@
+MASTER DEEP-RESEARCH PROMPT
+
+THE EVOLUTION OF ONLINE SELLING AND THE KNOWLEDGE BASE FOR AN AI SALES-DESIGNED WEBSITE DESIGNER
+
+ROLE
+
+Act as a multidisciplinary research team composed of:
+
+- Consumer psychologist
+- Behavioral economist
+- Marketing scientist
+- Sales strategist
+- Ecommerce strategist
+- Conversion-rate optimization researcher
+- UX researcher
+- UI designer
+- Interaction designer
+- Information architect
+- Visual-attention researcher
+- Pricing strategist
+- Merchandising specialist
+- Retail psychologist
+- Ecommerce product manager
+- Recommendation-system specialist
+- Personalization specialist
+- Growth strategist
+- Retention strategist
+- CRM specialist
+- Brand strategist
+- Copywriting researcher
+- Search and discovery specialist
+- Mobile-commerce specialist
+- Marketplace specialist
+- Data scientist
+- Experimentation/A-B testing specialist
+- Web analytics specialist
+- Competitive-intelligence analyst
+- Digital commerce historian
+- AI-commerce researcher
+- Accessibility specialist
+- Consumer-protection researcher
+
+You are NOT designing or building the agent yet.
+
+You are conducting the foundational research that must exist before its architecture is decided.
+
+The final goal is to understand how humans have been persuaded, assisted, guided, reassured, educated, converted, upsold, retained, and brought back throughout the history of online commerce, and determine what knowledge an AI must possess to design sales-oriented digital experiences intelligently.
+
+The eventual system we intend to build is not merely:
+
+- a website auditor
+- a CRO checker
+- a copywriting bot
+- a marketing assistant
+- a UI designer
+- a recommender system
+- a psychology bot
+
+The eventual system is intended to become an AI SALES-DESIGNED WEBSITE DESIGNER.
+
+Its job will eventually be to understand a business, market, customers, competitors, products, prices, margins, brand, traffic sources, customer psychology, purchase behavior, visual design, merchandising, recommendation opportunities, funnel structure, analytics, and historical sales knowledge, and then design the commercial experience around those facts.
+
+But DO NOT design that architecture yet.
+
+First build the intellectual foundation.
+
+==================================================
+PART I
+RESEARCH PHILOSOPHY
+==================================================
+
+Do not produce generic marketing advice.
+
+Do not rely primarily on marketing blogs.
+
+Do not repeat internet folklore such as:
+
+“red makes people buy”
+“$9.99 always converts better”
+“people only read in an F-pattern”
+“three options always work best”
+“urgency always increases sales”
+
+Treat every such claim as a hypothesis requiring evidence and context.
+
+For every important principle distinguish:
+
+1. Strong causal evidence
+2. Repeated empirical evidence
+3. Observational evidence
+4. Industry best practice
+5. Practitioner experience
+6. Plausible psychological hypothesis
+7. Weak evidence
+8. Marketing folklore
+9. Contradicted or context-dependent evidence
+
+Research disagreements.
+
+Explain when an effect changes according to:
+
+- product
+- customer
+- culture
+- country
+- price
+- brand
+- device
+- purchase frequency
+- expertise
+- risk
+- traffic source
+- industry
+- customer intent
+- stage of the funnel
+
+Never assume that a technique used by Amazon, Apple, Booking, SHEIN, Shopify merchants, or another successful company caused their success.
+
+Distinguish:
+
+“they use this”
+
+from:
+
+“evidence indicates this produces this outcome.”
+
+Study failed practices as seriously as successful ones.
+
+==================================================
+PART II
+SOURCE REQUIREMENTS
+==================================================
+
+Use current web research.
+
+Prioritize:
+
+1. Peer-reviewed research
+2. Academic books and meta-analyses
+3. Original experiments
+4. Nielsen Norman Group
+5. Baymard Institute
+6. Google research and documentation
+7. Microsoft research
+8. Meta research where relevant
+9. Shopify research/documentation
+10. Stripe research/documentation
+11. major ecommerce platform documentation
+12. behavioral economics literature
+13. consumer psychology literature
+14. marketing science journals
+15. HCI and usability research
+16. eye-tracking studies
+17. large-scale ecommerce studies
+18. company engineering/product publications
+19. credible industry datasets
+20. regulatory authorities
+
+Examples of academic fields to search:
+
+- marketing science
+- consumer behavior
+- behavioral economics
+- neuroeconomics
+- decision science
+- cognitive psychology
+- social psychology
+- human-computer interaction
+- visual cognition
+- attention research
+- retail science
+- pricing research
+- recommender systems
+- information retrieval
+- persuasion research
+
+Use blogs mainly to discover hypotheses, terminology, examples, and practitioner patterns.
+
+Do not treat them as strong evidence without stronger supporting sources.
+
+Cite every major conclusion.
+
+Provide direct source links.
+
+Include publication year.
+
+Whenever possible, identify sample size and study design.
+
+==================================================
+PART III
+RECONSTRUCT THE HISTORY OF ONLINE SELLING
+==================================================
+
+Research the evolution of digital commerce chronologically.
+
+Do not begin in 2020.
+
+Understand how we arrived here.
+
+Start with the foundations of electronic and catalog commerce where useful, then investigate the commercial internet.
+
+Create a detailed timeline covering approximately:
+
+1990–1995
+1995–2000
+2000–2005
+2005–2010
+2010–2015
+2015–2020
+2020–2023
+2023–2026
+
+For every era investigate:
+
+- technology available
+- bandwidth/device constraints
+- payment mechanisms
+- consumer trust
+- dominant interfaces
+- dominant business models
+- website design
+- search/discovery
+- product pages
+- shopping carts
+- checkout
+- customer acquisition
+- advertising
+- personalization
+- recommendations
+- pricing
+- merchandising
+- customer service
+- loyalty
+- shipping expectations
+- social influence
+- mobile usage
+- analytics
+- experimentation
+- privacy
+- fraud prevention
+- marketplace behavior
+- psychological techniques
+- major innovations
+- techniques that disappeared
+- techniques that became standard
+
+Explain WHY each major change occurred.
+
+==================================================
+PART IV
+THE FIRST GENERATION OF ECOMMERCE
+==================================================
+
+Study early ecommerce.
+
+Research:
+
+- early online catalogs
+- first ecommerce transactions
+- SSL
+- credit-card trust
+- shopping carts
+- checkout forms
+- primitive product pages
+- search
+- category navigation
+- dial-up limitations
+- trust badges
+- privacy/security messaging
+- online payment skepticism
+- early Amazon
+- eBay
+- Dell
+- online travel
+- comparison-shopping engines
+- early online banking
+- first online marketplaces
+
+Study what online stores originally copied from:
+
+- physical retail
+- mail-order catalogs
+- direct-response advertising
+- television shopping
+- telephone sales
+- print advertising
+
+Identify principles that survived into modern ecommerce.
+
+==================================================
+PART V
+THE 2000–2010 EVOLUTION
+==================================================
+
+Study how ecommerce changed after the dot-com crash.
+
+Research:
+
+- usability becoming commercially important
+- standardized navigation
+- site search
+- product filtering
+- shopping-cart persistence
+- abandoned carts
+- email marketing
+- transactional emails
+- affiliate marketing
+- search-engine marketing
+- Google AdWords
+- SEO
+- online reviews
+- customer ratings
+- wishlists
+- “customers who bought this also bought”
+- collaborative filtering
+- recommendation systems
+- personalization
+- Amazon's influence
+- one-click purchasing
+- free-shipping strategies
+- free-shipping thresholds
+- returns
+- customer accounts
+- guest checkout
+- price comparison
+- coupon codes
+- scarcity
+- limited inventory indicators
+- trust/security indicators
+- ecommerce analytics
+- early conversion-rate optimization
+- A/B testing
+
+Determine which modern ecommerce patterns originated or became mainstream during this era.
+
+==================================================
+PART VI
+THE WEB 2.0 AND SOCIAL-PROOF ERA
+==================================================
+
+Research how user-generated content changed online selling.
+
+Study:
+
+- reviews
+- ratings
+- photos
+- testimonials
+- communities
+- forums
+- blogs
+- influencers
+- social networks
+- customer questions and answers
+- recommendation sharing
+- referral programs
+- social proof
+- authority
+- expert endorsement
+- user-generated photography
+- community identity
+- fandom
+- brand communities
+
+Study the shift from:
+
+company tells customer
+
+to:
+
+customers influence customers.
+
+==================================================
+PART VII
+THE MOBILE REVOLUTION
+==================================================
+
+Research what smartphones changed.
+
+Study:
+
+- responsive design
+- mobile-first design
+- app commerce
+- touch interfaces
+- thumb zones
+- bottom navigation
+- simplified checkout
+- saved payment methods
+- autofill
+- Apple Pay
+- Google Pay
+- biometrics
+- push notifications
+- deep linking
+- mobile search
+- mobile product photography
+- vertical video
+- swipe interfaces
+- mobile product cards
+- sticky add-to-cart
+- app-exclusive promotions
+- location-aware commerce
+- mobile abandonment
+- app retention
+- mobile onboarding
+
+Explain how purchase psychology differs between:
+
+desktop
+mobile web
+native app
+
+==================================================
+PART VIII
+THE PERSONALIZATION ERA
+==================================================
+
+Study the evolution from static stores to personalized stores.
+
+Research:
+
+- collaborative filtering
+- content-based recommendations
+- hybrid recommendations
+- behavioral recommendations
+- session-based recommendations
+- personalized homepages
+- personalized category sorting
+- personalized search
+- personalized offers
+- personalized emails
+- dynamic content
+- customer segmentation
+- predictive models
+- lifecycle marketing
+- customer lifetime value
+- propensity models
+- next-best-action models
+- real-time personalization
+
+Study Amazon, Netflix and other influential recommendation systems where relevant.
+
+Explain the difference between:
+
+alternative recommendation
+substitute
+complement
+cross-sell
+upsell
+bundle
+order bump
+frequently bought together
+recently viewed
+similar products
+complete-the-look
+complete-the-kit
+personalized recommendation
+contextual recommendation
+
+==================================================
+PART IX
+THE MARKETPLACE ERA
+==================================================
+
+Study:
+
+- Amazon
+- eBay
+- Alibaba
+- AliExpress
+- Etsy
+- MercadoLibre
+- Shopee
+- Lazada
+- Temu
+- SHEIN
+- regional marketplaces where relevant
+
+Investigate how marketplaces changed customer expectations regarding:
+
+- price
+- selection
+- search
+- filters
+- reviews
+- delivery
+- free shipping
+- returns
+- trust
+- comparison
+- recommendations
+- deals
+- discounts
+- loyalty
+- speed
+- checkout
+
+Analyze marketplace-specific psychology.
+
+==================================================
+PART X
+DIRECT-TO-CONSUMER COMMERCE
+==================================================
+
+Study the DTC boom.
+
+Research:
+
+- Shopify
+- brand storytelling
+- landing pages
+- hero sections
+- single-product stores
+- product storytelling
+- UGC
+- influencer marketing
+- lifestyle photography
+- performance advertising
+- subscription models
+- bundles
+- quizzes
+- product finders
+- SMS marketing
+- email flows
+- retargeting
+- post-purchase upsells
+- subscription retention
+- community building
+
+Study successful and failed DTC patterns.
+
+==================================================
+PART XI
+SOCIAL COMMERCE AND CREATOR COMMERCE
+==================================================
+
+Study:
+
+- Instagram commerce
+- TikTok commerce
+- TikTok Shop
+- YouTube shopping
+- influencer commerce
+- creator storefronts
+- affiliate creators
+- live shopping
+- livestream commerce
+- shoppable video
+- short-form video
+- social proof loops
+- community commerce
+- viral products
+
+Explain how these environments change customer psychology compared with search-driven ecommerce.
+
+==================================================
+PART XII
+MODERN 2020–2026 ONLINE SALES
+==================================================
+
+Investigate current commerce.
+
+Study:
+
+- pandemic-era ecommerce acceleration
+- omnichannel commerce
+- BOPIS
+- same-day delivery
+- subscriptions
+- BNPL
+- wallets
+- instant checkout
+- one-page checkout
+- conversational commerce
+- WhatsApp commerce
+- messaging commerce
+- chatbot commerce
+- AI shopping assistants
+- generative AI
+- AI search
+- agentic shopping
+- AI recommendations
+- generative merchandising
+- dynamic content generation
+- virtual try-on
+- AR commerce
+- visual search
+- voice commerce
+- predictive commerce
+- AI-generated customer support
+
+Research developments current through 2026.
+
+Identify what may represent a structural change rather than temporary hype.
+
+==================================================
+PART XIII
+CONSUMER PSYCHOLOGY
+==================================================
+
+Build a serious map of consumer psychology relevant to online purchasing.
+
+Research:
+
+- attention
+- perception
+- memory
+- working-memory limitations
+- motivation
+- reward
+- desire
+- emotion
+- trust
+- uncertainty
+- risk
+- confidence
+- curiosity
+- anticipation
+- identity
+- aspiration
+- belonging
+- status
+- expertise
+- competence
+- autonomy
+- convenience
+- habit
+- novelty
+- familiarity
+- fear
+- regret
+- satisfaction
+
+Investigate different purchasing modes:
+
+- impulse
+- habitual
+- exploratory
+- utilitarian
+- hedonic
+- identity-based
+- aspirational
+- status-based
+- problem solving
+- high involvement
+- low involvement
+- emergency
+- replenishment
+- gifting
+- luxury
+- professional
+- expert
+- beginner
+- comparison shopping
+- bargain hunting
+
+Explain how website design should change according to the type of decision.
+
+==================================================
+PART XIV
+BEHAVIORAL ECONOMICS
+==================================================
+
+Research at minimum:
+
+- anchoring
+- reference dependence
+- loss aversion
+- framing
+- mental accounting
+- endowment effect
+- default effect
+- decoy effect
+- attraction effect
+- compromise effect
+- asymmetric dominance
+- scarcity
+- urgency
+- social proof
+- authority
+- reciprocity
+- commitment
+- consistency
+- familiarity
+- mere exposure
+- priming
+- salience
+- present bias
+- hyperbolic discounting
+- ambiguity aversion
+- regret aversion
+- sunk-cost effects
+- zero-price effect
+- partitioned pricing
+- price-quality inference
+- choice overload
+- cognitive fluency
+- processing fluency
+- peak-end effects
+- goal-gradient effect
+- progress effects
+- ownership
+- anticipated regret
+- omission bias
+- status quo bias
+- confirmation bias where commercially relevant
+
+For each:
+
+DEFINE
+EVIDENCE
+WHEN IT WORKS
+WHEN IT FAILS
+ETHICAL RISKS
+ECOMMERCE APPLICATIONS
+EXAMPLES
+TESTABLE HYPOTHESES
+
+==================================================
+PART XV
+VISUAL ATTENTION AND EYE GUIDANCE
+==================================================
+
+Research how visual attention actually works.
+
+Study:
+
+- preattentive processing
+- visual salience
+- contrast
+- size
+- position
+- whitespace
+- grouping
+- proximity
+- alignment
+- visual hierarchy
+- movement
+- animation
+- faces
+- gaze direction
+- directional cues
+- symmetry
+- asymmetry
+- shapes
+- typography
+- image composition
+- foreground/background
+- clutter
+- information density
+- banner blindness
+- habituation
+- attentional capture
+- visual search
+
+Review eye-tracking research.
+
+Investigate common claims including:
+
+- F pattern
+- Z pattern
+- Gutenberg diagram
+- above-the-fold
+- left/right placement
+- CTA positioning
+- face/gaze effects
+
+Determine where these concepts are valid and where they are oversimplified.
+
+Build principles for intentionally guiding a visitor's eye.
+
+==================================================
+PART XVI
+COLOR PSYCHOLOGY
+==================================================
+
+Conduct a serious review of color.
+
+Do NOT produce:
+
+red = urgency
+blue = trust
+green = nature
+
+as universal rules.
+
+Research:
+
+- hue
+- saturation
+- luminance
+- contrast
+- temperature
+- color harmony
+- distinctiveness
+- visual salience
+- brand association
+- category expectations
+- cultural interpretation
+- learned associations
+- color accessibility
+- color blindness
+- CTA contrast
+- background interactions
+
+Investigate whether colors produce measurable effects on:
+
+- attention
+- emotion
+- trust
+- perceived quality
+- perceived price
+- luxury
+- excitement
+- safety
+- appetite
+- urgency
+- purchase behavior
+
+Separate evidence from folklore.
+
+==================================================
+PART XVII
+TYPOGRAPHY AND LANGUAGE
+==================================================
+
+Research:
+
+- readability
+- font size
+- weight
+- spacing
+- hierarchy
+- line length
+- capitalization
+- numerical typography
+- price typography
+- luxury typography
+- utilitarian typography
+- typography and perceived trust
+- typography and brand personality
+
+Study copy length.
+
+Determine when customers need:
+
+short copy
+long copy
+technical copy
+storytelling
+comparison
+FAQs
+specifications
+reviews
+
+==================================================
+PART XVIII
+COPYWRITING AND SALES LANGUAGE
+==================================================
+
+Research digital sales copy from:
+
+- direct response
+- advertising
+- retail
+- ecommerce
+- SaaS
+- DTC
+- marketplaces
+
+Study:
+
+- features vs benefits
+- benefit ladders
+- jobs-to-be-done
+- problem-agitation-solution
+- AIDA
+- PAS
+- awareness stages
+- value propositions
+- positioning
+- differentiation
+- headlines
+- CTA language
+- objections
+- risk reversal
+- guarantees
+- specificity
+- credibility
+- proof
+- storytelling
+- identity
+- aspirational language
+- outcome framing
+
+Determine which frameworks have strong evidence versus practitioner tradition.
+
+==================================================
+PART XIX
+THE PSYCHOLOGY OF PRICE
+==================================================
+
+Perform an extensive study of price presentation.
+
+Research:
+
+- charm pricing
+- left-digit effects
+- round prices
+- prestige pricing
+- price endings
+- price precision
+- price fonts
+- price size
+- crossed-out prices
+- reference prices
+- MSRP
+- discount framing
+- percentage vs absolute discounts
+- bundles
+- quantity discounts
+- subscriptions
+- monthly vs annual framing
+- per-day framing
+- installments
+- BNPL
+- shipping thresholds
+- free shipping
+- free trials
+- freemium
+- tiered plans
+- decoy plans
+- premium anchors
+- good/better/best
+- price ladders
+- price-quality inference
+- willingness to pay
+
+Study how these effects differ for:
+
+budget
+mainstream
+premium
+luxury
+B2B
+SaaS
+subscriptions
+retail goods
+
+==================================================
+PART XX
+PRODUCT MERCHANDISING
+==================================================
+
+Study digital merchandising.
+
+Research:
+
+- category hierarchy
+- assortment
+- sorting
+- filtering
+- featured products
+- best sellers
+- new arrivals
+- trending
+- seasonal placement
+- premium placement
+- category anchors
+- comparison
+- product cards
+- badges
+- bestseller labels
+- limited stock
+- new labels
+- staff picks
+- editor choices
+- recommended for you
+- ranking algorithms
+
+Study physical retail merchandising and determine what concepts transfer online.
+
+==================================================
+PART XXI
+PRODUCT DISCOVERY
+==================================================
+
+Research:
+
+- navigation
+- mega menus
+- search
+- autocomplete
+- typo tolerance
+- semantic search
+- faceted filters
+- category pages
+- recommendation carousels
+- quizzes
+- product finders
+- guided selling
+- conversational search
+- visual search
+- AI shopping assistants
+
+Determine how discovery changes for:
+
+beginner
+expert
+known-item shopper
+exploratory shopper
+gift buyer
+bargain hunter
+
+==================================================
+PART XXII
+PRODUCT-PAGE ENGINEERING
+==================================================
+
+Research every major component of a modern product page.
+
+Examples:
+
+- product title
+- hero image
+- gallery
+- video
+- 360° media
+- AR
+- rating
+- reviews
+- price
+- previous price
+- financing
+- variants
+- stock
+- shipping
+- delivery date
+- returns
+- warranty
+- seller
+- authenticity
+- specifications
+- features
+- benefits
+- comparison
+- FAQs
+- trust signals
+- certifications
+- compatibility
+- sizing
+- fit
+- installation
+- use cases
+- testimonials
+- UGC
+- questions
+- sticky CTA
+- recommendations
+
+Determine where information belongs in the customer's decision sequence.
+
+==================================================
+PART XXIII
+CART PSYCHOLOGY
+==================================================
+
+Research the shopping cart as a selling environment.
+
+Study:
+
+- cart drawer vs page
+- persistent cart
+- cart summary
+- shipping thresholds
+- free shipping progress
+- complementary recommendations
+- quantity changes
+- removal
+- save-for-later
+- coupon fields
+- taxes
+- shipping estimates
+- trust
+- urgency
+- inventory
+- checkout CTA
+
+Investigate when cart upselling helps and when it hurts.
+
+==================================================
+PART XXIV
+CHECKOUT PSYCHOLOGY
+==================================================
+
+Conduct deep research into checkout.
+
+Study:
+
+- guest checkout
+- account creation
+- number of steps
+- one-page checkout
+- progress indicators
+- field count
+- autofill
+- payment methods
+- wallets
+- BNPL
+- shipping
+- delivery estimates
+- address validation
+- coupon fields
+- errors
+- mobile keyboards
+- trust
+- security messaging
+- distraction
+- cross-sells
+- order bumps
+- confirmation
+
+Identify major reasons for checkout abandonment.
+
+==================================================
+PART XXV
+POST-PURCHASE SELLING
+==================================================
+
+Research what happens after payment.
+
+Study:
+
+- confirmation page
+- post-purchase upsell
+- cross-sell
+- order tracking
+- onboarding
+- education
+- referral
+- review requests
+- loyalty
+- replenishment
+- subscription
+- win-back
+- repeat purchase
+- customer service
+- community
+
+Understand why the commercial relationship does not end at checkout.
+
+==================================================
+PART XXVI
+RETENTION AND CUSTOMER LIFETIME VALUE
+==================================================
+
+Study:
+
+- repeat purchases
+- loyalty programs
+- points
+- tiers
+- VIP
+- subscriptions
+- replenishment
+- memberships
+- email
+- SMS
+- push
+- personalized offers
+- lifecycle campaigns
+- win-back campaigns
+- customer service
+- referral programs
+- community
+
+Study the tradeoff between:
+
+maximizing today's conversion
+
+and:
+
+maximizing long-term customer value.
+
+==================================================
+PART XXVII
+TRUST
+==================================================
+
+Research digital trust.
+
+Study:
+
+- brand legitimacy
+- domain
+- design quality
+- photography
+- grammar
+- contact information
+- physical address
+- reviews
+- ratings
+- certifications
+- payment logos
+- security indicators
+- warranties
+- returns
+- shipping
+- customer support
+- transparency
+- seller identity
+- authenticity
+- social presence
+- founder/company information
+- press
+- expert endorsement
+
+Determine what trust signals matter at different purchasing stages.
+
+==================================================
+PART XXVIII
+PRODUCT PHOTOGRAPHY AND VIDEO
+==================================================
+
+Research:
+
+- packshots
+- lifestyle imagery
+- human models
+- product-in-use
+- scale
+- context
+- close-ups
+- detail
+- camera angle
+- perspective
+- lighting
+- background
+- image order
+- zoom
+- video
+- demonstrations
+- before/after
+- UGC
+- comparison imagery
+- emotional imagery
+
+Study eye-tracking and visual-attention research.
+
+==================================================
+PART XXIX
+SOCIAL PROOF
+==================================================
+
+Research:
+
+- star ratings
+- review volume
+- review recency
+- verified reviews
+- review distributions
+- photos
+- videos
+- expert endorsements
+- celebrity endorsements
+- influencer endorsements
+- customer counts
+- purchase counts
+- bestseller claims
+- “people are viewing”
+- “X bought today”
+- community size
+
+Separate legitimate evidence from deceptive social proof.
+
+==================================================
+PART XXX
+SCARCITY AND URGENCY
+==================================================
+
+Research:
+
+- limited stock
+- deadlines
+- limited editions
+- flash sales
+- countdowns
+- reservation windows
+- seasonal availability
+- temporary offers
+- shipping cutoffs
+
+Compare real scarcity with manufactured scarcity.
+
+Study:
+
+- short-term conversion
+- trust
+- reactance
+- customer satisfaction
+- long-term brand effects
+
+==================================================
+PART XXXI
+PERSONALIZATION VS PRIVACY
+==================================================
+
+Research:
+
+- cookies
+- first-party data
+- third-party data
+- identity graphs
+- consent
+- GDPR
+- CCPA/CPRA
+- tracking restrictions
+- browser privacy changes
+- Apple's privacy changes
+- server-side tracking
+- contextual targeting
+- zero-party data
+- first-party data
+- privacy-preserving personalization
+
+Study the psychological boundary between:
+
+“helpfully personalized”
+
+and:
+
+“creepy.”
+
+==================================================
+PART XXXII
+DARK PATTERNS
+==================================================
+
+Study dark patterns comprehensively because our eventual AI must recognize and avoid them.
+
+Research:
+
+- confirmshaming
+- hidden costs
+- forced continuity
+- roach motel
+- obstruction
+- disguised ads
+- fake scarcity
+- fake urgency
+- misleading defaults
+- sneaking
+- hidden subscriptions
+- forced account creation
+- difficult cancellation
+- preselection
+- deceptive visual hierarchy
+
+Research relevant consumer-protection regulation.
+
+The future agent must distinguish:
+
+PERSUASION
+from
+MANIPULATION
+from
+DECEPTION.
+
+==================================================
+PART XXXIII
+ACCESSIBILITY AND SALES
+==================================================
+
+Research accessibility not only as compliance, but as usability.
+
+Study:
+
+- WCAG
+- contrast
+- keyboard access
+- screen readers
+- motor accessibility
+- cognitive accessibility
+- readable typography
+- motion sensitivity
+- forms
+- errors
+- labels
+- color dependence
+
+Investigate how accessibility improvements affect usability and conversion more broadly.
+
+==================================================
+PART XXXIV
+COMPETITOR INTELLIGENCE
+==================================================
+
+Design a research methodology for studying competitor websites.
+
+For each competitor inspect:
+
+HOME
+CATEGORY
+SEARCH
+PRODUCT
+CART
+CHECKOUT
+POST-PURCHASE
+ACCOUNT
+MOBILE
+APP where available
+
+Record:
+
+- layout
+- navigation
+- visual hierarchy
+- colors
+- typography
+- imagery
+- copy
+- pricing
+- offers
+- discounts
+- guarantees
+- shipping
+- returns
+- recommendations
+- upsells
+- cross-sells
+- bundles
+- trust
+- reviews
+- loyalty
+- checkout
+- personalization
+- search
+- mobile behavior
+- sticky elements
+- prompts
+- popups
+- email capture
+- notification capture
+
+Do not merely compare screenshots.
+
+Reverse-engineer the commercial logic.
+
+Ask:
+
+WHY IS THIS ELEMENT HERE?
+
+WHAT CUSTOMER QUESTION DOES IT ANSWER?
+
+WHAT BEHAVIOR IS IT TRYING TO CREATE?
+
+WHAT PSYCHOLOGICAL PRINCIPLE MAY BE INVOLVED?
+
+AT WHAT FUNNEL STAGE DOES IT APPEAR?
+
+WHAT BUSINESS METRIC MAY IT TARGET?
+
+==================================================
+PART XXXV
+COMPETITOR MYSTERY SHOPPING
+==================================================
+
+Simulate multiple shoppers.
+
+Examples:
+
+BEGINNER
+EXPERT
+PRICE-SENSITIVE SHOPPER
+PREMIUM BUYER
+IMPULSE BUYER
+SKEPTIC
+GIFT BUYER
+RETURNING CUSTOMER
+MOBILE USER
+COMPARISON SHOPPER
+
+For each competitor record:
+
+- entry point
+- number of clicks
+- search process
+- confusion
+- product discovery
+- comparison
+- reassurance
+- recommendations
+- cart behavior
+- checkout friction
+- upsells
+- cross-sells
+- post-purchase
+- unanswered questions
+
+==================================================
+PART XXXVI
+STUDY WORLD-CLASS COMPANIES
+==================================================
+
+Analyze representative companies across categories.
+
+Potential examples include:
+
+Amazon
+Apple
+Nike
+Adidas
+IKEA
+Sephora
+Walmart
+Target
+Costco
+Best Buy
+Booking.com
+Airbnb
+Expedia
+SHEIN
+Temu
+AliExpress
+Alibaba
+Etsy
+eBay
+Zalando
+ASOS
+Wayfair
+Warby Parker
+Glossier
+Allbirds
+Gymshark
+Patagonia
+Lululemon
+Shopify-powered DTC brands
+
+Add better examples where appropriate.
+
+Do not assume every company is a good model.
+
+Identify:
+
+WHAT THEY DO
+WHY THEY MAY DO IT
+WHAT EVIDENCE SUPPORTS IT
+WHICH BUSINESSES SHOULD NOT COPY IT
+
+==================================================
+PART XXXVII
+DIFFERENT BUSINESS MODELS
+==================================================
+
+Study how commercial design differs between:
+
+- ecommerce retail
+- marketplace
+- DTC
+- luxury
+- discount
+- subscription
+- SaaS
+- B2B
+- wholesale
+- services
+- booking
+- travel
+- food delivery
+- grocery
+- fashion
+- electronics
+- beauty
+- furniture
+- automotive
+- digital goods
+- education
+- financial products where legally appropriate
+
+Do not create one universal sales formula.
+
+==================================================
+PART XXXVIII
+TRAFFIC-SOURCE PSYCHOLOGY
+==================================================
+
+Study how visitors differ when arriving from:
+
+- branded Google search
+- non-branded Google search
+- shopping search
+- SEO article
+- paid search
+- display ad
+- Meta ad
+- TikTok
+- Instagram
+- influencer
+- YouTube
+- email
+- SMS
+- affiliate
+- referral
+- direct visit
+- marketplace
+- QR code
+- offline campaign
+
+Research how landing experiences should adapt to visitor intent.
+
+==================================================
+PART XXXIX
+THE CUSTOMER'S PSYCHOLOGICAL JOURNEY
+==================================================
+
+Develop models for questions customers ask unconsciously or consciously.
+
+Example:
+
+What is this?
+Is this relevant?
+Do I want it?
+Why this one?
+Why this company?
+Can I trust them?
+Is the price fair?
+What are my alternatives?
+Will it work for me?
+What could go wrong?
+Can I return it?
+Should I buy now?
+Am I making a good choice?
+
+Study how these questions change by product.
+
+==================================================
+PART XL
+INFORMATION SEQUENCING
+==================================================
+
+Research how the ORDER of information changes persuasion.
+
+Study when customers should encounter:
+
+- problem
+- desire
+- outcome
+- product
+- benefits
+- specifications
+- proof
+- comparison
+- price
+- risk
+- guarantee
+- CTA
+
+Determine why different products require different sequences.
+
+==================================================
+PART XLI
+COGNITIVE LOAD
+==================================================
+
+Research:
+
+- working memory
+- Hick's Law
+- choice overload
+- progressive disclosure
+- chunking
+- recognition vs recall
+- menu complexity
+- filter complexity
+- form complexity
+- visual clutter
+- competing CTAs
+- popups
+- banners
+
+Determine when simplification improves sales and when removing information damages confidence.
+
+==================================================
+PART XLII
+SEARCH AND RECOMMENDER SYSTEM SCIENCE
+==================================================
+
+Study the technical history and current state of:
+
+- information retrieval
+- ecommerce search
+- ranking
+- collaborative filtering
+- matrix factorization
+- embeddings
+- neural recommenders
+- session recommenders
+- graph recommenders
+- contextual bandits
+- reinforcement learning
+- LLM recommendations
+- conversational recommendations
+- multimodal recommendations
+
+Focus on their commercial applications.
+
+==================================================
+PART XLIII
+BASKET INTELLIGENCE
+==================================================
+
+Research:
+
+- market basket analysis
+- association rules
+- product affinity
+- compatibility
+- attach rate
+- bundle optimization
+- complement detection
+- substitute detection
+- accessory detection
+- replenishment
+
+Understand how an AI could know:
+
+WHAT SHOULD BE RECOMMENDED
+TO WHOM
+WHEN
+WHERE
+AND WHY.
+
+==================================================
+PART XLIV
+PROMOTIONS
+==================================================
+
+Research:
+
+- discounts
+- coupons
+- bundles
+- BOGO
+- gifts
+- samples
+- loyalty rewards
+- free shipping
+- thresholds
+- limited offers
+- referral discounts
+- first-order discounts
+- subscription discounts
+
+Study whether promotions increase:
+
+incremental profit
+
+or simply subsidize customers who would have purchased anyway.
+
+==================================================
+PART XLV
+UNIT ECONOMICS
+==================================================
+
+Do not optimize only conversion rate.
+
+Study:
+
+- revenue per visitor
+- contribution margin
+- gross margin
+- AOV
+- attach rate
+- CAC
+- LTV
+- repeat rate
+- refund rate
+- return rate
+- cancellation
+- churn
+- shipping costs
+- discount costs
+- support costs
+
+Build the principle:
+
+THE BEST DESIGN IS NOT NECESSARILY THE ONE WITH THE HIGHEST CONVERSION RATE.
+
+==================================================
+PART XLVI
+EXPERIMENTATION
+==================================================
+
+Research:
+
+- A/B testing
+- multivariate testing
+- sequential testing
+- Bayesian testing
+- frequentist testing
+- sample size
+- statistical power
+- novelty effects
+- multiple testing
+- false positives
+- segmentation
+- guardrail metrics
+- holdout groups
+- long-term effects
+
+Study famous ecommerce experimentation programs.
+
+Research how companies avoid optimizing themselves into local maxima.
+
+==================================================
+PART XLVII
+ANALYTICS
+==================================================
+
+Research what data our future system should eventually understand.
+
+Potential signals:
+
+- sessions
+- users
+- acquisition
+- impressions
+- clicks
+- CTR
+- searches
+- zero-result searches
+- filters
+- product views
+- recommendation impressions
+- recommendation clicks
+- add-to-cart
+- remove-from-cart
+- wishlist
+- checkout
+- abandonment
+- purchase
+- AOV
+- revenue
+- margin
+- refunds
+- returns
+- repeat purchases
+- retention
+- device
+- viewport
+- traffic source
+- geography
+- customer status
+- scroll depth
+- engagement
+- interaction events
+
+Study limitations of heatmaps and session recording.
+
+Do not treat them as magical mind-reading tools.
+
+==================================================
+PART XLVIII
+FROM RULES TO LEARNING
+==================================================
+
+Study how ecommerce historically moved through:
+
+MANUAL MERCHANDISING
+
+↓
+
+RULE-BASED PERSONALIZATION
+
+↓
+
+SEGMENT-BASED PERSONALIZATION
+
+↓
+
+MACHINE-LEARNING PERSONALIZATION
+
+↓
+
+REAL-TIME PREDICTION
+
+↓
+
+GENERATIVE PERSONALIZATION
+
+↓
+
+AGENTIC COMMERCE
+
+Explain each transition.
+
+==================================================
+PART XLIX
+AI ERA
+==================================================
+
+Research developments current through 2026.
+
+Study:
+
+- LLM shopping assistants
+- AI product search
+- conversational commerce
+- multimodal commerce
+- AI-generated product pages
+- generative advertising
+- autonomous merchandising
+- personalized landing pages
+- dynamic UI
+- AI sales agents
+- AI customer service
+- shopping agents
+- agent-to-agent commerce
+- merchant feeds for AI systems
+- AI search engines
+- AI product discovery
+- personalized recommendations using LLMs
+- synthetic-user research
+- automated experimentation
+- autonomous CRO
+
+Identify what is technically mature versus experimental.
+
+==================================================
+PART L
+FUTURE OF ONLINE SELLING
+==================================================
+
+Based on evidence, examine likely changes during approximately 2026–2030.
+
+Do not make science-fiction predictions.
+
+Analyze plausible developments including:
+
+- conversational storefronts
+- personalized storefront generation
+- agentic shopping
+- AI negotiation
+- automated bundling
+- dynamic interfaces
+- personal shopping agents
+- product comparison agents
+- reduced importance of traditional navigation
+- machine-readable product information
+- AI-mediated purchasing
+- merchant-agent interoperability
+
+Clearly label forecasts as forecasts.
+
+==================================================
+PART LI
+BUILD A MASTER SALES-PATTERN LIBRARY
+==================================================
+
+Create a structured database of at least 150 distinct commercial design patterns, psychological mechanisms, merchandising mechanisms, sales techniques, UX mechanisms, and recommendation mechanisms found during research.
+
+Prefer 200+ if evidence supports it.
+
+For EACH pattern record:
+
+NAME
+
+CATEGORY
+
+HISTORY / WHEN IT EMERGED
+
+WHAT IT DOES
+
+WHERE IT APPEARS
+
+CUSTOMER STAGE
+
+PSYCHOLOGICAL MECHANISM
+
+BUSINESS MECHANISM
+
+BEST USE CASES
+
+WHEN IT FAILS
+
+RISKS
+
+ETHICAL ISSUES
+
+EVIDENCE QUALITY
+
+SUPPORTING RESEARCH
+
+EXAMPLES
+
+METRICS TO WATCH
+
+HOW TO TEST IT
+
+RELATED PATTERNS
+
+Do not fill the library with trivial variations just to meet the count.
+
+==================================================
+PART LII
+CREATE A DIGITAL SALES ONTOLOGY
+==================================================
+
+Develop a taxonomy connecting:
+
+CUSTOMER
+PRODUCT
+BUSINESS
+PAGE
+COMPONENT
+INTENT
+PSYCHOLOGY
+BEHAVIOR
+FUNNEL STAGE
+METRIC
+SALES TACTIC
+RECOMMENDATION
+EXPERIMENT
+
+Example relationship:
+
+CUSTOMER
+has INTENT
+
+INTENT
+affects INFORMATION NEED
+
+PRODUCT
+has PRICE
+MARGIN
+RISK
+COMPLEXITY
+PURCHASE FREQUENCY
+
+PAGE
+serves FUNNEL STAGE
+
+COMPONENT
+attempts BEHAVIOR
+
+BEHAVIOR
+affects METRIC
+
+TACTIC
+uses PSYCHOLOGICAL MECHANISM
+
+EXPERIMENT
+tests TACTIC.
+
+This ontology will eventually be useful for the agent's reasoning.
+
+==================================================
+PART LIII
+IDENTIFY UNIVERSAL VS CONTEXTUAL PRINCIPLES
+==================================================
+
+Divide findings into:
+
+A. ROBUST GENERAL PRINCIPLES
+
+B. COMMON BUT CONTEXT-DEPENDENT PRINCIPLES
+
+C. INDUSTRY-SPECIFIC PRINCIPLES
+
+D. CUSTOMER-SEGMENT-SPECIFIC PRINCIPLES
+
+E. DEVICE-SPECIFIC PRINCIPLES
+
+F. CULTURE-SPECIFIC PRINCIPLES
+
+G. WEAKLY SUPPORTED MARKETING CLAIMS
+
+H. CONTRADICTED CLAIMS
+
+This distinction is critical.
+
+==================================================
+PART LIV
+WHAT NOT TO COPY
+==================================================
+
+Create a section called:
+
+SUCCESSFUL COMPANIES CAN STILL HAVE BAD UX.
+
+Identify practices used by successful companies that may:
+
+- exist because of legacy systems
+- exist because of market power
+- exist because of internal politics
+- work only at enormous scale
+- depend on brand recognition
+- exploit lock-in
+- be legally questionable
+- be harmful to smaller businesses
+- not transfer to another category
+
+Never use competitor popularity as proof.
+
+==================================================
+PART LV
+CULTURE AND GEOGRAPHY
+==================================================
+
+Research how online buying differs across major regions.
+
+At minimum consider:
+
+North America
+Europe
+Middle East
+Gulf countries
+East Asia
+South Asia
+Southeast Asia
+Latin America
+
+Study differences in:
+
+- trust
+- payments
+- COD
+- mobile use
+- marketplaces
+- messaging
+- discounts
+- bargaining
+- delivery
+- returns
+- social commerce
+- luxury
+- colors
+- copy
+- reviews
+- privacy expectations
+
+==================================================
+PART LVI
+FRAUD, SECURITY AND TRUST
+==================================================
+
+Research the interaction between sales optimization and security.
+
+Examples:
+
+- payment friction
+- fraud checks
+- 3-D Secure
+- account verification
+- CAPTCHA
+- OTP
+- identity verification
+- risk-based authentication
+
+Study how security can reduce conversion and how to minimize unnecessary friction without reducing protection.
+
+==================================================
+PART LVII
+BRAND VS SHORT-TERM CONVERSION
+==================================================
+
+Investigate conflicts between:
+
+CONVERSION
+AOV
+MARGIN
+TRUST
+BRAND
+RETENTION
+CUSTOMER SATISFACTION
+LTV
+
+Example:
+
+An aggressive popup may increase email capture while damaging perception.
+
+A fake-looking discount may increase immediate purchases while weakening premium positioning.
+
+The future system must optimize a portfolio of outcomes, not one number.
+
+==================================================
+PART LVIII
+THE EVENTUAL AI'S PURPOSE
+==================================================
+
+After completing the research, explain what the research implies about the eventual system.
+
+The eventual AI should ultimately be capable of thinking:
+
+“What digital commercial experience should exist for THIS exact business, THIS product, THIS customer, THIS market, THIS traffic source, THIS brand, and THIS business objective?”
+
+It should eventually be able to:
+
+UNDERSTAND
+RESEARCH
+COMPARE
+REASON
+DESIGN
+SIMULATE
+BUILD
+TEST
+MEASURE
+LEARN
+
+But DO NOT produce detailed software architecture yet.
+
+Instead identify the KNOWLEDGE and CAPABILITIES it would require.
+
+==================================================
+PART LIX
+CAPABILITY DISCOVERY
+==================================================
+
+Based on all findings, identify every major capability the eventual AI would need.
+
+Examples may include:
+
+- web research
+- competitor crawling
+- screenshot capture
+- computer vision
+- design understanding
+- DOM understanding
+- product catalog analysis
+- analytics analysis
+- pricing analysis
+- merchandising
+- psychological reasoning
+- customer simulation
+- recommendation reasoning
+- copywriting
+- funnel design
+- UI generation
+- experimentation
+- statistical analysis
+- learning
+
+Do not limit yourself to these examples.
+
+Derive capabilities from the research.
+
+==================================================
+PART LX
+KNOWLEDGE GAPS
+==================================================
+
+Create a section:
+
+WHAT WE STILL DO NOT KNOW.
+
+Identify questions where available research is:
+
+- contradictory
+- weak
+- category-specific
+- culturally dependent
+- outdated
+- proprietary
+- impossible to generalize
+
+These become candidates for real-world experiments later.
+
+==================================================
+FINAL DELIVERABLES
+==================================================
+
+Produce the research as a set of connected deliverables.
+
+DELIVERABLE 1
+EXECUTIVE OVERVIEW
+
+Explain how online selling evolved and what the major intellectual breakthroughs were.
+
+DELIVERABLE 2
+HISTORICAL TIMELINE
+
+A detailed chronological history from early ecommerce to 2026.
+
+DELIVERABLE 3
+EVOLUTION MAP
+
+Show major transitions such as:
+
+CATALOG
+→ SEARCH
+→ TRANSACTION
+→ TRUST
+→ REVIEWS
+→ RECOMMENDATIONS
+→ PERSONALIZATION
+→ MOBILE
+→ SOCIAL
+→ OMNICHANNEL
+→ PREDICTION
+→ GENERATIVE COMMERCE
+→ AGENTIC COMMERCE
+
+DELIVERABLE 4
+CONSUMER PSYCHOLOGY KNOWLEDGE BASE
+
+DELIVERABLE 5
+BEHAVIORAL ECONOMICS KNOWLEDGE BASE
+
+DELIVERABLE 6
+VISUAL SALES DESIGN KNOWLEDGE BASE
+
+DELIVERABLE 7
+PRICING KNOWLEDGE BASE
+
+DELIVERABLE 8
+MERCHANDISING KNOWLEDGE BASE
+
+DELIVERABLE 9
+RECOMMENDATION / UPSELL / CROSS-SELL KNOWLEDGE BASE
+
+DELIVERABLE 10
+PRODUCT-PAGE KNOWLEDGE BASE
+
+DELIVERABLE 11
+CART AND CHECKOUT KNOWLEDGE BASE
+
+DELIVERABLE 12
+POST-PURCHASE AND RETENTION KNOWLEDGE BASE
+
+DELIVERABLE 13
+COMPETITOR-INTELLIGENCE FRAMEWORK
+
+DELIVERABLE 14
+SALES PATTERN LIBRARY
+
+At least 150 meaningful patterns.
+Prefer 200+ where justified.
+
+DELIVERABLE 15
+DIGITAL SALES ONTOLOGY
+
+DELIVERABLE 16
+EVIDENCE MATRIX
+
+For major principles:
+
+STRONG
+MODERATE
+WEAK
+CONTEXTUAL
+UNSUPPORTED
+CONTRADICTED
+
+DELIVERABLE 17
+DARK-PATTERN / ETHICS MATRIX
+
+DELIVERABLE 18
+ANALYTICS AND EXPERIMENTATION FRAMEWORK
+
+DELIVERABLE 19
+AI-ERA COMMERCE REVIEW
+
+Current through 2026.
+
+DELIVERABLE 20
+FUTURE AGENT CAPABILITY REQUIREMENTS
+
+Only requirements.
+Do not design its software architecture yet.
+
+DELIVERABLE 21
+RESEARCH GAPS
+
+DELIVERABLE 22
+SOURCE LIBRARY
+
+Group sources by:
+
+consumer psychology
+behavioral economics
+UX/HCI
+ecommerce
+pricing
+recommendations
+merchandising
+analytics
+experimentation
+AI commerce
+regulation
+
+==================================================
+RESEARCH STANDARDS
+==================================================
+
+For every major claim:
+
+State the claim.
+
+State why it may work.
+
+State the evidence.
+
+State evidence quality.
+
+State boundary conditions.
+
+State counterevidence where present.
+
+State commercial application.
+
+State ethical risks.
+
+State how it could be tested.
+
+Do not confuse:
+
+correlation
+causation
+industry convention
+psychological mechanism
+business strategy.
+
+==================================================
+ANTI-SHALLOWNESS RULE
+==================================================
+
+If a conclusion can be found in a generic:
+
+“10 psychology tricks to increase ecommerce conversions”
+
+article, it is not deep enough by itself.
+
+Go underneath the tactic.
+
+Example:
+
+Do not stop at:
+
+“Use social proof.”
+
+Research:
+
+Which type?
+At which decision point?
+For which product?
+What quantity matters?
+Does review variance matter?
+Does recency matter?
+Does reviewer similarity matter?
+Does verified status matter?
+Can negative reviews increase credibility?
+When do review counts matter more than ratings?
+Where should reviews appear?
+When can social proof backfire?
+How does expertise affect reliance on reviews?
+
+Apply this depth to every major topic.
+
+==================================================
+COMPETITOR-RESEARCH RULE
+==================================================
+
+Do not simply search:
+
+“best ecommerce websites.”
+
+For each relevant category:
+
+Find actual market leaders.
+
+Find fast-growing challengers.
+
+Find premium companies.
+
+Find discount companies.
+
+Find companies with unusual selling systems.
+
+Find companies with poor commercial design for contrast.
+
+Study complete journeys rather than homepages.
+
+==================================================
+HISTORICAL RULE
+==================================================
+
+Whenever a modern practice is discovered, ask:
+
+WHEN DID THIS APPEAR?
+
+WHAT PROBLEM WAS IT SOLVING?
+
+WHAT DID IT REPLACE?
+
+WHY DID IT BECOME COMMON?
+
+IS IT STILL NECESSARY?
+
+HAS TECHNOLOGY MADE A BETTER APPROACH POSSIBLE?
+
+This is essential because the eventual AI should not blindly reproduce decades of inherited ecommerce conventions.
+
+It should know WHY they exist.
+
+==================================================
+FINAL SYNTHESIS QUESTION
+==================================================
+
+At the end of all research, answer:
+
+“If we could give an artificial intelligence the accumulated knowledge of approximately 30 years of online commerce, retail psychology, sales, behavioral economics, user experience, merchandising, pricing, experimentation, analytics, recommendation systems, and digital design, what exactly would that intelligence need to know before it should be trusted to design a commercial website?”
+
+Then provide the complete answer.
+
+Do not build the agent yet.
+
+Do not choose the programming language yet.
+
+Do not choose the framework yet.
+
+Do not prematurely propose microservices, agents, databases, APIs, or LLMs.
+
+FIRST UNDERSTAND THE SCIENCE, HISTORY, PRACTICE, FAILURES, AND EVOLUTION OF SELLING ONLINE.
+
+Only after this research is complete will we use the findings to architect the AI Sales-Designed Website Designer.

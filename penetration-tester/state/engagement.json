@@ -1,45 +1,55 @@
 {
   "engagement": {
-    "id": "PENTEST-2026-BOP-001",
-    "target": "bop-library.com, covered-folders.com, payments.bek-checkout.com",
-    "start_date": "2026-04-13",
-    "end_date": "2026-04-20",
-    "phase": "vulnerability-analysis",
+    "id": "PENTEST-2026-ZAK-001",
+    "target": "zakerne.com and its actual subdomains",
+    "start_date": "2026-07-16",
+    "end_date": "2026-07-16",
+    "phase": "complete",
     "scope": [
-      "bop-library.com",
-      "covered-folders.com",
-      "payments.bek-checkout.com",
-      "Discord Guild: 1491717189210865666"
+      "zakerne.com",
+      "www.zakerne.com",
+      "*.zakerne.com (subdomains discovered during recon, web-app layer only)"
     ],
     "out_of_scope": [
-      "Stripe payment infrastructure",
-      "Discord core API"
+      "Whish payment processor's own infrastructure/servers/domains",
+      "Any CDN or hosting-provider infrastructure not directly controlled by the site (site resolves behind Cloudflare - 172.67.218.191 at engagement start; the Cloudflare edge IP itself is NOT to be port-scanned or attacked, only the hostname's HTTP(S) application layer is in scope)",
+      "Any domain outside zakerne.com and its subdomains"
     ],
-    "authorization_ref": "User-Owner-Statement-2026-04-13",
-    "emergency_contact": "Bekeroo14 (Telegram)",
-    "rules_of_engagement": "Authorized to bypass paywalls/restrictions for proof-of-concept. No DoS."
+    "authorization_ref": "Informal written authorization via WhatsApp from domain owner Elio Nasr to requesting user Elie Tanios (personal contact), 2026-07-16. Owner asked 'you want me to do a pentest on it to make it more secure?' -> replied 'Try, whatever comes out, this way it's better.' Full scope checklist sent verbatim, owner replied 'Great'. NOTE: this is NOT a signed formal pentest/legal agreement - it is a documented informal consent exchange with the actual domain owner. Flagged as a limitation in final report.",
+    "emergency_contact": "Elie Tanios (requesting user, relaying to Elio Nasr / domain owner) - no dedicated phone/stop-condition contact was provided; treat as a gap and pace conservatively",
+    "rules_of_engagement": "HARD CONSTRAINTS: (1) No destructive testing - no data deletion, no DoS/high-volume flooding, no availability degradation for real users. (2) No action that could cost real money - do NOT complete/trigger any real Whish transaction, do NOT submit real payment data, no charges/refunds/financial state changes; payment flow testing limited to logic/validation/access-control (IDOR on order/payment refs, price/amount tampering in requests, auth bypass around checkout steps, session handling) via safe/observational methods only, stopping before any step that finalizes a real charge. (3) Stay within zakerne.com and actual subdomains only. (4) Owner has another team already monitoring site security - pace scans professionally/moderately, avoid loud high-volume scanning that could be mistaken for a real attack. Scope checklist: OWASP Top 10 web app logic, auth/session mgmt, payment/checkout config (logic only), API endpoints, admin/backend access controls, misconfigs/exposed secrets, known-CVE/outdated dependency checks."
   },
   "coverage": {
-    "WSTG-INFO": "completed",
-    "WSTG-CONF": "in-progress",
-    "WSTG-ATHN": "in-progress",
-    "WSTG-AUTHZ": "in-progress"
+    "WSTG-INFO": "complete",
+    "WSTG-CONF": "complete",
+    "WSTG-ATHN": "partial",
+    "WSTG-AUTHZ": "partial",
+    "WSTG-SESS": "partial",
+    "WSTG-INPV": "complete",
+    "WSTG-ERRH": "complete",
+    "WSTG-CLNT": "partial",
+    "WSTG-BUSL": "partial",
+    "OWASP-LLM": "not-applicable"
   },
   "findings_count": {
     "critical": 0,
-    "high": 0,
-    "medium": 0,
-    "low": 0,
-    "info": 1
+    "high": 1,
+    "medium": 1,
+    "low": 2,
+    "info": 4
   },
   "findings": [
-    {
-      "id": "VULN-001",
-      "title": "Publicly Accessible Video Assets",
-      "severity": "info",
-      "description": "Promo videos are stored in a guessable directory /assets/videos/ without protection."
-    }
+    "finding-recon-20260716T171825Z-tls-legacy-protocols (MEDIUM)",
+    "finding-recon-20260716T171825Z-missing-headers-security-subdomain (LOW)",
+    "finding-recon-20260716T171825Z-missing-caa-record (INFO)",
+    "finding-recon-20260716T171825Z-unauthenticated-health-endpoint (INFO)",
+    "finding-recon-20260716T171825Z-third-party-mail-subdomain (INFO)",
+    "finding-web-20260716T174701Z-otp-rate-limiting (HIGH)",
+    "finding-web-20260716T174701Z-unsanitized-name-field (LOW)",
+    "finding-web-20260716T174701Z-payment-integration-clarification (INFO)"
   ],
-  "tools_used": ["playwright-cli", "nslookup", "curl"],
-  "notes": "Transitioning to vulnerability analysis focused on payment bypass."
+  "tools_used": ["nmap", "testssl.sh", "dig", "gobuster", "subfinder", "ffuf", "whatweb", "nikto", "nuclei", "curl", "python-requests", "searchsploit", "playwright-cli", "manual JS bundle static analysis"],
+  "context_load": 0.0,
+  "playwright_session": null,
+  "notes": "ENGAGEMENT COMPLETE. Standard scan mode. No unauthorized access obtained (OBJ-010/011 BLOCKED for legitimate RoE-compliant reasons - no CVE path existed, and full exploitation of the one HIGH finding was explicitly prohibited by client's no-high-volume-testing rule). Post-exploitation (OBJ-012-014) skipped - standard mode + no initial access. Overall risk rating: MEDIUM. Final report: reports/PENTEST-2026-ZAK-001-report.md. Largest coverage gap: no staff/admin credentials available, so admin/tenant-dashboard authorization depth was not tested - recommend follow-up authenticated pass. Docker kali-pentest container stopped at end of engagement per standard practice."
 }

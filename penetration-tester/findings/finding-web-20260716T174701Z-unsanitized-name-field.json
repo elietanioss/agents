@@ -1,0 +1,31 @@
+{
+  "id": "finding-web-20260716T174701Z-unsanitized-name-field",
+  "title": "Customer Registration Accepts HTML/Script Metacharacters in Name Fields Without Server-Side Sanitization or Rejection (Defense-in-Depth Gap, No Confirmed Rendering Sink)",
+  "severity": "Low",
+  "cvss_score": 3.1,
+  "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:N/A:N",
+  "cwe": "CWE-20",
+  "owasp_category": "A03:2025-Injection",
+  "mitre_attack": "T1059.007",
+  "description": "POST https://zakerne.com/api/public/customers/register accepted and stored a firstName value of '<script>alert(1)</script>' without rejecting the input or stripping HTML metacharacters (HTTP 200, {\"success\":true,\"customerId\":\"CA-F067D0E9\",\"otpRequired\":true}). This indicates the backend performs no server-side output-context sanitization/encoding-on-write for this field. Static analysis of the production JS bundle (index-sxBIrYLU.js) found zero application-level usages of React's dangerouslySetInnerHTML (only React-DOM's own internal generic prop-handling code, which is expected framework internals, not app usage), meaning the primary React SPA renders all text content through JSX's default auto-escaping and is very unlikely to execute this payload as script in the customer-facing web app itself. No authenticated tenant/staff session was available in this engagement to observe how this field is rendered in the staff/admin dashboard (client list, appointment views) or in any server-rendered surfaces (transactional emails, SMS templates, PDF receipts generated via the bundled jsPDF library) -- those surfaces were not directly testable and could theoretically use a different rendering path than the SPA (e.g. an HTML email template) where escaping behavior is unverified.",
+  "reproduction_steps": [
+    "1. POST https://zakerne.com/api/public/customers/register with body {\"email\":\"<test>@example.com\",\"password\":\"TestPassw0rd!23\",\"firstName\":\"<script>alert(1)</script>\",\"lastName\":\"XSSTest\",\"phoneNumber\":\"<test-number>\",\"bookingSlug\":\"demo\"}",
+    "2. Observe HTTP 200 {\"success\":true,\"customerId\":\"...\",\"otpRequired\":true} -- no validation error, payload accepted verbatim",
+    "3. Static review of production bundle for a dangerouslySetInnerHTML sink that could render this field unescaped: grep 'dangerouslySetInnerHTML:{__html:' index-sxBIrYLU.js -> 0 application-level matches (only generic React-DOM internals)"
+  ],
+  "payload": "firstName: <script>alert(1)</script>",
+  "evidence": [
+    "C:\\Users\\User\\.claude\\agents\\penetration-tester\\evidence\\logs\\finding-web-20260716T174701Z-otp-rate-limiting-output.txt (registration flow context)"
+  ],
+  "impact": "No confirmed exploitation path was identified within the scope of this engagement (React's default text-escaping and the absence of any dangerouslySetInnerHTML sink in the client bundle make client-side stored XSS unlikely via the tested SPA). However, the lack of server-side input validation/sanitization on this field is a defense-in-depth gap: if the value is ever consumed by an untested rendering surface (staff/admin dashboard views not reachable without credentials in this engagement, HTML transactional emails, PDF generation, or a future feature) without equivalent escaping, it could become a stored XSS vector against staff/admin users viewing client records -- a materially more sensitive target than the public-facing pages tested here.",
+  "remediation": "Add server-side input validation on firstName/lastName (and other free-text customer fields) to reject or strip HTML metacharacters, and independently ensure every rendering surface that displays customer-supplied names (staff dashboard, admin panel, email templates, SMS templates, PDF receipts) applies context-appropriate output encoding. Do not rely solely on the frontend framework's default escaping as the only control, since backend-rendered surfaces (emails/PDFs) are not covered by React's JSX escaping.",
+  "references": [
+    "OWASP WSTG-INPV-01: Testing for Reflected Cross Site Scripting",
+    "OWASP Top 10 2021 A03: Injection",
+    "CWE-20: Improper Input Validation"
+  ],
+  "status": "unconfirmed",
+  "discovered_date": "2026-07-16",
+  "reported_to_client": false,
+  "engagement_note": "Rated LOW and status 'unconfirmed' specifically because no rendering sink could be exercised in this engagement (no staff/admin/email/PDF access available). Recommend the client's own team check server-rendered surfaces (email/SMS/PDF templates, admin dashboard) directly, since those were out of reach without provided credentials."
+}

@@ -1,0 +1,24 @@
+{
+  "id": "finding-recon-20260716T171825Z-missing-headers-security-subdomain",
+  "title": "security.zakerne.com dashboard lacks security headers present on main application (no CSP, HSTS, X-Frame-Options, X-Content-Type-Options, Permissions-Policy)",
+  "severity": "Low",
+  "cvss_score": 4.3,
+  "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:L/A:N",
+  "cwe": "CWE-693",
+  "owasp_category": "A05:2025",
+  "mitre_attack": "T1189",
+  "description": "The subdomain security.zakerne.com (self-described via its HTML meta description as the 'Zakerne security monitoring dashboard', a client-side rendered SPA) does not send the same security header baseline as the main zakerne.com/www.zakerne.com application. The main app sends Content-Security-Policy, Strict-Transport-Security (with preload), X-Frame-Options: DENY, X-Content-Type-Options: nosniff, and Permissions-Policy. security.zakerne.com sends only Cloudflare/NEL headers and cache-control, omitting all of the above. Note: this subdomain is covered by the same Cloudflare TLS certificate (SAN includes security.zakerne.com and *.security.zakerne.com), so it is in-scope application-layer infrastructure, not third-party.",
+  "reproduction_steps": [
+    "curl -s -I https://security.zakerne.com",
+    "Compare header set against curl -s -I https://zakerne.com",
+    "Observe absence of content-security-policy, strict-transport-security, x-frame-options, x-content-type-options, permissions-policy on the security.zakerne.com response"
+  ],
+  "payload": "",
+  "evidence": ["evidence/recon/headers.txt"],
+  "impact": "A dashboard described as a security-monitoring tool lacking clickjacking (X-Frame-Options), MIME-sniffing (X-Content-Type-Options), and CSP protections is a weaker target for framing/UI-redress or injected-script attacks than the rest of the estate, which is inconsistent given its likely sensitivity (security monitoring data). No content or authentication bypass was tested or observed.",
+  "remediation": "Apply the same security header baseline (CSP, HSTS with preload, X-Frame-Options: DENY, X-Content-Type-Options: nosniff, Permissions-Policy) used on the main zakerne.com application to security.zakerne.com and any other first-party subdomains.",
+  "references": ["https://owasp.org/www-project-secure-headers/"],
+  "status": "confirmed",
+  "discovered_date": "2026-07-16T17:18:25Z",
+  "reported_to_client": false
+}

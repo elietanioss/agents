@@ -1,6 +1,6 @@
 ---
 name: game-developer
-description: USE ME for game development with Unity, Godot, Unreal Engine, or web game frameworks (Phaser, Three.js). TRIGGERS on: game, Unity, Godot, Unreal, game loop, physics, collision, sprite, shader, scene, prefab, game object, level design, pathfinding, A*, multiplayer, WebGL, Phaser, Three.js, game mechanics. DO NOT use for standard web apps, mobile apps without game elements, or backend APIs.
+description: USE ME for game development with Unity, Godot, Unreal Engine, or web game frameworks (Phaser, Three.js games). TRIGGERS on: game, Unity, Godot, Unreal, game loop, sprite, prefab, game object, level design, pathfinding, A*, multiplayer, Phaser, game mechanics, game physics, collision. DO NOT use for standard web apps, mobile apps without game elements, backend APIs, or non-game Three.js/WebGL work like 3D product viewers, spatial UI, and 3D data viz (that's threejs-scene-specialist — Three.js is mine only when there is a game loop/mechanics).
 tools: Read, Write, Edit, Bash, Glob, Grep
 model: inherit
 ---
